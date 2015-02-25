@@ -6,14 +6,16 @@ import java.text.*;
 import java.util.*;
 import org.json.*;
 
-public class jsontest {
+public class JsonTest {
 	
 	//Declare number formats
 	public static DecimalFormat temp = new DecimalFormat("#.#");
-	public static DecimalFormat place = new DecimalFormat("#.####");	
+	public static DecimalFormat place = new DecimalFormat("#.####");
+	
 	//Determines am or pm
 	public static String daytime;
 	public static int ihours, iminutes;
+	
 	//used to check for short term if it is a new date or not
 	public static Boolean NewDay = false;
 	
@@ -30,22 +32,20 @@ public class jsontest {
 			res = JSONReader(s, length);		
 		} while (res == null);
 		
-		
 		//Gets the correct weather forecast
 		if (length == "current")
-		CurrentWeather(res);
+			CurrentWeather(res);
 		else if (length == "short term")
-		ShortTerm(res);
+			ShortTerm(res);
 		else if (length == "long term")
-		LongTerm(res);
+			LongTerm(res);
 		else if (length == "mars")
-		Mars(res);
+			Mars(res);
 	}
 	
-	   //All of this is for a test with JSON import data on a specific location, in this case my apt.
+	//  All of this is for a test with JSON import data on a specific location, in this case my apt.
 	   public static JSONObject JSONReader(String addr, String s) throws Exception
-	   {	
-		   System.out.println("In jsonobkect");
+	{	
 	       // build a URL
 		   String api = null;
 		   
@@ -110,7 +110,7 @@ public class jsontest {
 		    //get current time
 	 	    Date now = new Date();
 	 	    
-		    //Capitalize first letter of cloud condition
+		    //Capitalize first letter of cloud contition
 		    String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		    
 		    // Print the results
@@ -139,58 +139,12 @@ public class jsontest {
 		    
 		    //Get refresh time of information
 		    GetTime(res.getInt("dt"));	    		    
-		    System.out.format("Information retrieved at " + ihours + ":" + (iminutes < 10 ? "0" : "") + iminutes + " " + daytime);
+		    System.out.format("Information last updated at " + ihours + ":" + (iminutes < 10 ? "0" : "") + iminutes + " " + daytime);
 		    
 		    System.out.println();
-		    System.out.format("Current user time: %tl:%tM %tp%n", now, now, now);
+		    System.out.format("Retrieved at: %tl:%tM %tp%n", now, now, now);
 	   }
 
-	 //Gets the current weather conditions for the selected location
-	   public static void Mars (JSONObject res) throws Exception
-	   {	
-		    Double precip=0.00;
-		   
-		    //Declare Json Objects for use
-		    JSONObject data = res.getJSONObject("report");
-		    
-		    //TIME
-	 	    Date now = new Date();
-	 	    
-	 	    //TEMPERATURE
-		    int maxTemp = data.getInt("max_temp");
-		    int minTemp = data.getInt("min_temp");
-		    int avgTemp = (maxTemp+minTemp)/2;
-	 	    
-		    //DATE
-	 	    String date = data.getString("terrestrial_date"); //Earth Date
-	 	    String season = data.getString("season"); //Martian Month
-	 	    String totalDate = date + " (" + season + " on mars)";
-	 	    
-	 	    //WIND
-	 	    String windDirection = data.getString("wind_direction");
-	 	    Object windSpeed = data.get("wind_speed");
-		    
-	 	    //PRESSURE
-	 	    int pressureNum = data.getInt("pressure");
-		    String pressureString = data.getString("pressure_string");
-		    String pressure = pressureNum + " (" + pressureString + ")";
-		    
-		    //HUMIDITY + CONDITION
-		    Object humidity = data.get("abs_humidity"); 
-		    String skyCondition = data.getString("atmo_opacity");
-		    
-		    //PRINT
-		    System.out.println("Average Temp: " + avgTemp);
-		    System.out.println("Date: " + totalDate);
-		    System.out.println("WindDir: " + windDirection);
-		    System.out.println("Windspeed " + windSpeed);
-		    System.out.println("Humidity "+ humidity);
-		    System.out.println("Pressure: " + pressure);
-		    System.out.println("SkyCond: " + skyCondition);
-		    
-	   }
-
-	   
 	   //Gets the short term weather conditions for the selected location
 	   public static void ShortTerm (JSONObject res) throws Exception
 	   {		 
@@ -204,7 +158,7 @@ public class jsontest {
 		   cal.setTime(now);
 		   SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd");
 		   
-		   //To catch if there is less than 24h worth of forecast data available
+		   //To catch if there is less than 24 hours worth of forecast data available
 		   try{
 		   
 			   //do for each 3 hour period
@@ -310,6 +264,62 @@ public class jsontest {
 		   }
 	   }
 	   
+
+	   //Gets the current weather conditions for the selected location
+	   public static void Mars (JSONObject res) throws Exception
+	   {	
+		   Double precip=0.00;
+		   
+		   //Declare Json Objects for use
+		   JSONObject data = res.getJSONObject("report");
+		   
+		   //TIME
+		   Date now = new Date();
+		   
+		   //TEMPERATURE
+		   int maxTemp = data.getInt("max_temp");
+		   int minTemp = data.getInt("min_temp");
+		   int avgTemp = (maxTemp+minTemp)/2;
+		   
+		   //DATE
+		   String date = data.getString("terrestrial_date"); //Earth Date
+		   String season = data.getString("season"); //Martian Month
+		   String totalDate = date + " (" + season + " on mars)";
+		   
+		   //WIND
+		   String windDirection = data.getString("wind_direction");
+		   Object windSpeed = data.get("wind_speed");
+		   
+		   //PRESSURE
+		   int pressureNum = data.getInt("pressure");
+		   String pressureString = data.getString("pressure_string");
+		   String pressure = pressureNum + " (" + pressureString + ")";
+		   
+		   //HUMIDITY + CONDITION
+		   Object humidity = data.get("abs_humidity"); 
+		   String skyCondition = data.getString("atmo_opacity");
+		   
+		   //PRINT
+		   System.out.println("Average Temp: " + avgTemp + "\u00B0" + "C");
+		   System.out.println("Date: " + totalDate);
+		   
+		   if (!windDirection.equals("--"))
+			   System.out.println("Wind Direction: " + windDirection);
+		   else System.out.println("No wind direction information available.");
+		   
+		   if (!windSpeed.equals(null))
+			   System.out.println("Wind speed " + windSpeed);
+		   else System.out.println("No wind speed information available.");
+		   
+		   if (!humidity.equals(null))
+			   System.out.println("Humidity "+ humidity);	
+		   else System.out.println("No humidity information available.");	   
+		   
+		   System.out.println("Pressure: " + pressure);
+		   System.out.println("Sky Conditon: " + skyCondition);
+		   
+		   	}
+	   
 	   //Gets the current time from the Epoch timestamp. Modifies ihours and iminutes, as wel as 
 	   //NewDay, which checks to see it it is the start of a new date.
 	   public static void GetTime (int time)
@@ -317,7 +327,7 @@ public class jsontest {
 		   //Get number of seconds from last possible midnight
 		   do 
 		    {
-			   time -=86400;
+		    	time -=86400;
 		    } while (time >=104400);
 		    
 		    //Get number of hours and minutes from remaining seconds
@@ -371,5 +381,4 @@ public class jsontest {
 	   //Used to convert temperature
 	   public static Double Celcius (Double temp) {	return temp - 273.15;}	   
 	   public static Double Fahrenheight (Double temp) { return temp*1.8000 + 32.00;}
-	   
 }
