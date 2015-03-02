@@ -86,11 +86,14 @@ public class GUI implements ActionListener{
 
 		addLocationField();
 
-		addLTF(loc);
+		if (loc != null) 
+		{		
+			addLTF(loc);
 		
-    	addSTF(loc);
+			addSTF(loc);
     
-    	addLW(loc);
+			addLW(loc);
+		}
     	
     	mainWindow.setVisible(true);
 	}
@@ -195,6 +198,7 @@ public class GUI implements ActionListener{
 		String locationText = field.getText();
 		try {
 			// TODO add a button.  Calls on newline atm.
+			if (loc != null)
 			updateGUI(locationText);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -209,10 +213,17 @@ public class GUI implements ActionListener{
 	 * @throws Exception
 	 */
 	private void updateGUI(String locationText) throws Exception {
-		Location userLoc = new Location(locationText);	
-		addLTF(userLoc);
-    	addSTF(userLoc);
-    	addLW(userLoc);    	
+		Location oldLoc = loc;
 		
+		try {		
+			Location userLoc = new Location(locationText);	
+		
+			addLTF(userLoc);
+			addSTF(userLoc);
+			addLW(userLoc);    
+		} 
+		catch (NullPointerException e) {			
+			field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));	
+		}
 	}
 }

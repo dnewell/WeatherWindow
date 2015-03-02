@@ -49,11 +49,13 @@ public class Location {
 		/*
 		 * MARS case handling.  There are many different ways (and possible places) we could handle this.
 		 * 
-		 */		
+		 */		if (getLocation().equals("mars"))
 			this.marsDay = new MarsDay(readJSON("", "mars"));
+		 else {
 			this.shortTermForecast = new ShortTermForecast(readJSON(location, "short term"));
 			this.longTermForecast = new LongTermForecast(readJSON(location, "long term"));
-			this.localWeather = new LocalWeather(readJSON(location, "current"));				
+			this.localWeather = new LocalWeather(readJSON(location, "current"));
+		 }
 	}
 
 	/**
