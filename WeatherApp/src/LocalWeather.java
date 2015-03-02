@@ -4,18 +4,11 @@ import java.util.Date;
 import org.json.*;
 
 /**
- * @author David Newell
- * 
  * The LocalWeather class stores the current forecast information.
  * 
- * Used by the GUI, its instances are typically created by the Location class
- * TODO This class should ONLY return the data, and the GUI should handle display, adding descriptions
- * to the string.  I.E. the getter for temperature should return "23" and the GUI will format to
- * Temperature: 23°C
- * TODO Think about if temp and precipitation fields should be numeric.  I think that the getters in this class
- * return a String, however.
- * TODO I think we should also add the unit conversion logic here. Have a getter for both C and for F? 
- * May be helpful in keeping the code out of the GUI classes.
+ * Used by the GUI, its instances are created by the Location class
+ * @author David Newell
+ * @author David Langford
  */
 public class LocalWeather {
 
@@ -53,9 +46,7 @@ public class LocalWeather {
 			String skyCondition, String precipatation, String windSpeed,
 			String windDirection, String pressure, String humidity, String minTemp,
 			String maxTemp, String sunrise, String sunset) {
-		
-		
-		
+			
 		this.updateTime = updateTime;
 		this.userTime = userTime;
 		this.temperature = temperature;
@@ -119,7 +110,7 @@ public class LocalWeather {
 		this.precipatation = temp.format(precip) + "";
 		this.windSpeed = temp.format(Wind.getDouble("speed")) + "km/h";
 		this.windDirection = Location.Direction(Wind.getDouble("deg"));
-		this.pressure = temp.format(Main.getDouble("pressure")) + "KpA";
+		this.pressure = temp.format(Main.getDouble("pressure")) + "hPa";
 		this.humidity = (int)Main.getDouble("humidity") + "";
 		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "°C";
 		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "°C";
@@ -158,7 +149,7 @@ public class LocalWeather {
 		return skyCondition;
 	}
 	/**
-	 * @return the precipatation
+	 * @return the precipitation
 	 */
 	public String getPrecipatation() {
 		return precipatation;

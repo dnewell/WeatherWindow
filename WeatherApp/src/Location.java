@@ -1,15 +1,10 @@
 /**
- * @author David Newell
- * 
  * Location class represents a single location,
  * creates and populates the fields instances of the different forecast classes
  * and handles JSON requests.
  * 
- * TODO basically everything.
- * 
- * ADDED: ToString method, which is required for the proper display of the location name
- * in the GUI LocationPicker
- *
+ * @author David Newell
+ * @author David Langford
  */
 
 import java.net.URL;
@@ -20,6 +15,10 @@ import java.util.Scanner;
 
 import org.json.*;
 
+/**
+ * @author David
+ *
+ */
 public class Location {
 
 	private String location;
@@ -42,10 +41,6 @@ public class Location {
 
 	/**
 	 * Constructor.
-	 * Creates the 3 forecast child classes for an earth location.
-	 * Create the child classes here or in a method?  I think here in the constructor is okay,
-	 * but if we change the forecast objects to accept JSON objects as parameters, we will
-	 * likely need to add a method(s)
 	 * @param location
 	 */
 	public Location(String location) throws Exception {
@@ -80,10 +75,12 @@ public class Location {
 
 
 	
+
 	/**
-	 * TODO
-	 * Not sure about this method.  Are we handling the http requests here, and then
-	 * passing the JSON as a parameter to the child classes?
+	 * @param addr
+	 * @param s
+	 * @return
+	 * @throws Exception
 	 */
 	public JSONObject readJSON(String addr, String s) throws Exception
 	{
@@ -216,9 +213,6 @@ public class Location {
 	}
 	
 	/**
-	 * Since we don't have a specific class to parse the JSON for Local Weather,
-	 * could we do it here, or with helper methods here?
-	 * Maybe think about creating a class equivalent to ShortTermForecast for Local weather?
 	 * @return localWeather the localWeather for this location
 	 */
 	public LocalWeather getLW() {
@@ -226,9 +220,6 @@ public class Location {
 	}
 	
 	/**
-	 * Since we don't have a specific class to parse the JSON for MarsDay,
-	 * could we do it here, or with helper methods here?
-	 * Maybe think about creating a class equivalent to ShortTermForecast for MarsDay?
 	 * @return marsDay the MarsDay for this location
 	 */
 	public MarsDay getMD() {
@@ -236,7 +227,6 @@ public class Location {
 	}
 	
 	/**
-	 * This toString is REQUIRED for proper display of the location list in the gLocationPicker class
 	 * @return location Name of the location
 	 */
 	public String toString(){

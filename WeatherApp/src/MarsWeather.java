@@ -4,18 +4,10 @@ import java.util.Date;
 import org.json.*;
 
 /**
+ * The MarsWeather class stores the current forecast information.
+ * 
  * @author David Langford
- * 
- * The LocalWeather class stores the current forecast information.
- * 
- * Used by the GUI, its instances are typically created by the Location class
- * TODO This class should ONLY return the data, and the GUI should handle display, adding descriptions
- * to the string.  I.E. the getter for temperature should return "23" and the GUI will format to
- * Temperature: 23°C
- * TODO Think about if temp and precipitation fields should be numeric.  I think that the getters in this class
- * return a String, however.
- * TODO I think we should also add the unit conversion logic here. Have a getter for both C and for F? 
- * May be helpful in keeping the code out of the GUI classes.
+ * @author David Newell 
  */
 public class MarsWeather {
 
@@ -28,33 +20,10 @@ public class MarsWeather {
 	private String pressure;
 	private String humidity;
 	
-	/**
-	 *  Constructs LocalWeather with all needed fields
-	 * @param date
-	 * @param temperature
-	 * @param skyCondition
-	 * @param windSpeed
-	 * @param windDirection
-	 * @param pressure
-	 * @param humidity
-	 */
-	public MarsWeather(String date, String temperature, String skyCondition, String windSpeed,
-			String windDirection, String pressure, String humidity) {
-		
-		
-		
-		this.date = date;
-		this.temperature = temperature;
-		this.skyCondition = skyCondition;
-		this.windSpeed = windSpeed;
-		this.windDirection = windDirection;
-		this.pressure = pressure;
-		this.humidity = humidity;
-	}
 	
 	/**
-	 *  Constructs LocalWeather with dummy values.  Used for testing GUI.
-	 *  TODO Delete once parser is integrated
+	 *  Constructor for MarsWeather class
+	 *  
 	 * @param date
 	 * @param temperature
 	 * @param skyCondition

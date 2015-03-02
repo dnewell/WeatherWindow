@@ -1,10 +1,12 @@
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
@@ -12,24 +14,42 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The GUI class creates and maintains the interface
 
+ * @author David Newell
+ * @author David Langford
+ */
 public class GUI implements ActionListener{
 	
 	private static final String APPLICATION_NAME = "WeatherApp";
+	private static final String DEFAULT_LOCATION = "London, On";
 	private JFrame mainWindow;
-	private JButton displayLPButton;
-	private gLocationPicker lp;
+	private JTextField field;
+
+	private LongTermPanel ltPanel;
+	private ShortTermPanel stPanel;
+	private LocalWeatherPanel lwPanel;
+	private Location loc;
 	public static Font font;
 	
 	// Constructor
 	public GUI() {	
 		mainWindow = new JFrame(APPLICATION_NAME);
+		try {
+			loc = new Location(DEFAULT_LOCATION);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		setFont();
 		this.initGUI();	
 	}
 	
-	// Initializes the GUI on the event dispatch thread
+	/**
+	 *  Initializes the GUI on the event dispatch thread
+	 */
 	private void initGUI() {
 		SwingUtilities.invokeLater(new Runnable() {
 		    public void run() {
@@ -46,80 +66,57 @@ public class GUI implements ActionListener{
 	/**
 	 *  Formats and makes visible the main program JFrame,
 	 *  after adding all child components to its hierarchy
-	 *  
-	 *  	There are a few ways to handle location changes, best might be
-	 *  	to call this method from MyLocations.setCurrentLocation() 
-	 *     	and have each element of the GUI pull all information from the currentLocation,
-	 *     	the GUI updates itself as the location changes.
-	 *     	Syntax like:
-	 *     	PersistanceHandler.getMyLocations().getLocationList().get(0).getLTF().getDayArray()[3].getDayOfWeek()
-	 *     	(Yikes, that's wordy.)
-	 *     
-	 *     	Note: if we need to rebuild the hierarchy from scratch, i.e. for a full refresh,
-	 *      make a call to mainWindow.removeAll(), then to this method.  
 	 * @throws Exception 
 	 */
 	public void buildHierarchy() throws Exception {
 		mainWindow.setResizable(false);
+		
 		//Sets background
-		mainWindow.setContentPane(new JLabel(new ImageIcon("LONDONNIGHT.jpg")));
+		mainWindow.setContentPane(new JLabel(new ImageIcon("LONDONNIGHT.jpg")));	
 		
 		//defines frame closing behavior
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainWindow.setSize(1190, 742);
+		mainWindow.setSize(1190, 742);	
 		
 		// null layout enables absolute positioning
-		mainWindow.setLayout(null);
-		mainWindow.setVisible(true);
+		mainWindow.setLayout(null);	
 		
 		// centers window
-		mainWindow.setLocationRelativeTo(null);
-		
-		refresh();
-		
-		Location loc = new Location("london, Canada");
-		
-		//ALL THESE METHODS SHOULD BE RENAMED TO addBLAH().
-		displayLTF(loc);
-		
-		
-		displayHeader(loc);
-		
-    	displaySTF(loc);
-    
-    	displayLW(loc);
-    	
-    	addLocationPicker();
-    	
-    	// add the unit conversion button (this should be handled elsewhere)
-    	ResizableImage button = new ResizableImage("unitIcon.png", 70, 200);
-    	button.setLocation(350,20);
-    	mainWindow.getContentPane().add(button);
-    	
-    	refresh();
-	}
-	
-	/**
-	 * ActionPerfomed() overrides the eponymous method of ActionListener,
-	 * adding functions to the buttons.
-	 * @param e ActionEvent
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == displayLPButton) {
+		mainWindow.setLocationRelativeTo(null);	
 
-			if (lp.isShowing() == true) {
-				lp.setVisible(false);
-				refresh();
-			} else {
-				lp.setVisible(true);
-				refresh();
-			}
-		}
+		addLocationField();
+
+		addLTF(loc);
+		
+    	addSTF(loc);
+    
+    	addLW(loc);
+    	
+    	mainWindow.setVisible(true);
 	}
 	
+	
+	private void addLocationField() {
+		Font newFont = GUI.font.deriveFont(64f);
+		field = new JTextField(15);		
+		field.setText(loc.getLocation().substring(0, 1).toUpperCase() + loc.getLocation().substring(1));
+		field.addActionListener(this);
+		field.setLocation(30,30);
+		field.setSize(500, 70);
+    	field.setFont(newFont);
+    	field.setOpaque(false);
+    	field.setBackground(new Color(0,0,255,40));
+    	field.setForeground(Color.WHITE);
+    	Border border = BorderFactory.createLineBorder(new Color(255,255,255,40));
+    	field.setBorder(border);
+    	field.setCaretColor(new Color(255,255,255,140));
+		field.setVisible(true);
+		mainWindow.add(field);
+		
+	}
+
 	/**
-	 * Validates and refreshes the main JFrame
+	 * Validates and refreshes the main JFrame hierarchy
 	 */
 	private void refresh() {
        	mainWindow.validate();
@@ -131,10 +128,14 @@ public class GUI implements ActionListener{
 	 * @param loc 
 	 * @throws Exception 
 	 */
-	private void displayLW(Location loc) throws Exception {
-	   	LocalWeatherPanel lwp = new LocalWeatherPanel(loc);
-    	lwp.setLocation(80, 110);
-    	mainWindow.getContentPane().add(lwp);
+	private void addLW(Location loc) throws Exception {
+		if (lwPanel != null){
+			// panel exists
+			mainWindow.remove(lwPanel);	
+		}
+	   	lwPanel = new LocalWeatherPanel(loc);
+	   	lwPanel.setLocation(80, 110);
+    	mainWindow.getContentPane().add(lwPanel);
     	refresh();	
 	}
 
@@ -143,76 +144,36 @@ public class GUI implements ActionListener{
 	 * @param loc 
 	 * @throws Exception 
 	 */
-	private void displaySTF(Location loc) throws Exception {
-    	ShortTermPanel panel6 = new ShortTermPanel(loc);
-    	panel6.setLocation(780, 5);
-    	mainWindow.getContentPane().add(panel6);
+	private void addSTF(Location loc) throws Exception {
+		if (stPanel != null){
+			// panel exists
+			mainWindow.remove(stPanel);	
+		}
+    	stPanel = new ShortTermPanel(loc);
+    	stPanel.setLocation(780, 5);
+    	mainWindow.getContentPane().add(stPanel);
     	refresh();
 	}
 
-	/**
-	 * Adds the header/title panel to the main JFrame hierarchy 
-	 * @param loc 
-	 */
-	private void displayHeader(Location loc) {
-		Header header = new Header(loc);
-    	header.setLocation(30, 30);
-    	mainWindow.getContentPane().add(header);
-    	refresh();	
-	}
 
 	/**
 	 * Adds the DayPanel (which organizes 5 DayPanel objects) to the main JFrame hierarchy
 	 * @param loc 
 	 * @throws Exception 
 	 */
-	private void displayLTF(Location loc) throws Exception {
-		
-		LongTermPanel ltPanel = new LongTermPanel(loc);
+	private void addLTF(Location loc) throws Exception {
+		if (ltPanel != null){
+			// panel exists
+			mainWindow.remove(ltPanel);	
+		}
+		ltPanel = new LongTermPanel(loc);
 		ltPanel.setLocation(5, 458);
 		mainWindow.getContentPane().add(ltPanel);
 		
     	refresh();
 	}
 	
-	/**
-	 * Adds the locationPicker to the main JFrame hierarchy
-	 */
-	private void addLocationPicker() {
 		
-		// adds a location picker		
-		lp = new gLocationPicker();
-		
-		// adds the location picker to the main window hierarchy, but does not paint it.
-		lp.setVisible(false);
-		addToMain(lp, 360, 75);	
-
-		
-		// button to toggle the visibility of the location picker
-		displayLPButton = new JButton("Add / Switch location");
-		displayLPButton.addActionListener(this);
-		displayLPButton.setSize(160,25);
-		displayLPButton.setOpaque(true);
-		displayLPButton.setBorderPainted(false);
-		displayLPButton.setFocusPainted(false);
-    	
-		addToMain(displayLPButton, 460, 50);
-		refresh();		
-	}
-	
-	/**
-	 * Helper to add a Swing component to the main window.
-	 * Reduces code duplication and eases readability.
-	 * @param comp Component to add
-	 * @param x X coordinate of the upper left corner
-	 * @param y Y coordinate of the upper left corner
-	 */
-	private void addToMain(Component comp, int x, int y) {
-		comp.setLocation(x, y);
-		mainWindow.add(comp);
-		refresh();
-	}
-	
 	/**
 	 * Sets the GUI.font global variable.  Can also register the font with the Graphics Environment,
 	 * but its a TODO
@@ -228,4 +189,30 @@ public class GUI implements ActionListener{
 			System.out.println("Uh oh, you have font problems.");
 		}
 }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String locationText = field.getText();
+		try {
+			// TODO add a button.  Calls on newline atm.
+			updateGUI(locationText);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
+
+	/**
+	 * Handles GUI update on location change 
+	 * @param locationText
+	 * @throws Exception
+	 */
+	private void updateGUI(String locationText) throws Exception {
+		Location userLoc = new Location(locationText);	
+		addLTF(userLoc);
+    	addSTF(userLoc);
+    	addLW(userLoc);    	
+		
+	}
 }

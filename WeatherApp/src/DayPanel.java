@@ -5,6 +5,14 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
+/**
+ * The DayPanel class displays the forecast information for a single day.
+ * 
+ * Used by the GUI, its instances are typically created by the LongTermPanel class
+ * 
+ * @author David Newell
+ *
+ */
 @SuppressWarnings("serial")
 public class DayPanel extends JPanel {
 
@@ -31,7 +39,8 @@ public class DayPanel extends JPanel {
 		addLabel(day.getPrecipitation());
 		addLabel(day.getMaxTemp());
 		addLabel(day.getMinTemp());
-    	ResizableImage button = new ResizableImage("rain20.png", 30, 30);
+		
+		ResizableImage button = new ResizableImage("rain20.png", 30, 30);
     	this.add(button);
     	this.validate();
     	this.repaint();

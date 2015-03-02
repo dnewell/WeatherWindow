@@ -1,24 +1,17 @@
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * @author David Newell
  * The ThreeHourPeriod class stores the forecast information for a three hour period.
  * 
  * Used by the GUI, its instances are typically created by the ShortTermForecast class
  * 
- * TODO This class should ONLY return the data, and the GUI should handle display, adding descriptions
- * to the string.  I.E. the getter for temperature should return "23" and the GUI will format to
- * Temperature: 23°C
- * TODO Think about if temp and precipitation fields should be numeric.  I think that the getters in this class
- * return a String, however.
- * TODO I think we should also add the unit conversion logic here. Have a getter for both C and for F? 
- * May be helpful in keeping the code out of the GUI classes.
+ * @author David Newell
+ * @author David Langford
  */
 public class ThreeHourPeriod {
 
@@ -27,27 +20,10 @@ public class ThreeHourPeriod {
 	private String skyCondition;
 	private String precipitation;
 
-
-	/**
-	 * Constructs a ThreeHourPeriod with all needed fields
-	 * 
-	 * @param dayOfWeek The day of the week
-	 * @param temperature The temperature
-	 * @param skyCondition The sky condition
-	 * @param precipitation The precipitation amount
-	 */
-	public ThreeHourPeriod(String dayOfWeek, String temperature,
-			String skyCondition, String precipitation) {
-		this.dayOfWeek = dayOfWeek;
-		this.temperature = temperature;
-		this.skyCondition = skyCondition;
-		this.precipitation = precipitation;
-	}
 	
 	/**
-	 * TODO Delete once parser is integrated
-	 * No argument constructor creates a dummy day,
-	 * to ease GUI testing
+	 * Constructs a ThreeHourPeriod
+	 * 
 	 * @throws JSONException 
 	 */
 	public ThreeHourPeriod(JSONObject res, int index) throws JSONException {
@@ -61,6 +37,7 @@ public class ThreeHourPeriod {
 		JSONObject list = res.getJSONArray("list").getJSONObject(index);
 		JSONObject Main = list.getJSONObject("main");
 		JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
+		@SuppressWarnings("unused")
 		JSONObject Clouds = list.getJSONObject("clouds");
 		Location.GetTime(list.getInt("dt"));
 		
@@ -70,7 +47,7 @@ public class ThreeHourPeriod {
 	    if (list.has("rain"))
 	    	precip += list.getJSONObject("rain").getDouble("3h");
 		    
-		//Capitalize first letter of cloud contition
+		//Capitalize first letter of cloud condition
 		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		 
 		this.dayOfWeek = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime + ", ";

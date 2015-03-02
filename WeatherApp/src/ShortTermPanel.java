@@ -1,17 +1,14 @@
 
-
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
-
-import org.json.*;
 
 
 /**
- * This class creates/contains ThreeHourPanels
+ * This class displays the Short Term Forecast, by creating/containing an array of ThreeHourPanel objects
+ * 
  * @author David Newell
- *
+ * @author David Langford
  */
 public class ShortTermPanel extends JPanel {
 
@@ -33,11 +30,11 @@ public class ShortTermPanel extends JPanel {
 
 
 /**
- * For testing - just populating the panel with ThreeHourPanels objects, created with that classes no arg constructor.
+ * Populates the panel with ThreeHourPanels objects
  * 
- * Once parser code is in, populate from LOCATION.getSTF().getThreeHourArray()[0 - 8].getWHATEVER());
  * @throws Exception 
  */
+	@SuppressWarnings("static-access")
 	private void addPeriods(Location loc) throws Exception {
 
 		ThreeHourPanel[] panels = new ThreeHourPanel[8];

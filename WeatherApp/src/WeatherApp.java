@@ -1,7 +1,8 @@
 /**
  * Super-exciting main class.
+ * 
  * @author David Newell
- * @edited by David Langford
+ * @author David Langford
  */
 public class WeatherApp {
 

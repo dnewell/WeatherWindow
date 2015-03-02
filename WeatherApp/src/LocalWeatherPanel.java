@@ -8,7 +8,10 @@ import javax.swing.JPanel;
 
 import org.json.*;
 /**
+ * The LocalWeatherPanel class displays the current forecast
+ * 
  * @author David Newell
+ * @author David Langford
  */
 public class LocalWeatherPanel extends JPanel {
 

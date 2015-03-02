@@ -1,13 +1,14 @@
-/**
- * @author David Newell
- */
 
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
 
-import org.json.*;
+/**
+ * This class displays the Long Term Forecast, by creating/containing an array of DayPanel objects
+ * 
+ * @author David Newell
+ */
+
 
 public class LongTermPanel extends JPanel {
 
@@ -25,8 +26,7 @@ public class LongTermPanel extends JPanel {
 		
 		this.setBackground(new Color(0,0,255,30));
     	this.setSize(new Dimension(770,250));
-    	JSONObject test = null;
-		addDayPanels(loc);
+    	addDayPanels(loc);
 
 	}
 

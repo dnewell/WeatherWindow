@@ -3,19 +3,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * @author David Newell
- * 
  * ImageButton class uses JLabel to implement buttons with dynamically sized images
- * This is a mouse click enabled button.
  * It is transparent, and border free.
  * 
- * Created to ease the process of resizing images, eliminating the need to
+ * Created to ease the process of resizing images, eliminates the need to
  * manually size each image using an image editor
  * 
  * Created for CS2212 WeatherApp project
- * 
- * CAN IMPLEMENT COLOR INVERSION HERE, if desired, using Graphics.RescaleOp()
- * Look at: http://docstore.mik.ua/orelly/java-ent/jfc/ch04_10.htm
+ * @author David Newell
  *
  */
 public class ResizableImage extends JLabel {
@@ -84,7 +79,6 @@ public class ResizableImage extends JLabel {
  * 	Spent about an hour trying to get this resizing method to work,
  *  since Image.getScaledInstance() method is very old, slow, low quality, and mostly deprecated.
  *  Turns out Graphics2D.drawImage() is BROKEN IN JAVA 8!!!
- *  FUUUUUUUUUUUUUUU.....
  *  Implemented it with Image.getScaledInstance() in about 30 seconds.  Time for a break.
  */
     	

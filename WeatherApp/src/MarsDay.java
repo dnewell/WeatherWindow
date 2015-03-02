@@ -1,18 +1,10 @@
 import org.json.*;
 
 /**
+ * The MarsDay class stores the current weather information for Mars.
+ * 
  * @author David Newell
- * 
- * The LocalWeather class stores the current forecast information.
- * 
- * Used by the GUI, its instances are typically created by the Location class
- * TODO This class should ONLY return the data, and the GUI should handle display, adding descriptions
- * to the string.  I.E. the getter for temperature should return "23" and the GUI will format to
- * Temperature: 23°C
- * TODO Think about if temp and precipitation fields should be numeric.  I think that the getters in this class
- * return a String, however.
- * TODO I think we should also add the unit conversion logic here. Have a getter for both C and for F? 
- * May be helpful in keeping the code out of the GUI classes.
+ * @author David Langford
  */
 public class MarsDay {
 
@@ -27,34 +19,7 @@ public class MarsDay {
 	private String maxTemp;
 	
 	/**
-	 *  Constructs MarsDay with all needed fields
-	 * @param marsDate
-	 * @param averageTemp
-	 * @param skyCondition
-	 * @param precipatation
-	 * @param windSpeed
-	 * @param windDirection
-	 * @param minTemp
-	 * @param maxTemp
-	 */
-	public MarsDay(String marsDate, String averageTemp,
-			String skyCondition, String precipatation, String windSpeed,
-			String windDirection, String minTemp,
-			String maxTemp) {
-		
-		this.marsDate = marsDate;
-		this.averageTemp = averageTemp;
-		this.skyCondition = skyCondition;
-		this.precipatation = precipatation;
-		this.windSpeed = windSpeed;
-		this.windDirection = windDirection;
-		this.minTemp = minTemp;
-		this.maxTemp = maxTemp;
-	}
-	
-	/**
-	 *  Constructs MarsDay with dummy values.  Used for testing GUI.
-	 *  TODO Delete once parser is integrated
+	 *  Constructor
 	 * @param marsDate
 	 * @param averageTemp
 	 * @param skyCondition
@@ -176,6 +141,4 @@ public class MarsDay {
 		this.maxTemp = maxTemp;
 	}
 
-
-	
 }

@@ -4,7 +4,14 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+* The ThreeHourPanel class displays the forecast information for a three hour period.
+* 
+* Used by the GUI, its instances are typically created by the ShortTermPanel class
+* 
+* @author David Newell
+* @author David Langford
+*/
 
 public class ThreeHourPanel extends JPanel {
 	

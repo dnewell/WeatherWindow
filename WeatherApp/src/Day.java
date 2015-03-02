@@ -6,19 +6,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * @author David Newell
- * 
  * The Day class stores the forecast information for a single day.
  * 
  * Used by the GUI, its instances are typically created by the LongTermForecast class
  * 
- * TODO This class should ONLY return the data, and the GUI should handle display, adding descriptions
- * to the string.  I.E. the getter for temperature should return "23" and the GUI will format to
- * Temperature: 23°C
- * TODO Think about if temp and precipitation fields should be numeric.  I think that the getters in this class
- * return a String, however.
- * TODO I think we should also add the unit conversion logic here. Have a getter for both C and for F? 
- * May be helpful in keeping the code out of the GUI classes.
+ * @author David Newell
+ * @author David Langford
  */
 
 public class Day {
@@ -53,9 +46,7 @@ public class Day {
 	}
 
 	/**
-	 * no argument constructor creates a dummy day
-	 * to ease GUI testing
-	 * TODO Delete once parser is integrated
+	 * Constructor
 	 * @param i 
 	 * @param info 
 	 * @throws JSONException 

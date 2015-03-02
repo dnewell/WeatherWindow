@@ -1,8 +1,6 @@
 import org.json.*;
 
 /**
- * @author David Newell
- * 
  * Class LongTermForecast parses the JSON for the long term forecast,
  * initializes all of the Day objects for that data,
  * and stores them in an array.
@@ -10,6 +8,8 @@ import org.json.*;
  * I think that the createDayArray() method in the UML is redundant,
  * the constructor will handle creating the array, and other methods will fill it!
  *
+ * @author David Newell
+ * @author David Langford
  */
 
 
