@@ -1,6 +1,7 @@
-import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
+ * CHANGED TO USE DEFAULT LIST MODEL INTEAD OF ARRAYLIST
  * @author David Newell
  * MyLocations class is created by PersistanceHandler,
  * and will interact with the GUI. 
@@ -12,9 +13,11 @@ import java.util.ArrayList;
 public class MyLocations {
 	
 	private String currentLocation;
-	// the arraylist is used to contain Location objects as they are created. 
+	// the DefaultListModel is used to contain Location objects as they are created. 
 	// Needs to be a list, not an array, since number of Locations is dynamic
-	private ArrayList<Location> locationList;;
+	// and it is by FAR easiest/best choice to use a DefaultListModel if we're using 
+	//a JList to pick locations in the GUI.
+	private DefaultListModel<Location> locationList;
 	
 	/**
 	 * Constructor.
@@ -28,18 +31,44 @@ public class MyLocations {
 	public MyLocations(){
 		// actionEvents here. GUI link.
 		
-		locationList = new ArrayList<Location>();
+		locationList = new DefaultListModel<Location>();
 	}
 
 	/**
 	 * addLocation method
+	 * 
+	 * Validate locations here!!!
+	 * 
+	 * return true if location was valid, and successfully added to the list.
 	 * @param locationName the name of the location to add
+	 * @throws Exception 
 	 */
-	public void addLocation(Location location) {
+	public Boolean addLocation(String locationName) throws Exception {
 		
-		locationList.add(location);
+		if (isValidLocation(locationName) == true){
+			Location validatedLocation = new Location(locationName);			
+			locationList.addElement(validatedLocation);			
+			return true;
+		}
 		
+		// if not a valid location
+		return false;
 	}
+
+	/**
+	 * This method will use the OpenWeatherMaps API to check if the location the user
+	 * entered is valid
+	 * TODO validation code
+	 * @param locationName The name of the location to check
+	 * @return boolean True if the location is valid, false otherwise
+	 */
+	private boolean isValidLocation(String locationName) {
+		// validate with OWM API here.
+		
+		
+		return true;
+	}
+
 
 	/**
 	 * @return the currentLocation
@@ -58,14 +87,14 @@ public class MyLocations {
 	/**
 	 * @return the locationList
 	 */
-	public ArrayList<Location> getLocationList() {
+	public DefaultListModel<Location> getLocationList() {
 		return locationList;
 	}
 
 	/**
 	 * @param locationList the locationList to set
 	 */
-	public void setLocationList(ArrayList<Location> locationList) {
+	public void setLocationList(DefaultListModel<Location> locationList) {
 		this.locationList = locationList;
 	}
 	

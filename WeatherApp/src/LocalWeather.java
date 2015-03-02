@@ -1,3 +1,8 @@
+import java.text.DecimalFormat;
+import java.util.Date;
+
+import org.json.*;
+
 /**
  * @author David Newell
  * 
@@ -48,6 +53,9 @@ public class LocalWeather {
 			String skyCondition, String precipatation, String windSpeed,
 			String windDirection, String pressure, String humidity, String minTemp,
 			String maxTemp, String sunrise, String sunset) {
+		
+		
+		
 		this.updateTime = updateTime;
 		this.userTime = userTime;
 		this.temperature = temperature;
@@ -80,20 +88,49 @@ public class LocalWeather {
 	 * @param sunrise
 	 * @param sunset
 	 */
-	public LocalWeather() {
-		this.updateTime = "Last data update: 10:23pm";
-		this.userTime = "Current Time: 10:32";
-		this.temperature = "Current Temp is: 15.7°C";
-		this.skyCondition = "Sky is clear";
-		this.precipatation = "0mm precipitation";
-		this.windSpeed = "24km/h";
-		this.windDirection = "from NW";
-		this.pressure = "101.2KpA";
-		this.humidity = "12% relative humidity";
-		this.minTemp = "low: 5.2°C";
-		this.maxTemp = "high: 15.7°C";
-		this.sunrise = "Sunrise: 5:49am";
-		this.sunset = "Sunset: 8:54pm";
+	public LocalWeather(JSONObject info) throws Exception {
+
+		DecimalFormat temp = new DecimalFormat("#.#");
+		Date now = new Date();
+		
+		//Declare Json Objects for use
+	    JSONObject loc = info.getJSONObject("coord");
+	    JSONObject Weather = info.getJSONArray("weather").getJSONObject(0);
+	    JSONObject sys = info.getJSONObject("sys");
+	    JSONObject Main = info.getJSONObject("main");
+	    JSONObject Wind = info.getJSONObject("wind");
+	    JSONObject Clouds = info.getJSONObject("clouds");
+	    
+	    Double precip=0.00;
+
+	    Location.GetTime(info.getInt("dt"));	  
+	    
+	    //Get precipitation levels if any
+	    if (info.has("snow"))
+	    	precip += info.getJSONObject("snow").getDouble("3h");
+	    if (info.has("rain"))
+	    	precip += info.getJSONObject("rain").getDouble("3h");	
+	    
+		
+		this.updateTime = "Last data update: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
+		this.userTime = String.format("Current Time: %tl:%tM %tp%n", now, now, now);
+		this.temperature = temp.format(Main.getDouble("temp")) + "°C";
+		this.skyCondition = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
+		this.precipatation = temp.format(precip) + "";
+		this.windSpeed = temp.format(Wind.getDouble("speed")) + "km/h";
+		this.windDirection = Location.Direction(Wind.getDouble("deg"));
+		this.pressure = temp.format(Main.getDouble("pressure")) + "KpA";
+		this.humidity = (int)Main.getDouble("humidity") + "";
+		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "°C";
+		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "°C";
+		
+		Location.GetTime(sys.getInt("sunrise"));
+		this.sunrise = "Sunrise: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
+		
+		Location.GetTime(sys.getInt("sunset"));
+		this.sunset = "Sunset: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
+		
+		Location.NewDay = false;
 	}
 	
 	/**
@@ -253,5 +290,6 @@ public class LocalWeather {
 		this.sunset = sunset;
 	}
 
+	
 	
 }

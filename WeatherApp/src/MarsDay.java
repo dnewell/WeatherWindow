@@ -1,3 +1,5 @@
+import org.json.*;
+
 /**
  * @author David Newell
  * 
@@ -62,7 +64,7 @@ public class MarsDay {
 	 * @param minTemp
 	 * @param maxTemp
 	 */
-	public MarsDay() {
+	public MarsDay(JSONObject info) {
 		this.marsDate = "Current Time: 10:32";
 		this.averageTemp = "Current Temp is: 15.7°C";
 		this.skyCondition = "Sky is clear";

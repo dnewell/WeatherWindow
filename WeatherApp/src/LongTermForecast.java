@@ -1,3 +1,5 @@
+import org.json.*;
+
 /**
  * @author David Newell
  * 
@@ -17,23 +19,25 @@ private Day[] dayArray;
 	
 	/**
 	 * Constructor
+	 * @throws JSONException 
 	 */
-	public LongTermForecast() {
+	public LongTermForecast(JSONObject info) throws JSONException {
 		// creates array which will contain the ThreeHourPeriod objects
 		this.dayArray = new Day[5];
 		// TODO this method may contain parser code, for now it just creates dummy objects
-		parseJSONforLTF();
+		parseJSONforLTF(info);
 	}
 
 	
 	// TODO Parser code might live here
 	// now creates dummy objects
-	public void parseJSONforLTF() {
+	public void parseJSONforLTF(JSONObject info) throws JSONException {
 	
-		// this loop creates 9 dummy ThreeHourPeriod objects by calling ThreeHourPeriod()'s no arg constructor
+		// this loop creates 5 dummy Day objects by calling Day()'s no arg constructor
 		// TODO Fit parser code in this class, and then delete this nonsense!
+		Location.cal.setTime(Location.now);
 		for(int i = 0; i < 5; i++){
-		dayArray[i] = new Day();
+		dayArray[i] = new Day(info, i);
 		}
 		
 	}

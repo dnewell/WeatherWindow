@@ -1,3 +1,10 @@
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * @author David Newell
  * 
@@ -49,14 +56,38 @@ public class Day {
 	 * no argument constructor creates a dummy day
 	 * to ease GUI testing
 	 * TODO Delete once parser is integrated
+	 * @param i 
+	 * @param info 
+	 * @throws JSONException 
 	 */
-	public Day() {
-		this.dayOfWeek = "Mon Mar 8";
-		this.temperature = "2.1°C or 62.3°F";
-		this.skyCondition = "Sky is clear";
-		this.precipitation = "4.5mm";
-		this.maxTemp = "-13";
-		this.minTemp = "19";
+	public Day(JSONObject info, int index) throws JSONException {
+		
+		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd");
+		DecimalFormat temp = new DecimalFormat("#.#");
+		
+		Double precip = 0.0;
+		//get needed JSON Objects and timestamp
+		JSONObject list = info.getJSONArray("list").getJSONObject(index);
+		JSONObject Temp = list.getJSONObject("temp");
+		JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
+		Location.GetTime(list.getInt("dt"));
+		
+		//Capitalize first letter of cloud contition
+		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
+		
+		//Get precipitation levels if any
+		if (list.has("snow"))
+	    	precip += list.getDouble("snow");
+	    if (list.has("rain"))
+	    	precip += list.getDouble("rain");
+		    
+	    this.dayOfWeek = format.format(Location.cal.getTime());
+	    Location.cal.add(Calendar.DATE, 1);
+		this.temperature = temp.format(Temp.getDouble("day")) + "°C";
+		this.skyCondition = weather;
+		this.precipitation = temp.format(precip) + "mm";
+		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "°C";
+		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "°C";
 	}
 
 	/**

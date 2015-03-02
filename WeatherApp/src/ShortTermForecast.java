@@ -1,3 +1,5 @@
+import org.json.*;
+
 /**
  * @author David Newell
  * 
@@ -16,24 +18,26 @@ public class ShortTermForecast {
 	/**
 	 * Constructor
 	 * @param threeHourArray
+	 * @throws JSONException 
 	 */
-	public ShortTermForecast() {
+	public ShortTermForecast(JSONObject info) throws JSONException {
 		// creates array which will contain the ThreeHourPeriod objects
-		this.threeHourArray = new ThreeHourPeriod[9];
+		this.threeHourArray = new ThreeHourPeriod[8];
 		// TODO this method may contain parser code, for now it just creates dummy objects
-		parseJSONforSTF();
+		parseJSONforSTF(info);
 	}
 
 	
 	// TODO Parser code might live here
 	// now creates dummy objects
-	public void parseJSONforSTF() {
+	public void parseJSONforSTF(JSONObject info) throws JSONException {
 	
 		// this loop creates 9 dummy ThreeHourPeriod objects for testing
 		// calls ThreeHourPeriod()'s no arg constructor
 		// TODO Fit parser code in this class, and then delete this nonsense!
-		for(int i = 0; i < 9; i++){
-		threeHourArray[i] = new ThreeHourPeriod();
+		Location.cal.setTime(Location.now);
+		for(int i = 0; i < 8; i++){
+		threeHourArray[i] = new ThreeHourPeriod(info, i+1);
 		}
 		
 	}
