@@ -15,8 +15,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The GUI class creates and maintains the interface
-
+ * The GUI class creates and maintains the graphic interface
+ * through which the user interacts with the program
+ * 
  * @author David Newell
  * @author David Langford
  */
@@ -33,7 +34,11 @@ public class GUI implements ActionListener{
 	private Location loc;
 	public static Font font;
 	
-	// Constructor
+	
+	/**
+	 * Constructs JFrame which contains the GUI,
+	 * and sets the default location.
+	 */
 	public GUI() {	
 		mainWindow = new JFrame(APPLICATION_NAME);
 		try {
@@ -48,7 +53,7 @@ public class GUI implements ActionListener{
 	}
 	
 	/**
-	 *  Initializes the GUI on the event dispatch thread
+	 *  Initializes the GUI on the event dispatch thread.
 	 */
 	private void initGUI() {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -98,7 +103,9 @@ public class GUI implements ActionListener{
     	mainWindow.setVisible(true);
 	}
 	
-	
+	/**
+	 * Adds a text field through which the user can change locations
+	 */
 	private void addLocationField() {
 		Font newFont = GUI.font.deriveFont(64f);
 		field = new JTextField(15);		
@@ -114,8 +121,7 @@ public class GUI implements ActionListener{
     	field.setBorder(border);
     	field.setCaretColor(new Color(255,255,255,140));
 		field.setVisible(true);
-		mainWindow.add(field);
-		
+		mainWindow.add(field);	
 	}
 
 	/**
@@ -128,7 +134,7 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the local weather panel to the main JFrame hierarchy 
-	 * @param loc 
+	 * @param loc the location
 	 * @throws Exception 
 	 */
 	private void addLW(Location loc) throws Exception {
@@ -144,7 +150,7 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the short term weather panel to the main JFrame hierarchy 
-	 * @param loc 
+	 * @param loc the location
 	 * @throws Exception 
 	 */
 	private void addSTF(Location loc) throws Exception {
@@ -161,7 +167,7 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the DayPanel (which organizes 5 DayPanel objects) to the main JFrame hierarchy
-	 * @param loc 
+	 * @param loc the location
 	 * @throws Exception 
 	 */
 	private void addLTF(Location loc) throws Exception {
@@ -178,8 +184,8 @@ public class GUI implements ActionListener{
 	
 		
 	/**
-	 * Sets the GUI.font global variable.  Can also register the font with the Graphics Environment,
-	 * but its a TODO
+	 * Sets the GUI.font global variable.  
+	 * TODO it may be better to register the font with the Graphics Environment
 	 */
 	private void setFont() {
 		try {
@@ -192,8 +198,11 @@ public class GUI implements ActionListener{
 			System.out.println("Uh oh, you have font problems.");
 		}
 }
-
-	@Override
+		
+	/**
+	 * Handles the ActionEvents for the location JTextField field object
+	 * 	@Override
+	 */
 	public void actionPerformed(ActionEvent e) {
 		String locationText = field.getText();
 		try {
@@ -209,8 +218,8 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Handles GUI update on location change 
-	 * @param locationText
-	 * @throws Exception
+	 * @param locationText the location name
+	 * @throws Exception invalid location
 	 */
 	private void updateGUI(String locationText) throws Exception {
 		Location oldLoc = loc;

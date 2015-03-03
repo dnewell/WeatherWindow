@@ -5,7 +5,8 @@ import javax.swing.JPanel;
 
 
 /**
- * This class displays the Short Term Forecast, by creating/containing an array of ThreeHourPanel objects
+ * This class displays the Short Term Forecast, by creating/containing 
+ * a collection of ThreeHourPanel objects
  * 
  * @author David Newell
  * @author David Langford
@@ -14,26 +15,36 @@ public class ShortTermPanel extends JPanel {
 
 	private static final long serialVersionUID = -597607470838407704L;
 
+	/**
+	 * Constructs the panel
+	 * @param loc the location
+	 * @throws Exception
+	 */
 	public ShortTermPanel(Location loc) throws Exception {		
 		initPanel(loc);
 	}
-
+	/**
+	 * Initialzes the panel and sets its display attributes.
+	 * @param loc a location
+	 * @throws Exception
+	 */
 	private void initPanel(Location loc) throws Exception {
 		
 		this.setBackground(new Color(0,0,255,20));
 		this.setLayout(null);
     	this.setSize(new Dimension(400,700));
     	
+    	//adds ThreeHourPanel objects with a helper method
 		addPeriods(loc);
 
 	}
 
 
-/**
- * Populates the panel with ThreeHourPanels objects
- * 
- * @throws Exception 
- */
+	/**
+	 * Populates the panel with ThreeHourPanels objects
+	 * @param loc the location 
+	 * @throws Exception 
+	 */
 	@SuppressWarnings("static-access")
 	private void addPeriods(Location loc) throws Exception {
 

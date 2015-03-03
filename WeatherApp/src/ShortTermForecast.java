@@ -24,7 +24,11 @@ public class ShortTermForecast {
 		// TODO this method may contain parser code, for now it just creates dummy objects
 		parseJSONforSTF(info);
 	}
-
+	/**
+	 * Parses the JSON 
+	 * @param info the JSON to parse
+	 * @throws JSONException
+	 */
 	public void parseJSONforSTF(JSONObject info) throws JSONException {
 		Location.cal.setTime(Location.now);
 		for(int i = 0; i < 8; i++){
@@ -33,7 +37,8 @@ public class ShortTermForecast {
 		
 	}
 
-	/*
+	/**
+	 * Getter for the ThreeHourArray
 	 * @return array containing all the ThreeHourPeriod objects 
 	 */
 	public ThreeHourPeriod[] getThreeHourArray() {

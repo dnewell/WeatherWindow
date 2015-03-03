@@ -1,7 +1,6 @@
 /**
- * Location class represents a single location,
- * creates and populates the fields instances of the different forecast classes
- * and handles JSON requests.
+ * The Location class represents a single location, creates and populates
+ * the fields instances of the different forecast classes and handles JSON requests.
  * 
  * @author David Newell
  * @author David Langford
@@ -15,10 +14,6 @@ import java.util.Scanner;
 
 import org.json.*;
 
-/**
- * @author David
- *
- */
 public class Location {
 
 	private String location;
@@ -40,7 +35,8 @@ public class Location {
 	
 
 	/**
-	 * Constructor.
+	 * Constructs a location.
+	 * - Handles the Mars case
 	 * @param location
 	 */
 	public Location(String location) throws Exception {
@@ -75,13 +71,11 @@ public class Location {
 		this.location = location;
 	}
 
-
-	
-
 	/**
-	 * @param addr
-	 * @param s
-	 * @return
+	 * Reads the JSON for a specified forecast type and location
+	 * @param addr the location text
+	 * @param s the desired type of forecast 
+	 * @return JSONObject
 	 * @throws Exception
 	 */
 	public JSONObject readJSON(String addr, String s) throws Exception
@@ -135,7 +129,11 @@ public class Location {
 	    	    
 	    return res;	    
 	}
-	
+	/**
+	 * Converts cardinal directions from a numeric representation to text
+	 * @param deg direction in degrees
+	 * @return a friendly text representation of the direction
+	 */
 	public static String Direction (double deg)
 	   {		   
 		   if (deg <=22.5 || deg >=337.5)
@@ -154,7 +152,12 @@ public class Location {
 			   return "West";
 		   else return "Northwest";
 	   }
-	
+	/**
+	 * Converts Epoch time from OpenWeatherMap api to a more
+	 * user friendly format
+	 * TODO Change to return a value, instead of using global variables
+	 * @param time the epoch time
+	 */
 	 public static void GetTime (int time)
 	   {
 		 	//Get number of seconds from last possible midnight
@@ -231,7 +234,7 @@ public class Location {
 	/**
 	 * @return location Name of the location
 	 */
-	public String toString(){
+	public String toString() {
 		return location;
 	}
 }

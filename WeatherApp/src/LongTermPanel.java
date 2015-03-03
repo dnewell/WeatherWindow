@@ -19,6 +19,11 @@ public class LongTermPanel extends JPanel {
 		initPanel(loc);		
 	}
 
+	/**
+	 * Initializes and sets display attributes for the panel
+	 * @param loc a location
+	 * @throws Exception
+	 */
 	private void initPanel(Location loc) throws Exception {
 	
 		this.setLayout(null);
@@ -30,7 +35,11 @@ public class LongTermPanel extends JPanel {
 
 	}
 
-	
+	/**
+	 * Adds Day objects to the day panel
+	 * @param loc a location
+	 * @throws Exception
+	 */
 	private void addDayPanels(Location loc) throws Exception {
 		DayPanel[] panels = new DayPanel[5];
 		

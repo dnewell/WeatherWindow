@@ -16,10 +16,21 @@ import org.json.*;
 public class LocalWeatherPanel extends JPanel {
 
 		private static final long serialVersionUID = 1L;
+		
+		/**
+		 * Constructs the panel
+		 * @param loc the location
+		 * @throws Exception
+		 */
 		public LocalWeatherPanel(Location loc) throws Exception {	
 			initPanel(loc);
 		}
 
+		/**
+		 * Initializes the panel, and sets its display attributes
+		 * @param loc the location
+		 * @throws Exception
+		 */
 		private void initPanel(Location loc) throws Exception {
 			this.setLayout(new GridLayout(0,2));
 			

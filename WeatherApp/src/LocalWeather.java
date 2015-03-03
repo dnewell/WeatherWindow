@@ -25,59 +25,12 @@ public class LocalWeather {
 	private String maxTemp;
 	private String sunrise;
 	private String sunset;
+
 	
 	/**
-	 *  Constructs LocalWeather with all needed fields
-	 * @param updateTime
-	 * @param userTime
-	 * @param temperature
-	 * @param skyCondition
-	 * @param precipatation
-	 * @param windSpeed
-	 * @param windDirection
-	 * @param pressure
-	 * @param humidity
-	 * @param mStringemp
-	 * @param maxTemp
-	 * @param sunrise
-	 * @param sunset
-	 */
-	public LocalWeather(String updateTime, String userTime, String temperature,
-			String skyCondition, String precipatation, String windSpeed,
-			String windDirection, String pressure, String humidity, String minTemp,
-			String maxTemp, String sunrise, String sunset) {
-			
-		this.updateTime = updateTime;
-		this.userTime = userTime;
-		this.temperature = temperature;
-		this.skyCondition = skyCondition;
-		this.precipatation = precipatation;
-		this.windSpeed = windSpeed;
-		this.windDirection = windDirection;
-		this.pressure = pressure;
-		this.humidity = humidity;
-		this.minTemp = minTemp;
-		this.maxTemp = maxTemp;
-		this.sunrise = sunrise;
-		this.sunset = sunset;
-	}
-	
-	/**
-	 *  Constructs LocalWeather with dummy values.  Used for testing GUI.
-	 *  TODO Delete once parser is integrated
-	 * @param updateTime
-	 * @param userTime
-	 * @param temperature
-	 * @param skyCondition
-	 * @param precipatation
-	 * @param windSpeed
-	 * @param windDirection
-	 * @param pressure
-	 * @param humidity
-	 * @param minTemp
-	 * @param maxTemp
-	 * @param sunrise
-	 * @param sunset
+	 * Constructs the LocalWeather
+	 * @param info the weather information 
+	 * @throws Exception
 	 */
 	public LocalWeather(JSONObject info) throws Exception {
 
@@ -125,48 +78,56 @@ public class LocalWeather {
 	}
 	
 	/**
+	 * Getter for updateTime
 	 * @return the updateTime
 	 */
 	public String getUpdateTime() {
 		return updateTime;
 	}
 	/**
+	 * Getter for userTime
 	 * @return the userTime
 	 */
 	public String getUserTime() {
 		return userTime;
 	}
 	/**
+	 * Getter for temperature
 	 * @return the temperature
 	 */
 	public String getTemperature() {
 		return temperature;
 	}
 	/**
+	 * Getter for skyCondition
 	 * @return the skyCondition
 	 */
 	public String getSkyCondition() {
 		return skyCondition;
 	}
 	/**
+	 * Getter for precipitation
 	 * @return the precipitation
 	 */
 	public String getPrecipatation() {
 		return precipatation;
 	}
 	/**
+	 * Getter for windSpeed
 	 * @return the windSpeed
 	 */
 	public String getWindSpeed() {
 		return windSpeed;
 	}
 	/**
+	 * Getter for windDirection
 	 * @return the windDirection
 	 */
 	public String getWindDirection() {
 		return windDirection;
 	}
 	/**
+	 * Getter for the pressure
 	 * @return the pressure
 	 */
 	public String getPressure() {

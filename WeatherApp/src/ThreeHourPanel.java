@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
@@ -18,11 +19,17 @@ public class ThreeHourPanel extends JPanel {
 	private static final long serialVersionUID = -1641461367018339795L;
 	private ThreeHourPeriod period;
 	
+	/**
+	 * Constructs the panel
+	 * @param period the ThreeHourPeriod
+	 */
 	public ThreeHourPanel(ThreeHourPeriod period){
 		this.period = period;
 		initPanel();
 	}
-
+	/**
+	 * Initializes the panel and sets its display attributes.
+	 */
 	private void initPanel() {
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
 		this.setOpaque(true);
@@ -42,6 +49,10 @@ public class ThreeHourPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Adds a label to the JPanel, and sets its display attributes
+	 * @param text desired label text
+	 */
 	private void addLabel(String text) {
 		JLabel label = new JLabel(text);	
 		Font newFont = GUI.font.deriveFont(22f);

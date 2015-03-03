@@ -22,7 +22,7 @@ public class MarsWeather {
 	
 	
 	/**
-	 *  Constructor for MarsWeather class
+	 *  Constructor for the MarsWeather class
 	 *  
 	 * @param date
 	 * @param temperature

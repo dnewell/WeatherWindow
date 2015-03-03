@@ -7,6 +7,7 @@ import javax.swing.*;
 
 /**
  * The DayPanel class displays the forecast information for a single day.
+ * Organizes a collection of Day objects.
  * 
  * Used by the GUI, its instances are typically created by the LongTermPanel class
  * 
@@ -18,11 +19,20 @@ public class DayPanel extends JPanel {
 
 	private Day day;
 
+	/**
+	 * Constructs a DayPanel
+	 * @param day
+	 * @throws Exception
+	 */
 	public DayPanel(Day day) throws Exception{
 		this.day = day;
 		initPanel();
 	}
 	
+	/**
+	 * Initializes and adds all the display components
+	 * to the panel
+	 */
 	private void initPanel() {
 		// single vertical column layout
 		GridLayout layout = new GridLayout(0,1);
@@ -46,9 +56,10 @@ public class DayPanel extends JPanel {
     	this.repaint();
 		
 	}
-		/**
-		 * Adds the label to the JPanel
-		 */
+	/**
+	 * Adds a label to the JPanel, and sets its display attributes
+	 * @param text label text
+	 */
 		private void addLabel(String text) {
 			Font newFont = GUI.font.deriveFont(22f);
 

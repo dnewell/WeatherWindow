@@ -25,30 +25,9 @@ public class Day {
 	
 	
 	/**
-	 * Constructs a Day with all needed fields
-	 * 
-	 * @param dayOfWeek The day of the week
-	 * @param temperature The temperature
-	 * @param skyCondition The condition of the sky
-	 * @param precipitation Precipitation amount
-	 * @param maxTemp Maximum temperature
-	 * @param minTemp Minimum temperature
-	 */
-	public Day(String dayOfWeek, String temperature, String skyCondition,
-			String precipitation, String maxTemp, String minTemp) {
-	
-		this.dayOfWeek = dayOfWeek;
-		this.temperature = temperature;
-		this.skyCondition = skyCondition;
-		this.precipitation = precipitation;
-		this.maxTemp = maxTemp;
-		this.minTemp = minTemp;
-	}
-
-	/**
-	 * Constructor
-	 * @param i 
-	 * @param info 
+	 * Constructs a new Day
+	 * @param info the weather information 
+	 * @param index the position in the array
 	 * @throws JSONException 
 	 */
 	public Day(JSONObject info, int index) throws JSONException {
@@ -63,7 +42,7 @@ public class Day {
 		JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
 		Location.GetTime(list.getInt("dt"));
 		
-		//Capitalize first letter of cloud contition
+		//Capitalize first letter of cloud condition
 		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		
 		//Get precipitation levels if any
@@ -82,6 +61,7 @@ public class Day {
 	}
 
 	/**
+	 * Getter for dayOfWeek
 	 * @return the dayOfWeek
 	 */
 	public String getDayOfWeek() {
@@ -89,6 +69,7 @@ public class Day {
 	}
 
 	/**
+	 * Setter for dayOfWeek
 	 * @param dayOfWeek the dayOfWeek to set
 	 */
 	public void setDayOfWeek(String dayOfWeek) {
@@ -96,6 +77,7 @@ public class Day {
 	}
 
 	/**
+	 * Getter for temperature
 	 * @return the temperature
 	 */
 	public String getTemperature() {
@@ -103,6 +85,7 @@ public class Day {
 	}
 
 	/**
+	 * Setter for temperature
 	 * @param temperature the temperature to set
 	 */
 	public void setTemperature(String temperature) {
@@ -110,6 +93,7 @@ public class Day {
 	}
 
 	/**
+	 * Getter for skyCondition
 	 * @return the skyCondition
 	 */
 	public String getSkyCondition() {
@@ -117,6 +101,7 @@ public class Day {
 	}
 
 	/**
+	 * Setter for skyCondition
 	 * @param skyCondition the skyCondition to set
 	 */
 	public void setSkyCondition(String skyCondition) {
@@ -124,6 +109,7 @@ public class Day {
 	}
 
 	/**
+	 * Getter for maxTemp
 	 * @return the maxTemp
 	 */
 	public String getMaxTemp() {
@@ -131,6 +117,7 @@ public class Day {
 	}
 
 	/**
+	 * Setter for maxTemp
 	 * @param maxTemp the maxTemp to set
 	 */
 	public void setMaxTemp(String maxTemp) {
@@ -138,6 +125,7 @@ public class Day {
 	}
 
 	/**
+	 * Getter for precipitation
 	 * @return the minTemp
 	 */
 	public String getMinTemp() {
@@ -145,13 +133,15 @@ public class Day {
 	}
 
 	/**
+	 * Setter for minTemp
 	 * @param minTemp the minTemp to set
 	 */
-	public void setMinTemp(String minTemp) {
+	public void setMinTemp(String precipitation) {
 		this.minTemp = minTemp;
 	}
 
 	/**
+	 * Getter for precipitation
 	 * @return the precipitation
 	 */
 	public String getPrecipitation() {
@@ -159,6 +149,7 @@ public class Day {
 	}
 
 	/**
+	 * Setter for precipitation
 	 * @param precipitation the precipitation to set
 	 */
 	public void setPrecipitation(String precipitation) {
