@@ -25,7 +25,7 @@ public class Location {
 	private ShortTermForecast shortTermForecast;
 	private LongTermForecast longTermForecast;
 	private LocalWeather localWeather;
-	private MarsDay marsDay;
+	private MarsWeather marsWeather;
 
 	//Determines am or pm
 	public static String daytime;
@@ -50,7 +50,7 @@ public class Location {
 		 * MARS case handling.  There are many different ways (and possible places) we could handle this.
 		 * 
 		 */		if (getLocation().equals("mars"))
-			this.marsDay = new MarsDay(readJSON("", "mars"));
+			this.marsWeather = new MarsWeather(readJSON("", "mars"));
 		 else {
 			this.shortTermForecast = new ShortTermForecast(readJSON(location, "short term"));
 			this.longTermForecast = new LongTermForecast(readJSON(location, "long term"));
@@ -224,8 +224,8 @@ public class Location {
 	/**
 	 * @return marsDay the MarsDay for this location
 	 */
-	public MarsDay getMD() {
-		return marsDay;
+	public MarsWeather getMD() {
+		return marsWeather;
 	}
 	
 	/**
@@ -234,7 +234,4 @@ public class Location {
 	public String toString(){
 		return location;
 	}
-
-
-
 }
