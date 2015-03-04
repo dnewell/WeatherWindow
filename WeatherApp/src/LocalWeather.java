@@ -27,6 +27,9 @@ public class LocalWeather {
 	private String sunset;
 
 	
+	// Just making minor comment change to test to make
+	// first push to rep
+	
 	/**
 	 * Constructs the LocalWeather
 	 * @param info the weather information 
@@ -58,15 +61,15 @@ public class LocalWeather {
 		
 		this.updateTime = "Last data update: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
 		this.userTime = String.format("Current Time: %tl:%tM %tp%n", now, now, now);
-		this.temperature = temp.format(Main.getDouble("temp")) + "°C";
+		this.temperature = temp.format(Main.getDouble("temp")) + "ï¿½C";
 		this.skyCondition = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		this.precipatation = temp.format(precip) + "";
 		this.windSpeed = temp.format(Wind.getDouble("speed") * 3.6) + "km/h";
 		this.windDirection = Location.Direction(Wind.getDouble("deg"));
 		this.pressure = temp.format(Main.getDouble("pressure")) + "hPa";
 		this.humidity = (int)Main.getDouble("humidity") + "";
-		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "°C";
-		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "°C";
+		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "ï¿½C";
+		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "ï¿½C";
 		
 		Location.GetTime(sys.getInt("sunrise"));
 		this.sunrise = "Sunrise: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
