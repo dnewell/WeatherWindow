@@ -30,7 +30,6 @@ public class ResizableImage extends JLabel {
 	 * @param fileName Image file name
 	 * @param width Desired button width
 	 * @param height Desired button height
-	 * @return 
 	 */
 	public ResizableImage(String fileName, int w, int h) {
 		this._fileName = fileName;

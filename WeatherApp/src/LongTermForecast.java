@@ -16,7 +16,7 @@ private Day[] dayArray;
 	
 	/**
 	 * Constructs a LongTermForecast
-	 * @throws JSONException 
+	 * @throws JSONException when an error occurs
 	 */
 	public LongTermForecast(JSONObject info) throws JSONException {
 		// creates array which will contain the ThreeHourPeriod objects
@@ -27,9 +27,9 @@ private Day[] dayArray;
 
 	
 	/**
-	 * Parses the JSON 
+	 * Parses the JSON for the Long-term weather forecast
 	 * @param info the JSON to parse
-	 * @throws JSONException
+	 * @throws JSONException when an error occurs
 	 */
 	public void parseJSONforLTF(JSONObject info) throws JSONException {
 	
@@ -42,7 +42,7 @@ private Day[] dayArray;
 	}
 
 	/**
-	 * Getter for the dayArray
+	 * Gets the day array
 	 * @return array containing all the ThreeHourPeriod objects
 	 */
 	public Day[] getDayArray() {

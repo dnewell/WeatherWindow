@@ -58,7 +58,7 @@ public class ThreeHourPeriod {
 		    Location.cal.add(Calendar.DATE, 1);
 		
 		this.dayOfWeek += format.format(Location.cal.getTime());
-		this.temperature = temp.format(Main.getDouble("temp")) + "°C";
+		this.temperature = temp.format(Main.getDouble("temp")) + "ï¿½C";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "";
 
@@ -66,56 +66,64 @@ public class ThreeHourPeriod {
 	
 
 	/**
-	 * @return the dayOfWeek
+	 * Get the current day of the week
+	 * @return A string representing the name of the day
 	 */
 	public String getDayOfWeek() {
 		return dayOfWeek;
 	}
 
 	/**
-	 * @return the temperature
+	 * Get the current temperature
+	 * @return A string representing the current temperature
 	 */
 	public String getTemperature() {
 		return temperature;
 	}
 
 	/**
-	 * @return the skyCondition
+	 * Get the current sky condition
+	 * @return A string representing the current condition of the sky
 	 */
 	public String getSkyCondition() {
 		return skyCondition;
 	}
 
 	/**
-	 * @return the precipitation
+	 * Get the current amount of precipitation
+	 * @return A string representing the current amount of precipitation
 	 */
 	public String getPrecipitation() {
 		return precipitation;
 	}
 
 	/**
-	 * @param dayOfWeek the dayOfWeek to set
+	 * Set an updated title for the day of the week
+	 * @param dayOfWeek the updated title to set for the current day
 	 */
 	public void setDayOfWeek(String dayOfWeek) {
 		this.dayOfWeek = dayOfWeek;
 	}
 
 	/**
-	 * @param temperature the temperature to set
+	 * Set an updated temperature value
+	 * @param temperature the updated temperature information to set
 	 */
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
 
 	/**
-	 * @param skyCondition the skyCondition to set
+	 * Set an updated sky condition value
+	 * @param skyCondition the updated sky condition information to set
 	 */
 	public void setSkyCondition(String skyCondition) {
 		this.skyCondition = skyCondition;
 	}
 
 	/**
-	 * @param precipitation the precipitation to set
+	 * Set an updated precipitation value
+	 * @param precipitation the updated precipitation value to set
 	 */
 	public void setPrecipitation(String precipitation) {
 		this.precipitation = precipitation;

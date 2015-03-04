@@ -18,15 +18,15 @@ public class ShortTermPanel extends JPanel {
 	/**
 	 * Constructs the panel
 	 * @param loc the location
-	 * @throws Exception
+	 * @throws Exception when an error occurs
 	 */
 	public ShortTermPanel(Location loc) throws Exception {		
 		initPanel(loc);
 	}
 	/**
-	 * Initialzes the panel and sets its display attributes.
-	 * @param loc a location
-	 * @throws Exception
+	 * Initializes the panel and sets its display attributes.
+	 * @param loc a location such as a city or planet
+	 * @throws Exception when an error occurs
 	 */
 	private void initPanel(Location loc) throws Exception {
 		
@@ -42,8 +42,8 @@ public class ShortTermPanel extends JPanel {
 
 	/**
 	 * Populates the panel with ThreeHourPanels objects
-	 * @param loc the location 
-	 * @throws Exception 
+	 * @param loc the location such as a city or planet
+	 * @throws Exception when an error occurs
 	 */
 	@SuppressWarnings("static-access")
 	private void addPeriods(Location loc) throws Exception {

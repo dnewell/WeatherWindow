@@ -21,8 +21,8 @@ public class LongTermPanel extends JPanel {
 
 	/**
 	 * Initializes and sets display attributes for the panel
-	 * @param loc a location
-	 * @throws Exception
+	 * @param loc the location e.g city or planet
+	 * @throws Exception when an error occurs
 	 */
 	private void initPanel(Location loc) throws Exception {
 	
@@ -37,8 +37,8 @@ public class LongTermPanel extends JPanel {
 
 	/**
 	 * Adds Day objects to the day panel
-	 * @param loc a location
-	 * @throws Exception
+	 * @param loc a location e.g city or planet
+	 * @throws Exception when an error occurs
 	 */
 	private void addDayPanels(Location loc) throws Exception {
 		DayPanel[] panels = new DayPanel[5];

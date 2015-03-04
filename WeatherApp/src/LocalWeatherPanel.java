@@ -19,8 +19,8 @@ public class LocalWeatherPanel extends JPanel {
 		
 		/**
 		 * Constructs the panel
-		 * @param loc the location
-		 * @throws Exception
+		 * @param loc a requested location (e.g city, planet (Mars)) for weather information
+		 * @throws Exception if an error occurs
 		 */
 		public LocalWeatherPanel(Location loc) throws Exception {	
 			initPanel(loc);
@@ -28,8 +28,8 @@ public class LocalWeatherPanel extends JPanel {
 
 		/**
 		 * Initializes the panel, and sets its display attributes
-		 * @param loc the location
-		 * @throws Exception
+		 * @param loc a requested location (e.g city, planet (Mars)) for weather information
+		 * @throws Exception if an error occurs
 		 */
 		private void initPanel(Location loc) throws Exception {
 			this.setLayout(new GridLayout(0,2));
@@ -50,6 +50,10 @@ public class LocalWeatherPanel extends JPanel {
 			addLabel(lw.getSunset());
 		}
 		
+		/**
+		 * Adds a label to the panel with current weather information 
+		 * @param text the weather information for the label
+		 */
 		private void addLabel(String text) {
 			JLabel label = new JLabel(text);	
 			Font newFont = GUI.font.deriveFont(20f);

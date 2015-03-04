@@ -28,7 +28,7 @@ public class Day {
 	 * Constructs a new Day
 	 * @param info the weather information 
 	 * @param index the position in the array
-	 * @throws JSONException 
+	 * @throws JSONException when an error occurs
 	 */
 	public Day(JSONObject info, int index) throws JSONException {
 		
@@ -53,11 +53,11 @@ public class Day {
 		    
 	    this.dayOfWeek = format.format(Location.cal.getTime());
 	    Location.cal.add(Calendar.DATE, 1);
-		this.temperature = temp.format(Temp.getDouble("day")) + "°C";
+		this.temperature = temp.format(Temp.getDouble("day")) + "ï¿½C";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "mm";
-		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "°C";
-		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "°C";
+		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "ï¿½C";
+		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "ï¿½C";
 	}
 
 	/**

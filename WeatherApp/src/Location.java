@@ -38,7 +38,7 @@ public class Location {
 	/**
 	 * Constructs a location.
 	 * - Handles the Mars case
-	 * @param location
+	 * @param location a requested city or planet to query weather information for
 	 */
 	public Location(String location) throws Exception {
 		
@@ -56,7 +56,8 @@ public class Location {
 	}
 
 	/**
-	 * @return the location
+	 * Get the current location being queried
+	 * @return the location the current location
 	 */
 	public String getLocation() {
 		return location;
@@ -76,8 +77,8 @@ public class Location {
 	 * Reads the JSON for a specified forecast type and location
 	 * @param addr the location text
 	 * @param s the desired type of forecast 
-	 * @return JSONObject
-	 * @throws Exception
+	 * @return A JSONObject
+	 * @throws Exception when an error occurs
 	 */
 	public JSONObject readJSON(String addr, String s) throws Exception
 	{
@@ -212,6 +213,7 @@ public class Location {
 	
 	
 	/**
+	 * Get the Short-term forecast for the current location
 	 * @return shortTermForecast the short term forecast for this location
 	 */
 	public ShortTermForecast getSTF() {
@@ -219,6 +221,7 @@ public class Location {
 	}
 	
 	/**
+	 * Get the Long-term forecast for the current location
 	 * @return longTermForecast the long term forecast for this location
 	 */
 	public LongTermForecast getLTF() {
@@ -226,6 +229,7 @@ public class Location {
 	}
 	
 	/**
+	 * Get the current weather for the current location
 	 * @return localWeather the localWeather for this location
 	 */
 	public LocalWeather getLW() {
@@ -233,6 +237,7 @@ public class Location {
 	}
 	
 	/**
+	 * Get the current weather for a Mars query
 	 * @return marsDay the MarsDay for this location
 	 */
 	public MarsWeather getMD() {
@@ -240,6 +245,7 @@ public class Location {
 	}
 	
 	/**
+	 * Get the name of the current location
 	 * @return location Name of the location
 	 */
 	public String toString() {

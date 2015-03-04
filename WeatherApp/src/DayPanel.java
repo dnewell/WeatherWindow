@@ -21,8 +21,8 @@ public class DayPanel extends JPanel {
 
 	/**
 	 * Constructs a DayPanel
-	 * @param day
-	 * @throws Exception
+	 * @param day to access weather information
+	 * @throws Exception when an error occurs
 	 */
 	public DayPanel(Day day) throws Exception{
 		this.day = day;
@@ -58,7 +58,7 @@ public class DayPanel extends JPanel {
 	}
 	/**
 	 * Adds a label to the JPanel, and sets its display attributes
-	 * @param text label text
+	 * @param text the weather information to add to the label
 	 */
 		private void addLabel(String text) {
 			Font newFont = GUI.font.deriveFont(22f);

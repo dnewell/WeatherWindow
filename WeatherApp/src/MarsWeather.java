@@ -11,7 +11,6 @@ import org.json.*;
  */
 public class MarsWeather {
 
-
 	private String date;
 	private String temperature;
 	private String skyCondition;
@@ -23,14 +22,7 @@ public class MarsWeather {
 	
 	/**
 	 *  Constructor for the MarsWeather class
-	 *  
-	 * @param date
-	 * @param temperature
-	 * @param skyCondition
-	 * @param windSpeed
-	 * @param windDirection
-	 * @param pressure
-	 * @param humidity
+	 *  @param info the Mars weather information
 	 */
 	public MarsWeather(JSONObject info) throws Exception {
 
@@ -68,7 +60,7 @@ public class MarsWeather {
 		   
 		
 		this.date = String.format("Date: " + totalDate);
-		this.temperature = temp.format(avgTemp) + "°C";
+		this.temperature = temp.format(avgTemp) + "ï¿½C";
 		
 		if (!windDirection.equals("--"))
 			this.windDirection = ("Wind Direction: " + windDirection);
@@ -88,86 +80,112 @@ public class MarsWeather {
 	}
 	
 	/**
-	 * @return the date
+	 * Get the date the weather information was accessed
+	 * @return A string representing the date the information was accessed
 	 */
 	public String getdate() {
 		return date;
 	}
+	
 	/**
-	 * @return the temperature
+	 * Get the current temperature
+	 * @return A string representing the current temperature 
 	 */
 	public String getTemperature() {
 		return temperature;
 	}
+	
 	/**
-	 * @return the skyCondition
+	 * Get the current condition of the sky
+	 * @return A string representing the sky condition 
 	 */
 	public String getSkyCondition() {
 		return skyCondition;
 	}
+	
 	/**
-	 * @return the windSpeed
+	 * Get the current wind speed
+	 * @return A string representing the wind speed
 	 */
 	public String getWindSpeed() {
 		return windSpeed;
 	}
+	
 	/**
-	 * @return the windDirection
+	 * Get the current wind direction
+	 * @return A string representing the wind direction
 	 */
 	public String getWindDirection() {
 		return windDirection;
 	}
+	
 	/**
-	 * @return the pressure
+	 * Get the current atmospheric pressure
+	 * @return A string representing the atmospheric pressure
 	 */
 	public String getPressure() {
 		return pressure;
 	}
+	
 	/**
-	 * @return the humidity
+	 * Get the current humidity
+	 * @return A string representing the humidity
 	 */
 	public String getHumidity() {
 		return humidity;
 	}
+	
 	/**
-	 * @param date 
-	 * @param date the date to set
+	 * Set an updated date for the current date
+	 * @param date the updated date information to set
 	 */
 	public void setdate(String date) {
 		this.date = date;
 	}
+	
 	/**
-	 * @param temperature the temperature to set
+	 * Set an updated temperature value
+	 * @param temperature the updated temperature information to set
 	 */
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
+	
 	/**
-	 * @param skyCondition the skyCondition to set
+	 * Set an updated sky condition
+	 * @param skyCondition the updated skycondition information to set
 	 */
 	public void setSkyCondition(String skyCondition) {
 		this.skyCondition = skyCondition;
 	}
+	
 	/**
-	 * @param windSpeed the windSpeed to set
+	 * Set an updated wind speed value
+	 * @param windSpeed the updated wind speed information to set
 	 */
 	public void setWindSpeed(String windSpeed) {
 		this.windSpeed = windSpeed;
 	}
+	
 	/**
-	 * @param windDirection the windDirection to set
+	 * Set an updated wind direction value
+	 * @param windDirection the updated wind direction information to set
 	 */
 	public void setWindDirection(String windDirection) {
 		this.windDirection = windDirection;
 	}
+	
 	/**
-	 * @param pressure the pressure to set
+	 * Set an updated atmospheric pressure value
+	 * @param pressure the updated pressure value to set
 	 */
 	public void setPressure(String pressure) {
 		this.pressure = pressure;
 	}
+	
 	/**
-	 * @param humidity the humidity to set
+	 * Set an updated humidity value
+	 * @param humidity the updated humidity information to set
 	 */
 	public void setHumidity(String humidity) {
 		this.humidity = humidity;
