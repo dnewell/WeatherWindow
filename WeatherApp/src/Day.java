@@ -53,11 +53,11 @@ public class Day {
 		    
 	    this.dayOfWeek = format.format(Location.cal.getTime());
 	    Location.cal.add(Calendar.DATE, 1);
-		this.temperature = temp.format(Temp.getDouble("day")) + "�C";
+		this.temperature = temp.format(Temp.getDouble("day")) + "\u00b0C";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "mm";
-		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "�C";
-		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "�C";
+		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0C";
+		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0C";
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class Day {
 	 * Setter for minTemp
 	 * @param minTemp the minTemp to set
 	 */
-	public void setMinTemp(String precipitation) {
+	public void setMinTemp(String minTemp) {
 		this.minTemp = minTemp;
 	}
 

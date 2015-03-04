@@ -58,7 +58,7 @@ public class ThreeHourPeriod {
 		    Location.cal.add(Calendar.DATE, 1);
 		
 		this.dayOfWeek += format.format(Location.cal.getTime());
-		this.temperature = temp.format(Main.getDouble("temp")) + "�C";
+		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0C";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "";
 
