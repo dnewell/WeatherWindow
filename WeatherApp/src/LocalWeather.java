@@ -61,7 +61,7 @@ public class LocalWeather {
 		this.temperature = temp.format(Main.getDouble("temp")) + "°C";
 		this.skyCondition = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		this.precipatation = temp.format(precip) + "";
-		this.windSpeed = temp.format(Wind.getDouble("speed")) + "km/h";
+		this.windSpeed = temp.format(Wind.getDouble("speed") * 3.6) + "km/h";
 		this.windDirection = Location.Direction(Wind.getDouble("deg"));
 		this.pressure = temp.format(Main.getDouble("pressure")) + "hPa";
 		this.humidity = (int)Main.getDouble("humidity") + "";

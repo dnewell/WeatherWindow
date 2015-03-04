@@ -6,6 +6,7 @@
  * @author David Langford
  */
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
@@ -64,7 +65,7 @@ public class Location {
 	/**
 	 * Do we ever need to change an individual location?  It's set by a parameter on creation.
 	 * I think it should be immutable afterwards, and so we should not have a setter for it.  Thoughts? 
-	 * @param location the location to set
+	 * @param location: the location to set. 
 	 * TODO perhaps delete?
 	 */
 	public void setLocation(String location) {
@@ -107,9 +108,16 @@ public class Location {
 		   }
 	    URL url = new URL(api);
 	    System.out.println("API address used: " + url);
+	    
+	    Scanner scan;
 	 
 	    // read from the URL, then close the scanner
-	    Scanner scan = new Scanner(url.openStream());
+	    try {
+	    	scan = new Scanner(url.openStream());
+	    } catch (IOException e)
+	    {
+	    	scan = new Scanner(url.openStream());
+	    }
 	    String str = new String();
 	    while (scan.hasNext())
 	        str += scan.nextLine();
