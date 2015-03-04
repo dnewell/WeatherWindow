@@ -71,7 +71,7 @@ public class GUI implements ActionListener{
 	/**
 	 *  Formats and makes visible the main program JFrame,
 	 *  after adding all child components to its hierarchy
-	 * @throws Exception 
+	 *  @throws Exception if an error occurs
 	 */
 	public void buildHierarchy() throws Exception {
 		mainWindow.setResizable(false);
@@ -135,7 +135,7 @@ public class GUI implements ActionListener{
 	/**
 	 * Adds the local weather panel to the main JFrame hierarchy 
 	 * @param loc the location
-	 * @throws Exception 
+	 * @throws Exception if an error occurs
 	 */
 	private void addLW(Location loc) throws Exception {
 		if (lwPanel != null){

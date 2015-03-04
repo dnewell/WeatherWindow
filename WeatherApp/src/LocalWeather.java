@@ -81,165 +81,208 @@ public class LocalWeather {
 	}
 	
 	/**
-	 * Getter for updateTime
-	 * @return the updateTime
+	 * Gets the time when the current weather was last updated by the weather service
+	 * @return A string representing the time of when the current weather was last updated
 	 */
 	public String getUpdateTime() {
 		return updateTime;
 	}
+	
 	/**
-	 * Getter for userTime
-	 * @return the userTime
+	 * Gets the user's current time
+	 * @return A string representing the user's current time 
 	 */
 	public String getUserTime() {
 		return userTime;
 	}
+	
 	/**
-	 * Getter for temperature
-	 * @return the temperature
+	 * Gets the current temperature
+	 * @return A string representing the current temperature
 	 */
 	public String getTemperature() {
 		return temperature;
 	}
+	
 	/**
-	 * Getter for skyCondition
-	 * @return the skyCondition
+	 * Gets the current condition of the sky
+	 * @return A string representing the current condition of the sky
 	 */
 	public String getSkyCondition() {
 		return skyCondition;
 	}
+	
 	/**
-	 * Getter for precipitation
-	 * @return the precipitation
+	 * Gets the current amount of precipitation
+	 * @return A string representing the current amount of precipitation
 	 */
 	public String getPrecipatation() {
 		return precipatation;
 	}
+	
 	/**
-	 * Getter for windSpeed
-	 * @return the windSpeed
+	 * Gets the current wind speed
+	 * @return A string representing the current wind speed
 	 */
 	public String getWindSpeed() {
 		return windSpeed;
 	}
+	
 	/**
-	 * Getter for windDirection
-	 * @return the windDirection
+	 * Gets the current wind direction
+	 * @return A string representing the current wind direction
 	 */
 	public String getWindDirection() {
 		return windDirection;
 	}
+	
 	/**
-	 * Getter for the pressure
-	 * @return the pressure
+	 * Gets the current atmospheric pressure
+	 * @return A string representing the current atmospheric pressure
 	 */
 	public String getPressure() {
 		return pressure;
 	}
+	
 	/**
-	 * @return the humidity
+	 * Gets the current humidity
+	 * @return A string representing that current humidity
 	 */
 	public String getHumidity() {
 		return humidity;
 	}
+	
 	/**
-	 * @return the mStringemp
+	 * Get the current minimum temperature
+	 * @return A string representing the minimum temperature
 	 */
 	public String getMinTemp() {
 		return minTemp;
 	}
+	
 	/**
-	 * @return the maxTemp
+	 * Get the current maximum temperature
+	 * @return A string representing the maximum temperature
 	 */
 	public String getMaxTemp() {
 		return maxTemp;
 	}
+	
 	/**
-	 * @return the sunrise
+	 * Gets the time for sunrise for the current day
+	 * @return A string representing the time for sunrise
 	 */
 	public String getSunrise() {
 		return sunrise;
 	}
+	
 	/**
-	 * @return the sunset
+	 * Gets the time for sunset for the current day
+	 * @return A string representing the time for sunset
 	 */
 	public String getSunset() {
 		return sunset;
 	}
+	
 	/**
-	 * @param updateTime the updateTime to set
+	 * Sets the time when the current weather was last updated 
+	 * @param updateTime the time to set to the updateTime variable
 	 */
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
+	
 	/**
-	 * @param userTime the userTime to set
+	 * Sets an updated time for the current time
+	 * @param userTime the time to set to the userTime variable
 	 */
 	public void setUserTime(String userTime) {
 		this.userTime = userTime;
 	}
+	
 	/**
-	 * @param temperature the temperature to set
+	 * Sets an updated temperature for the current temperature
+	 * @param temperature the temperature to set to the temperature variable
 	 */
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
+	
 	/**
-	 * @param skyCondition the skyCondition to set
+	 * Sets an updated sky condition for the current temperature 
+	 * @param skyCondition the skyCondition to set to the skyCondition variable
 	 */
 	public void setSkyCondition(String skyCondition) {
 		this.skyCondition = skyCondition;
 	}
+	
 	/**
-	 * @param precipatation the precipatation to set
+	 * Sets an updated amount of precipitation 
+	 * @param precipatation the precipitation amount to set precipitation variable
 	 */
 	public void setPrecipatation(String precipatation) {
 		this.precipatation = precipatation;
 	}
+	
 	/**
-	 * @param windSpeed the windSpeed to set
+	 * Sets an updated wind speed value for the current wind speed
+	 * @param windSpeed the wind speed to set the wind speed variable
 	 */
 	public void setWindSpeed(String windSpeed) {
 		this.windSpeed = windSpeed;
 	}
+	
 	/**
-	 * @param windDirection the windDirection to set
+	 * Sets an updated wind direction value for the current wind direction
+	 * @param windDirection the windDirection to set the windDirection variable
 	 */
 	public void setWindDirection(String windDirection) {
 		this.windDirection = windDirection;
 	}
+	
 	/**
-	 * @param pressure the pressure to set
+	 * Sets an updated atmospheric pressure value to the current pressure value
+	 * @param pressure the atmospheric pressure to set to the pressure variable
 	 */
 	public void setPressure(String pressure) {
 		this.pressure = pressure;
 	}
+	
 	/**
-	 * @param humidity the humidity to set
+	 * Sets an updated humidity value to the current humidity value
+	 * @param humidity the humidity to set to the humidity variable
 	 */
 	public void setHumidity(String humidity) {
 		this.humidity = humidity;
 	}
+	
 	/**
-	 * @param mStringemp the mStringemp to set
+	 * Sets an updated minimum temperature value to the current minimum temperature
+	 * @param minTemp the minimum temperature to set to the minTemp variable
 	 */
 	public void setMinTemp(String mStringemp) {
 		this.minTemp = mStringemp;
 	}
+	
 	/**
-	 * @param maxTemp the maxTemp to set
+	 * Sets an updated maximum temperature value to the current maximum temperature
+	 * @param maxTemp the maximum temperature to set to the maxTemp variable
 	 */
 	public void setMaxTemp(String maxTemp) {
 		this.maxTemp = maxTemp;
 	}
+	
 	/**
-	 * @param sunrise the sunrise to set
+	 * Sets an updated time for sunrise to the current sunrise value
+	 * @param sunrise a time to set to the sunrise variable
 	 */
 	public void setSunrise(String sunrise) {
 		this.sunrise = sunrise;
 	}
+	
 	/**
-	 * @param sunset the sunset to set
+	 * Sets an updated time for sunset to the current sunset value
+	 * @param sunset a time to set the sunset variable
 	 */
 	public void setSunset(String sunset) {
 		this.sunset = sunset;
