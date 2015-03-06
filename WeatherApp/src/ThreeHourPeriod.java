@@ -43,10 +43,14 @@ public class ThreeHourPeriod {
 		Location.GetTime(list.getInt("dt"));
 		
 		//Get precipitation levels if any
-	    if (list.has("snow"))
-	    	precip += list.getJSONObject("snow").getDouble("3h");
-	    if (list.has("rain"))
-	    	precip += list.getJSONObject("rain").getDouble("3h");
+		 if (list.has("snow"))
+		    	if (list.getJSONObject("snow").has("3h"))
+		    	precip += list.getJSONObject("snow").getDouble("3h");
+		    	else precip += list.getJSONObject("snow").getDouble("1h");
+		    if (list.has("rain"))
+		    	if (list.getJSONObject("rain").has("3h"))
+			    	precip += list.getJSONObject("rain").getDouble("3h");
+			    	else precip += list.getJSONObject("rain").getDouble("1h");
 		    
 		//Capitalize first letter of cloud condition
 		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);

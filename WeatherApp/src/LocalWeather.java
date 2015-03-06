@@ -54,9 +54,13 @@ public class LocalWeather {
 	    
 	    //Get precipitation levels if any
 	    if (info.has("snow"))
+	    	if (info.getJSONObject("snow").has("3h"))
 	    	precip += info.getJSONObject("snow").getDouble("3h");
+	    	else precip += info.getJSONObject("snow").getDouble("1h");
 	    if (info.has("rain"))
-	    	precip += info.getJSONObject("rain").getDouble("3h");	
+	    	if (info.getJSONObject("rain").has("3h"))
+		    	precip += info.getJSONObject("rain").getDouble("3h");
+		    	else precip += info.getJSONObject("rain").getDouble("1h");	
 	    
 		
 		this.updateTime = "Last data update: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
