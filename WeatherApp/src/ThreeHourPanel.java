@@ -41,7 +41,7 @@ public class ThreeHourPanel extends JPanel {
 		addLabel("Now: " + period.getTemperature() + "      ");
 		addLabel(period.getSkyCondition());
 		addLabel("  " + period.getPrecipitation() + "mm of precipitation");
-    	ResizableImage button = new ResizableImage("rain20.png", 30, 30);
+    	ResizableImage button = new ResizableImage("resources/rain20.png", 30, 30);
     	this.add(button);
 
     	this.validate();

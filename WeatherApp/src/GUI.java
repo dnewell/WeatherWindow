@@ -77,7 +77,7 @@ public class GUI implements ActionListener{
 		mainWindow.setResizable(false);
 		
 		//Sets background
-		mainWindow.setContentPane(new JLabel(new ImageIcon("LONDONNIGHT.jpg")));	
+		mainWindow.setContentPane(new JLabel(new ImageIcon("resources/LONDONNIGHT.jpg")));	
 		
 		//defines frame closing behavior
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,7 +189,7 @@ public class GUI implements ActionListener{
 	 */
 	private void setFont() {
 		try {
-			File fontFile = new File("Roboto-Thin.TTF");
+			File fontFile = new File("resources/Roboto-Thin.TTF");
 			font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 			font = font.deriveFont(44f);
 		} 
