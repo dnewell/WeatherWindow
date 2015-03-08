@@ -33,7 +33,7 @@ public class LocalWeather {
 	/**
 	 * Constructs the LocalWeather
 	 * @param info the weather information 
-	 * @throws Exception
+	 * @throws Exception if an error occurs
 	 */
 	public LocalWeather(JSONObject info) throws Exception {
 
@@ -264,8 +264,8 @@ public class LocalWeather {
 	 * Sets an updated minimum temperature value to the current minimum temperature
 	 * @param minTemp the minimum temperature to set to the minTemp variable
 	 */
-	public void setMinTemp(String mStringemp) {
-		this.minTemp = mStringemp;
+	public void setMinTemp(String minTemp) {
+		this.minTemp = minTemp;
 	}
 	
 	/**

@@ -25,7 +25,7 @@ public class ThreeHourPeriod {
 	 * Constructs a ThreeHourPeriod
 	 * 
 	 * @param  res the JSON data object
-	 * @throws JSONException 
+	 * @throws JSONException if an error occurs
 	 */
 	public ThreeHourPeriod(JSONObject res, int index) throws JSONException {
 				

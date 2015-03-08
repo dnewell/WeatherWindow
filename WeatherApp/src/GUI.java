@@ -150,8 +150,8 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the short term weather panel to the main JFrame hierarchy 
-	 * @param loc the location
-	 * @throws Exception 
+	 * @param loc the location e.g a city or planet
+	 * @throws Exception if an error occurs
 	 */
 	private void addSTF(Location loc) throws Exception {
 		if (stPanel != null){
@@ -167,8 +167,8 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the DayPanel (which organizes 5 DayPanel objects) to the main JFrame hierarchy
-	 * @param loc the location
-	 * @throws Exception 
+	 * @param loc the location e.g a city or planet
+	 * @throws Exception if an error occurs
 	 */
 	private void addLTF(Location loc) throws Exception {
 		if (ltPanel != null){
