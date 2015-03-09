@@ -39,7 +39,7 @@ public class ResizableImage extends JLabel {
     	this._desiredWidth = w;
     	this._desiredHeight = h;
     	
-		icon = new ImageIcon(fileName);
+		icon = new ImageIcon(getClass().getResource(fileName));
  	
     	
    // maintain aspect ratio
@@ -95,8 +95,9 @@ public class ResizableImage extends JLabel {
  * @param name File Name
  */
 	private void setDimensionsFromDisk(String name) {
-		_imageWidthOnDisk = new ImageIcon(name).getIconWidth();
-		_imageHeightOnDisk = new ImageIcon(name).getIconHeight();
+		getClass().getResource("rain20.png");
+		_imageWidthOnDisk = new ImageIcon(getClass().getResource(name)).getIconWidth();
+		_imageHeightOnDisk = new ImageIcon(getClass().getResource(name)).getIconHeight();
 	}
 
 

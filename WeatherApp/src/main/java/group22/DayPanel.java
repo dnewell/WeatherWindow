@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -50,7 +51,7 @@ public class DayPanel extends JPanel {
 		addLabel(day.getMaxTemp());
 		addLabel(day.getMinTemp());
 		
-		ResizableImage button = new ResizableImage("resources/rain20.png", 30, 30);
+		ResizableImage button = new ResizableImage("rain20.png", 30, 30);
     	this.add(button);
     	this.validate();
     	this.repaint();

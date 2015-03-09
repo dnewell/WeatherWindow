@@ -8,11 +8,15 @@ import javax.swing.border.Border;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * The GUI class creates and maintains the graphic interface
@@ -77,7 +81,8 @@ public class GUI implements ActionListener{
 		mainWindow.setResizable(false);
 		
 		//Sets background
-		mainWindow.setContentPane(new JLabel(new ImageIcon("resources/LONDONNIGHT.jpg")));	
+		URL url = getClass().getResource("LONDONNIGHT.jpg");
+		mainWindow.setContentPane(new JLabel(new ImageIcon(url)));	
 		
 		//defines frame closing behavior
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,8 +155,8 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the short term weather panel to the main JFrame hierarchy 
-	 * @param loc the location e.g a city or planet
-	 * @throws Exception if an error occurs
+	 * @param loc the location
+	 * @throws Exception 
 	 */
 	private void addSTF(Location loc) throws Exception {
 		if (stPanel != null){
@@ -167,8 +172,8 @@ public class GUI implements ActionListener{
 
 	/**
 	 * Adds the DayPanel (which organizes 5 DayPanel objects) to the main JFrame hierarchy
-	 * @param loc the location e.g a city or planet
-	 * @throws Exception if an error occurs
+	 * @param loc the location
+	 * @throws Exception 
 	 */
 	private void addLTF(Location loc) throws Exception {
 		if (ltPanel != null){
@@ -187,16 +192,29 @@ public class GUI implements ActionListener{
 	 * Sets the GUI.font global variable.  
 	 * TODO it may be better to register the font with the Graphics Environment
 	 */
-	private void setFont() {
+	private void setFont(){
+		//File fontFile;
+		InputStream is = this.getClass().getResourceAsStream("Roboto-Thin.ttf");
 		try {
-			File fontFile = new File("resources/Roboto-Thin.TTF");
-			font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-			font = font.deriveFont(44f);
+			font = Font.createFont(Font.TRUETYPE_FONT, is);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
-		catch (IOException|FontFormatException e) 
-		{
-			System.out.println("Uh oh, you have font problems.");
-		}
+		
+//		try {
+//			
+//			fontFile = new File("Roboto-Thin.ttf");
+//			font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+//			font = font.deriveFont(44f);
+//		} 
+//		catch (Exception e) 
+//		{
+//			System.out.println("Uh oh, you have font problems.");
+//		}
+		
+
+		
 }
 		
 	/**
