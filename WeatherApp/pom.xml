@@ -16,24 +16,13 @@
 <build>   
     <plugins>
 
-    	<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-             <version>2.4</version>
-            <configuration>
-                <archive>
-                    <manifest>
-                     	<mainClass>WeatherApp</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
-
       <plugin>
 		  <groupId>org.apache.maven.plugins</groupId>
 		  <artifactId>maven-assembly-plugin</artifactId>
 		  <version>2.5.3</version>
 		  <configuration>
+			 <finalName>22-WeatherApp</finalName>
+			<appendAssemblyId>false</appendAssemblyId>
 		    <descriptorRefs>
 		      <descriptorRef>jar-with-dependencies</descriptorRef>
 		    </descriptorRefs>
@@ -55,3 +44,4 @@
     </plugins>
  </build>
 </project>
+

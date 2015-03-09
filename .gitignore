@@ -5,3 +5,9 @@ bin/
 .metadata/
 .settings/
 .recommenders/
+archive-tmp/
+classes/
+maven-archiver/
+maven-status/
+group22-WeatherApp-1.0.jar
+Thumbs.db
