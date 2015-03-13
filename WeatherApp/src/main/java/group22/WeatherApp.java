@@ -16,6 +16,5 @@ public class WeatherApp {
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
 		GUI swingGUI = new GUI();
-
 	}
 }

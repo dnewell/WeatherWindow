@@ -144,12 +144,22 @@ public class GUI implements ActionListener{
 	}
 
 	/**
-	 * Validates and refreshes the main JFrame hierarchy
+	 * Validates and refreshGUIes the main JFrame hierarchy
 	 */
-	private void refresh() {
+	private void refreshGUI() {
        	mainWindow.validate();
     	mainWindow.repaint();		
 	}
+	
+	
+	/**
+	 * Validates and refreshGUIes the main JFrame hierarchy
+	 * @throws Exception 
+	 */
+	private void refresh() throws Exception {
+		updateGUI(DEFAULT_UNITS, DEFAULT_LOCATION);
+	}
+	
 
 	/**
 	 * Adds the local weather panel to the main JFrame hierarchy 
@@ -164,7 +174,7 @@ public class GUI implements ActionListener{
 	   	lwPanel = new LocalWeatherPanel(loc);
 	   	lwPanel.setLocation(80, 110);
     	mainWindow.getContentPane().add(lwPanel);
-    	refresh();	
+    	refreshGUI();	
 	}
 
 	/**
@@ -180,7 +190,7 @@ public class GUI implements ActionListener{
     	stPanel = new ShortTermPanel(loc);
     	stPanel.setLocation(780, 5);
     	mainWindow.getContentPane().add(stPanel);
-    	refresh();
+    	refreshGUI();
 	}
 
 
@@ -198,7 +208,7 @@ public class GUI implements ActionListener{
 		ltPanel.setLocation(5, 458);
 		mainWindow.getContentPane().add(ltPanel);
 		
-    	refresh();
+    	refreshGUI();
 	}
 	
 		
@@ -240,7 +250,7 @@ public class GUI implements ActionListener{
 		try {
 			// TODO add a button.  Calls on newline atm.
 			if (loc != null)
-			updateGUI(locationText);
+			updateGUI(DEFAULT_UNITS, locationText);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -253,9 +263,11 @@ public class GUI implements ActionListener{
 	 * @param locationText the location name
 	 * @throws Exception invalid location
 	 */
-	private void updateGUI(String locationText) throws Exception {
+	private void updateGUI(int units, String locationText) throws Exception {
 		
-		Serialize s = new Serialize(locationText, DEFAULT_UNITS); //Serialize the new location
+		DEFAULT_UNITS = units;
+		DEFAULT_LOCATION = locationText;
+		Serialize s = new Serialize(locationText, units); //Serialize the new location
 		Location oldLoc = loc;
 		
 		try {		
