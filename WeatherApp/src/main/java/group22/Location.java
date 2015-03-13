@@ -40,18 +40,18 @@ public class Location {
 	 * - Handles the Mars case
 	 * @param location a requested city or planet to query weather information for
 	 */
-	public Location(String location) throws Exception {
+	public Location(int units, String location) throws Exception {
 		
 		this.location = location;
 		/*
 		 * MARS case handling.  There are many different ways (and possible places) we could handle this.
 		 * 
 		 */		if (getLocation().equals("mars"))
-			this.marsWeather = new MarsWeather(readJSON("", "mars"));
+			this.marsWeather = new MarsWeather(readJSON(units, "", "mars"));
 		 else {
-			this.shortTermForecast = new ShortTermForecast(readJSON(location, "short term"));
-			this.longTermForecast = new LongTermForecast(readJSON(location, "long term"));
-			this.localWeather = new LocalWeather(readJSON(location, "current"));
+			this.shortTermForecast = new ShortTermForecast(readJSON(units, location, "short term"));
+			this.longTermForecast = new LongTermForecast(readJSON(units,location, "long term"));
+			this.localWeather = new LocalWeather(readJSON(units,location, "current"));
 		 }
 	}
 
@@ -80,28 +80,38 @@ public class Location {
 	 * @return A JSONObject
 	 * @throws Exception when an error occurs
 	 */
-	public JSONObject readJSON(String addr, String s) throws Exception
+	public JSONObject readJSON(int units, String addr, String s) throws Exception
 	{
 		String api = null;
+		String key = "&APPID=e57e5d3a71d17c47936c8513bdd97825";
+		String units_text = "&units=metric";
+		if(units==1){
+			units_text = "&units=imperial";
+		}
+		
 		   
 		   //NOTE - this will be controlled by a radio button or something, not the user entering a string
 		   if (s == "current")
 		   {
 			   api = "http://api.openweathermap.org/data/2.5/weather?q=";
 			   api += URLEncoder.encode(addr, "UTF-8");
-			   api +="&units=metric";
+			   api += units_text;
+			   api += key;
 		   }
 		   else if (s == "short term")
 		   {
 			   api = "http://api.openweathermap.org/data/2.5/forecast?q=";
 			   api += URLEncoder.encode(addr, "UTF-8");
-			   api +="&units=metric";
+			   api += units_text;
+			   api += key;
 		   }
 		   else if (s == "long term")
 		   {
 			   api = "http://api.openweathermap.org/data/2.5/forecast/daily?q=";
 			   api += URLEncoder.encode(addr, "UTF-8");
-			   api += "&units=metric&cnt=5";
+			   api += units_text;
+			   api += "&cnt=5";
+			   api += key;
 		   }
 		   else if (s == "mars")
 		   {

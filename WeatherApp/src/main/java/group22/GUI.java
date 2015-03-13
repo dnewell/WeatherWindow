@@ -28,7 +28,8 @@ import java.net.URL;
 public class GUI implements ActionListener{
 	
 	private static final String APPLICATION_NAME = "WeatherApp";
-	private static final String DEFAULT_LOCATION = "London, On";
+	private static String DEFAULT_LOCATION = "Toronto, On";
+	public int DEFAULT_UNITS = 1;
 	private JFrame mainWindow;
 	private JTextField field;
 
@@ -37,6 +38,9 @@ public class GUI implements ActionListener{
 	private LocalWeatherPanel lwPanel;
 	private Location loc;
 	public static Font font;
+	private SavedData s;
+	
+
 	
 	
 	/**
@@ -44,16 +48,26 @@ public class GUI implements ActionListener{
 	 * and sets the default location.
 	 */
 	public GUI() {	
+		
+		//Deserialize data and set location to London
+		Deserialize de_ser = new Deserialize();
+		s = de_ser.getData();
+		DEFAULT_LOCATION = s.location;
+		DEFAULT_UNITS = s.units;
+		
+		
 		mainWindow = new JFrame(APPLICATION_NAME);
 		try {
-			loc = new Location(DEFAULT_LOCATION);
+			loc = new Location(DEFAULT_UNITS, DEFAULT_LOCATION);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		setFont();
 		this.initGUI();	
+		
+	
 	}
 	
 	/**
@@ -240,10 +254,12 @@ public class GUI implements ActionListener{
 	 * @throws Exception invalid location
 	 */
 	private void updateGUI(String locationText) throws Exception {
+		
+		Serialize s = new Serialize(locationText, DEFAULT_UNITS); //Serialize the new location
 		Location oldLoc = loc;
 		
 		try {		
-			Location userLoc = new Location(locationText);	
+			Location userLoc = new Location(DEFAULT_UNITS, locationText);	
 		
 			addLTF(userLoc);
 			addSTF(userLoc);
