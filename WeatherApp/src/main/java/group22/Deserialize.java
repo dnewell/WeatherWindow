@@ -9,7 +9,7 @@ public class Deserialize implements Serializable
       s = null;
       try
       {
-         FileInputStream fileIn = new FileInputStream("data.ser");
+         FileInputStream fileIn = new FileInputStream("src/data.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
          s = (SavedData) in.readObject();
          in.close();
