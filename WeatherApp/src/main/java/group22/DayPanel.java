@@ -36,23 +36,23 @@ public class DayPanel extends JPanel {
 	 */
 	private void initPanel() {
 		// single vertical column layout
-		GridLayout layout = new GridLayout(0,1);
-		this.setLayout(layout);
-
-		this.setOpaque(true);
+		this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+		this.setOpaque(false);
+		this.setSize(new Dimension(91,270));
 		
-		this.setBackground(new Color(0,255,0,20));
-		this.setSize(new Dimension(148,240));
+		addLabel(day.getDayOfWeek(),15,0,10, "Medium");
+		addLabel(day.getTemperature(),30,0,15, "Medium");
 		
-		addLabel(day.getDayOfWeek());
-		addLabel(day.getTemperature());
-		addLabel(day.getSkyCondition());
-		addLabel(day.getPrecipitation());
-		addLabel(day.getMaxTemp());
-		addLabel(day.getMinTemp());
+		ResizableImage weatherIcon = new ResizableImage("Sunny_128x128.png", 70, 70);
+    	weatherIcon.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		this.add(weatherIcon);
 		
-		ResizableImage button = new ResizableImage("rain20.png", 30, 30);
-    	this.add(button);
+    	addLabel(day.getSkyCondition(),12,0,0, "Light");
+		addLabel(day.getPrecipitation(),20,0,15, "Medium");
+		addLabel(day.getMaxTemp(),12,0,15, "Medium");
+		addLabel(day.getMinTemp(),12,0,15, "Medium");
+		
+		
     	this.validate();
     	this.repaint();
 		
@@ -61,16 +61,17 @@ public class DayPanel extends JPanel {
 	 * Adds a label to the JPanel, and sets its display attributes
 	 * @param text the weather information to add to the label
 	 */
-		private void addLabel(String text) {
-			Font newFont = GUI.font.deriveFont(22f);
-
-			JLabel label = new JLabel(text);	
-	    	label.setFont(newFont);
-	    	label.setForeground(Color.WHITE);
-	   	
-	    	this.add(label);
-	    	this.validate();
-	    	this.repaint();
-		}	
+	private void addLabel(String text, int size, int gapX,  int gapY, String style) {
+		JLabel label = new JLabel(text);	
+		MakeFont createFont = new MakeFont(style);
+		Font newFont = createFont.create().deriveFont((float)size);
+    	label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		label.setFont(newFont);
+    	label.setForeground(Color.WHITE);
+    	this.add((Box.createRigidArea(new Dimension(gapX,gapY))));
+    	this.add(label);
+    	this.validate();
+    	this.repaint();
+	}	
 		
 }

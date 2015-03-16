@@ -33,7 +33,7 @@ public class Day {
 	public Day(JSONObject info, int index) throws JSONException {
 		
 		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd");
-		DecimalFormat temp = new DecimalFormat("#.#");
+		DecimalFormat temp = new DecimalFormat("#");
 		
 		Double precip = 0.0;
 		//get needed JSON Objects and timestamp
@@ -53,11 +53,11 @@ public class Day {
 		    
 	    this.dayOfWeek = format.format(Location.cal.getTime());
 	    Location.cal.add(Calendar.DATE, 1);
-		this.temperature = temp.format(Temp.getDouble("day")) + "\u00b0C";
+		this.temperature = temp.format(Temp.getDouble("day")) + "\u00b0";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "mm";
-		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0C";
-		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0C";
+		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0";
+		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0";
 	}
 
 	/**

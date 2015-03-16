@@ -25,13 +25,14 @@ public class Location {
 
 	//Determines am or pm
 	public static String daytime;
-	public static int ihours, iminutes;
+	public static int ihours, iminutes, units;
 	
 	//used to check for short term if it is a new date or not
 	public static Boolean NewDay = false;
 	//Get current day of the week
 	public static Calendar cal = Calendar.getInstance();
 	public static Date now = new Date();
+
 
 	
 
@@ -43,6 +44,7 @@ public class Location {
 	public Location(int units, String location) throws Exception {
 		
 		this.location = location;
+		this.units = units;
 		/*
 		 * MARS case handling.  There are many different ways (and possible places) we could handle this.
 		 * 
@@ -61,6 +63,14 @@ public class Location {
 	 */
 	public String getLocation() {
 		return location;
+	}
+	
+	/**
+	 * Get the current units (metric/imperial) being used
+	 * @return a integer representing the current integer
+	 */
+	public static int getUnits(){
+		return units;
 	}
 
 	/**
@@ -117,6 +127,9 @@ public class Location {
 		   {
 			   api = "http://marsweather.ingenology.com/v1/latest/?format=json";
 		   }
+		   
+		   
+		   
 	    URL url = new URL(api);
 	    System.out.println("API address used: " + url);
 	    
@@ -129,6 +142,7 @@ public class Location {
 	    {
 	    	scan = new Scanner(url.openStream());
 	    }
+	  
 	    String str = new String();
 	    while (scan.hasNext())
 	        str += scan.nextLine();
@@ -156,20 +170,20 @@ public class Location {
 	public static String Direction (double deg)
 	   {		   
 		   if (deg <=22.5 || deg >=337.5)
-			   return "North";
+			   return "N";
 		   else if (deg <=67.5 )
-			   return "Northeast";
+			   return "NE";
 		   else if (deg <=112.5)
-			   return "East";
+			   return "E";
 		   else if (deg <=157.5)
-			   return "Southeast";
+			   return "SE";
 		   else if (deg <=202.5)
-			   return "South";
+			   return "S";
 		   else if (deg <=247.5 )
-			   return "Southwest";
+			   return "SW";
 		   else if (deg <=292.5)
-			   return "West";
-		   else return "Northwest";
+			   return "W";
+		   else return "NW";
 	   }
 	/**
 	 * Converts Epoch time from OpenWeatherMap api to a more
