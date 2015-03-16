@@ -1,7 +1,12 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 
 /**
@@ -30,9 +35,10 @@ public class ShortTermPanel extends JPanel {
 	 */
 	private void initPanel(Location loc) throws Exception {
 		
-		this.setBackground(new Color(0,0,255,20));
-		this.setLayout(null);
-    	this.setSize(new Dimension(400,700));
+		GridLayout layout = new GridLayout(1,0);
+		this.setOpaque(false);
+		this.setLayout(layout);
+		this.setSize(new Dimension(730,270));
     	
     	//adds ThreeHourPanel objects with a helper method
 		addPeriods(loc);

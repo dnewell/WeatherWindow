@@ -15,7 +15,7 @@ import org.json.JSONObject;
  */
 public class ThreeHourPeriod {
 
-	private String dayOfWeek;
+	private String time;
 	private String temperature;
 	private String skyCondition;
 	private String precipitation;
@@ -30,7 +30,7 @@ public class ThreeHourPeriod {
 	public ThreeHourPeriod(JSONObject res, int index) throws JSONException {
 				
 		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd");
-		DecimalFormat temp = new DecimalFormat("#.#");
+		DecimalFormat temp = new DecimalFormat("#");
 		
 		Double precip = 0.0;
 		   
@@ -55,14 +55,14 @@ public class ThreeHourPeriod {
 		//Capitalize first letter of cloud condition
 		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		 
-		this.dayOfWeek = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime + ", ";
+		this.time = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes;
 		
 		//Increase day by one
 	    if (Location.NewDay == true)
 		    Location.cal.add(Calendar.DATE, 1);
 		
-		this.dayOfWeek += format.format(Location.cal.getTime());
-		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0C";
+		//this.time += format.format(Location.cal.getTime());
+		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "";
 
@@ -73,8 +73,8 @@ public class ThreeHourPeriod {
 	 * Get the current day of the week
 	 * @return A string representing the name of the day
 	 */
-	public String getDayOfWeek() {
-		return dayOfWeek;
+	public String getTime() {
+		return time;
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class ThreeHourPeriod {
 	 * Set an updated title for the day of the week
 	 * @param dayOfWeek the updated title to set for the current day
 	 */
-	public void setDayOfWeek(String dayOfWeek) {
-		this.dayOfWeek = dayOfWeek;
+	public void setTime(String newTime) {
+		this.time = newTime;
 	}
 
 	/**

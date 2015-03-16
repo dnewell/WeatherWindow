@@ -1,6 +1,8 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 
 /**
@@ -26,11 +28,11 @@ public class LongTermPanel extends JPanel {
 	 */
 	private void initPanel(Location loc) throws Exception {
 	
-		this.setLayout(null);
-		this.setOpaque(true);
+		GridLayout layout = new GridLayout(1,0);
+		this.setOpaque(false);
+		this.setLayout(layout);
+		this.setSize(new Dimension(730,270));
 		
-		this.setBackground(new Color(0,0,255,30));
-    	this.setSize(new Dimension(770,250));
     	addDayPanels(loc);
 
 	}

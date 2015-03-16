@@ -37,7 +37,7 @@ public class LocalWeather {
 	 */
 	public LocalWeather(JSONObject info) throws Exception {
 
-		DecimalFormat temp = new DecimalFormat("#.#");
+		DecimalFormat temp = new DecimalFormat("#");
 		Date now = new Date();
 		
 		//Declare Json Objects for use
@@ -62,18 +62,25 @@ public class LocalWeather {
 		    	precip += info.getJSONObject("rain").getDouble("3h");
 		    	else precip += info.getJSONObject("rain").getDouble("1h");	
 	    
-		
-		this.updateTime = "Last data update: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
+	    String windSpeedText = "";
+	    
+	    // Gets the current units being used, and then sets the appropriate text
+		if(Location.getUnits() == 0)
+			windSpeedText = "km/h";
+		else
+			windSpeedText = "mph";
+	    
+		this.updateTime = "Last updated: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
 		this.userTime = String.format("Current Time: %tl:%tM %tp%n", now, now, now);
-		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0C";
+		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0";
 		this.skyCondition = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
-		this.precipatation = temp.format(precip) + "";
-		this.windSpeed = temp.format(Wind.getDouble("speed") * 3.6) + "km/h";
+		this.precipatation = "Precipitation: "+temp.format(precip) + "%";
+		this.windSpeed = "Wind: "+temp.format(Wind.getDouble("speed") * 3.6) +windSpeedText;
 		this.windDirection = Location.Direction(Wind.getDouble("deg"));
-		this.pressure = temp.format(Main.getDouble("pressure")) + "hPa";
-		this.humidity = (int)Main.getDouble("humidity") + "";
-		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "\u00b0C";
-		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "\u00b0C";
+		this.pressure = "Air Pressure: "+temp.format(Main.getDouble("pressure")) + "hPa";
+		this.humidity = "Humidity: "+(int)Main.getDouble("humidity") + "%";
+		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "\u00b0";
+		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "\u00b0";
 		
 		Location.GetTime(sys.getInt("sunrise"));
 		this.sunrise = "Sunrise: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
