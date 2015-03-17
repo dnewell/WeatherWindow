@@ -27,13 +27,14 @@ import java.net.URL;
  * @author David Newell
  * @author David Langford
  * @author Karsten Babin
+ * @author Robert Goldfarb
  */
 public class GUI implements ActionListener{
 	
 	
 	private static final String APPLICATION_NAME = "WeatherApp";
-	private static String DEFAULT_LOCATION = "London, On";
-	public int DEFAULT_UNITS = 1;
+	private static String CURRENT_LOCATION = "London, On";
+	public int CURRENT_UNITS = 1;
 	private JFrame mainWindow;
 	private JTextField field;
 
@@ -58,12 +59,12 @@ public class GUI implements ActionListener{
 		//Deserialize data and set location to London
 		Deserialize de_ser = new Deserialize();
 		s = de_ser.getData();
-		DEFAULT_LOCATION = s.location;
-		DEFAULT_UNITS = s.units;
+		CURRENT_LOCATION = s.location;
+		CURRENT_UNITS = s.units;
 		
 		mainWindow = new JFrame(APPLICATION_NAME);
 		try {
-			loc = new Location(DEFAULT_UNITS, DEFAULT_LOCATION);
+			loc = new Location(CURRENT_UNITS, CURRENT_LOCATION);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -127,7 +128,7 @@ public class GUI implements ActionListener{
 			addFahrenheitButton();
 			
 			// Set the default measurements to either Celsius or Fahrenheit
-			if(DEFAULT_UNITS == 0)
+			if(CURRENT_UNITS == 1)
 				stateFahrenheit();
 			else
 				stateCelsius();
@@ -193,6 +194,7 @@ public class GUI implements ActionListener{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		
 			
 		// Set the fahrenheitButton text to grey
 		fahrenheitButton.setForeground(new Color(150,150,150,200));
@@ -245,7 +247,6 @@ public class GUI implements ActionListener{
 	 * Changes the metric for the weather information to Fahrenheit
 	 */
 	private void stateFahrenheit(){
-		
 		// Updates the app with weather information in Fahrenheit
 		// by reloading new weather information in Fahrenheit
 		try {
@@ -253,6 +254,7 @@ public class GUI implements ActionListener{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		
 				
 		// Set the fahrenheitButton text to white
 		fahrenheitButton.setForeground(Color.WHITE);
@@ -267,6 +269,7 @@ public class GUI implements ActionListener{
 		// Shrink the size of the celsiusButton
 		MakeFont makenewCelsiusFont = new MakeFont("Bold");
 		celsiusButton.setFont(makenewCelsiusFont.create().deriveFont(38f));
+		
 		
 	}
 	
@@ -443,7 +446,7 @@ public class GUI implements ActionListener{
 	 * @throws Exception 
 	 */
 	private void refresh() throws Exception {
-		updateGUI(DEFAULT_UNITS, DEFAULT_LOCATION);
+		updateGUI(CURRENT_UNITS, CURRENT_LOCATION);
 	}
 	
 
@@ -576,7 +579,7 @@ public class GUI implements ActionListener{
 		try {
 			// TODO add a button.  Calls on newline atm.
 			if (loc != null)
-			updateGUI(DEFAULT_UNITS, locationText);
+			updateGUI(CURRENT_UNITS, locationText);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -591,14 +594,14 @@ public class GUI implements ActionListener{
 	 */
 	private void updateGUI(int units, String locationText) throws Exception {
 		
-		DEFAULT_UNITS = units;
-		DEFAULT_LOCATION = locationText;
+		CURRENT_UNITS = units;
+		CURRENT_LOCATION = locationText;
 		Serialize s = new Serialize(locationText, units); //Serialize the new location
 		Location oldLoc = loc;
 		
 		try {		
 
-			Location userLoc = new Location(DEFAULT_UNITS, locationText);	
+			Location userLoc = new Location(units, locationText);	
 
 			setBackgroundImage(userLoc);
 			addLTF(userLoc);
