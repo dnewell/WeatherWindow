@@ -1,5 +1,5 @@
 import java.io.*;
-import java.io.Serializable;
+import java.net.URL;
 
 public class Deserialize implements Serializable
 {
@@ -9,8 +9,9 @@ public class Deserialize implements Serializable
       s = null;
       try
       {
-         FileInputStream fileIn = new FileInputStream("src/data.ser");
-         ObjectInputStream in = new ObjectInputStream(fileIn);
+         //InputStream fileIn = getClass().getResourceAsStream("data.ser");
+    	 FileInputStream fileIn = new FileInputStream("data.ser");
+    	 ObjectInputStream in = new ObjectInputStream(fileIn);
          s = (SavedData) in.readObject();
          in.close();
          fileIn.close();
@@ -24,9 +25,14 @@ public class Deserialize implements Serializable
          c.printStackTrace();
          return;
       }
-      System.out.println("Deserialized Data...");
-      System.out.println("Units: " + s.units);
-      System.out.println("Location: " + s.location);
+      
+  		String units_text = "Metric";
+		if(s.units==1)
+			units_text = "Imperial";
+
+		System.out.println("Deserialized Data...");
+		System.out.println("Units: " + units_text);
+		System.out.println("Location: " + s.location);
     }
 }
 	

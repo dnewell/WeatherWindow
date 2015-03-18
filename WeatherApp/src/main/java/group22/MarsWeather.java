@@ -13,6 +13,7 @@ public class MarsWeather {
 
 	private String date;
 	private String temperature;
+	private String Ftemp;
 	private String skyCondition;
 	private String windSpeed;
 	private String windDirection;
@@ -35,10 +36,15 @@ public class MarsWeather {
 		   //TIME
 		   Date now = new Date();
 		   
-		   //TEMPERATURE
+		 //TEMPERATURE
 		   int maxTemp = data.getInt("max_temp");
 		   int minTemp = data.getInt("min_temp");
 		   int avgTemp = (maxTemp+minTemp)/2;
+		   
+		 //TEMPERATURE
+		   int maxFTemp = data.getInt("max_temp_fahrenheit");
+		   int minFTemp = data.getInt("min_temp_fahrenheit");
+		   int avgFTemp = (maxFTemp+minFTemp)/2;
 		   
 		   //DATE
 		   String date = data.getString("terrestrial_date"); //Earth Date
@@ -52,7 +58,7 @@ public class MarsWeather {
 		   //PRESSURE
 		   int pressureNum = data.getInt("pressure");
 		   String pressureString = data.getString("pressure_string");
-		   String pressure = pressureNum + " (" + pressureString + ")";
+		   String pressure = temp.format(pressureNum) + " (" + pressureString + ")";
 		   
 		   //HUMIDITY + CONDITION
 		   Object humidity = data.get("abs_humidity"); 
@@ -60,11 +66,12 @@ public class MarsWeather {
 		   
 		
 		this.date = String.format("Date: " + totalDate);
-		this.temperature = temp.format(avgTemp) + "�C";
+		this.temperature = temp.format(avgTemp) + "\u00b0";
+		this.Ftemp = temp.format(avgFTemp) + "\u00b0";
 		
 		if (!windDirection.equals("--"))
 			this.windDirection = ("Wind Direction: " + windDirection);
-		   else System.out.println("No wind direction information available.");
+		   else this.windDirection = ("");
 		   
 		   if (!windSpeed.equals(null))
 			   this.windDirection = ("Wind speed " + windSpeed);
@@ -75,7 +82,7 @@ public class MarsWeather {
 		   else this.humidity = ("No humidity information available.");	   
 		
 		this.skyCondition = "Sky Conditon: " + skyCondition;
-		this.pressure = temp.format(pressure) + "KpA";
+		this.pressure = pressure + "KpA";
 		
 	}
 	
@@ -93,6 +100,14 @@ public class MarsWeather {
 	 */
 	public String getTemperature() {
 		return temperature;
+	}
+	
+	/**
+	 * Get the current temperature in Fahrenheight
+	 * @return A string representing the current temperature in Fahrenheight
+	 */
+	public String getFtemp() {
+		return Ftemp;
 	}
 	
 	/**
@@ -149,6 +164,14 @@ public class MarsWeather {
 	 */
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
+	}
+	
+	/**
+	 * Set an updated temperature value in Fahrenheight
+	 * @param temperature the updated temperature information to set
+	 */
+	public void setFtemp(String Ftemp) {
+		this.Ftemp = Ftemp;
 	}
 	
 	/**

@@ -53,21 +53,23 @@ public class ShortTermPanel extends JPanel {
 	 */
 	@SuppressWarnings("static-access")
 	private void addPeriods(Location loc) throws Exception {
-
-		ThreeHourPanel[] panels = new ThreeHourPanel[8];
-		Location.cal.setTime(Location.now);
+		if (!loc.getLocation().toLowerCase().equals("mars"))
+		{
+			ThreeHourPanel[] panels = new ThreeHourPanel[8];
+			Location.cal.setTime(Location.now);
 		
-		for(int i = 0; i < 8; i++){
-	    	panels[i] = new ThreeHourPanel(loc.getSTF().getThreeHourArray()[i]);//LOCATION..getWHATEVER())
-		}
+			for(int i = 0; i < 8; i++){
+				panels[i] = new ThreeHourPanel(loc.getSTF().getThreeHourArray()[i]);//LOCATION..getWHATEVER())
+			}
 		
-		loc.NewDay = false;
+			loc.NewDay = false;
 		
-		int vertPosition = 5;
-		for(int i = 0; i < 8; i++){
-			// Sets spacing, uses a 5 pixel wide border on all sides of each ThreeHourPanel.
-	    	panels[i].setLocation(5, (5+(((vertPosition+80)*i))));
-	    	this.add(panels[i]);	
+			int vertPosition = 5;
+			for(int i = 0; i < 8; i++){
+				// Sets spacing, uses a 5 pixel wide border on all sides of each ThreeHourPanel.
+				panels[i].setLocation(5, (5+(((vertPosition+80)*i))));
+				this.add(panels[i]);	
+			}
 		}
 	}
 	

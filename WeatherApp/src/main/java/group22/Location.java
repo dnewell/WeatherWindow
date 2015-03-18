@@ -22,6 +22,7 @@ public class Location {
 	private LongTermForecast longTermForecast;
 	private LocalWeather localWeather;
 	private MarsWeather marsWeather;
+	private int count = 0;
 
 	//Determines am or pm
 	public static String daytime;
@@ -48,7 +49,7 @@ public class Location {
 		/*
 		 * MARS case handling.  There are many different ways (and possible places) we could handle this.
 		 * 
-		 */		if (getLocation().equals("mars"))
+		 */		if (getLocation().toLowerCase().equals("mars"))
 			this.marsWeather = new MarsWeather(readJSON(units, "", "mars"));
 		 else {
 			this.shortTermForecast = new ShortTermForecast(readJSON(units, location, "short term"));
@@ -64,7 +65,7 @@ public class Location {
 	public String getLocation() {
 		return location;
 	}
-	
+		
 	/**
 	 * Get the current units (metric/imperial) being used
 	 * @return a integer representing the current integer
@@ -82,7 +83,7 @@ public class Location {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
+	
 	/**
 	 * Reads the JSON for a specified forecast type and location
 	 * @param addr the location text
@@ -95,59 +96,69 @@ public class Location {
 		String api = null;
 		String key = "&APPID=e57e5d3a71d17c47936c8513bdd97825";
 		String units_text = "&units=metric";
-		if(units==1){
+		if(units==1)
 			units_text = "&units=imperial";
+		   
+		//NOTE - this will be controlled by a radio button or something, not the user entering a string
+		if (s == "current")
+		{
+			api = "http://api.openweathermap.org/data/2.5/weather?q=";
+			api += URLEncoder.encode(addr, "UTF-8");
+			api += units_text;
+			//api += key;
 		}
-		
-		   
-		   //NOTE - this will be controlled by a radio button or something, not the user entering a string
-		   if (s == "current")
-		   {
-			   api = "http://api.openweathermap.org/data/2.5/weather?q=";
-			   api += URLEncoder.encode(addr, "UTF-8");
-			   api += units_text;
-			   api += key;
-		   }
-		   else if (s == "short term")
-		   {
-			   api = "http://api.openweathermap.org/data/2.5/forecast?q=";
-			   api += URLEncoder.encode(addr, "UTF-8");
-			   api += units_text;
-			   api += key;
-		   }
-		   else if (s == "long term")
-		   {
-			   api = "http://api.openweathermap.org/data/2.5/forecast/daily?q=";
-			   api += URLEncoder.encode(addr, "UTF-8");
-			   api += units_text;
-			   api += "&cnt=5";
-			   api += key;
-		   }
-		   else if (s == "mars")
-		   {
-			   api = "http://marsweather.ingenology.com/v1/latest/?format=json";
-		   }
-		   
-		   
+		else if (s == "short term")
+		{
+			api = "http://api.openweathermap.org/data/2.5/forecast?q=";
+			api += URLEncoder.encode(addr, "UTF-8");
+			api += units_text;
+			//api += key;
+		}
+		else if (s == "long term")
+		{
+			api = "http://api.openweathermap.org/data/2.5/forecast/daily?q=";
+			api += URLEncoder.encode(addr, "UTF-8");
+			api += units_text;
+			api += "&cnt=5";
+			//api += key;
+		}
+		else if (s == "mars")
+		{
+		   	api = "http://marsweather.ingenology.com/v1/latest/?format=json";
+	   	}
 		   
 	    URL url = new URL(api);
-	    System.out.println("API address used: " + url);
-	    
-	    Scanner scan;
+	   
+	    Scanner scan = null;
 	 
 	    // read from the URL, then close the scanner
 	    try {
 	    	scan = new Scanner(url.openStream());
 	    } catch (IOException e)
 	    {
-	    	return readJSON(units, addr, s);
+	    	count++;
+	    	if (count <=10)
+	    	{
+	    		System.out.println("Retry attempt " + count + " of 10");
+	    		return readJSON(units, addr, s);
+	    	}
+	    	System.out.println("No information available. Check Internet connection.\nOpen Weather Maps API could also be down.\nClosing application.");
+	    	System.exit(0);
 	    }
-	  
-	    String str = new String();
+	   
+	    System.out.println("API address used: " + url);
+	    
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
 	 
+	    if (str == "")
+	    {
+    		System.out.println("Sorry, OpenWeatherMaps is loading a blank page.");
+    		return null;
+    	}
+	    
 	    // build JSON objects
 	    JSONObject res = new JSONObject(str);
 	    
@@ -155,7 +166,7 @@ public class Location {
 	    if (res.has("cod"))
 	    	if (res.getInt("cod") == 404)
 	    	{
-	    		System.out.print("That is not a valid location. ");
+	    		System.out.println("That is not a valid location. ");
 	    		return null;
 	    	}
 	    

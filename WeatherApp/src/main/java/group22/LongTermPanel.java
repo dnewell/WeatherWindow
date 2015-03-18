@@ -43,17 +43,20 @@ public class LongTermPanel extends JPanel {
 	 * @throws Exception when an error occurs
 	 */
 	private void addDayPanels(Location loc) throws Exception {
-		DayPanel[] panels = new DayPanel[5];
+		if (!loc.getLocation().toLowerCase().equals("mars"))
+		{		
+			DayPanel[] panels = new DayPanel[5];
 		
-		for(int i = 0; i < 5; i++){
-	    	panels[i] = new DayPanel(loc.getLTF().getDayArray()[i]);
-		}
+			for(int i = 0; i < 5; i++){
+				panels[i] = new DayPanel(loc.getLTF().getDayArray()[i]);
+			}
 		
-		int horPosition = 5;
-		for(int i = 0; i < 5; i++){
-			// Sets spacing, uses a 5 pixel wide border on all sides of each ThreeHourPanel.
-	    	panels[i].setLocation((5+(((horPosition+148)*i))), 5);
-	    	this.add(panels[i]);	
+			int horPosition = 5;
+			for(int i = 0; i < 5; i++){
+				// Sets spacing, uses a 5 pixel wide border on all sides of each ThreeHourPanel.
+				panels[i].setLocation((5+(((horPosition+148)*i))), 5);
+				this.add(panels[i]);
+			}
 		}
 	}
 	
