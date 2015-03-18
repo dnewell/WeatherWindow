@@ -313,6 +313,8 @@ public class GUI implements ActionListener{
 		ltPanel.setVisible(false);
 		stPanel.setVisible(true);
 		
+		 refreshGUI();
+		
 	}
 	
 	private void addLongTermButton() {
@@ -353,6 +355,8 @@ public class GUI implements ActionListener{
 		
 		stPanel.setVisible(false);
 		ltPanel.setVisible(true);
+		 
+		refreshGUI();
 		
 	}
 	
