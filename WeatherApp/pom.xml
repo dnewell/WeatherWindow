@@ -14,8 +14,29 @@
 </dependencies>
 
 <build>   
-    <plugins>
 
+	<resources>
+      <resource>
+        <directory>bin</directory>
+        <includes>
+          <include>HelveticaNeue-Light.otf</include>
+          <include>HelveticaNeue-Medium.otf</include>
+          <include>HelveticaNeue-Bold.otf</include>
+          <include>HelveticaNeue-UltraLight.otf</include>
+          <include>HelveticaNeue-UltraLight.otf</include>
+          <include>owfont-regular.otf</include>
+          <include>FontAwesome.otf.otf</include>
+		<include>Clear_Sky_750x630.png</include>
+		<include>Sunny_750x630.png</include>
+		<include>Sunny_Clouds_750x630.png</include>
+		<include>Rain_750x630.png</include>
+		<include>Clear_Sky_750x630.png</include>
+		<include>mars.png</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
       <plugin>
 		  <groupId>org.apache.maven.plugins</groupId>
 		  <artifactId>maven-assembly-plugin</artifactId>

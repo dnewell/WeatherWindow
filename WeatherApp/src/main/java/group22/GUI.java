@@ -33,7 +33,7 @@ public class GUI implements ActionListener{
 	
 	
 	private static final String APPLICATION_NAME = "WeatherApp";
-	private static String CURRENT_LOCATION = "London, On";
+	private static String CURRENT_LOCATION;
 	public int CURRENT_UNITS = 1;
 	private JFrame mainWindow;
 	private JTextField field;
@@ -114,11 +114,14 @@ public class GUI implements ActionListener{
 		if (loc != null) 
 		{		
 
-			// Add the long-term forecast to the frame
-			addLTF(loc);
+			if (!loc.getLocation().toLowerCase().equals("mars"))
+			{
+				// Add the long-term forecast to the frame
+				addLTF(loc);
 			
-			// Add the short-term forecast to the frame
-			addSTF(loc);
+				// Add the short-term forecast to the frame
+				addSTF(loc);
+			}
 				
 			// Add the current forecast to the frame
 			addLW(loc);
@@ -133,18 +136,28 @@ public class GUI implements ActionListener{
 			else
 				stateCelsius();
 			
-			// Add the Short and Long-term forecast buttons to the frame
-			addShortTermButton();
-			addLongTermButton();
+
+				// Add the Short and Long-term forecast buttons to the frame
+				addShortTermButton();
+				addLongTermButton();			
 			
 			// Set the default state between short and long-term forecast
-			if(shorttermState == true)
-				changeToShortTerm();
-			else
-				changeToLongTerm();
+				if (!loc.getLocation().toLowerCase().equals("mars"))
+					if(shorttermState == true)
+						changeToShortTerm();
+					else
+						changeToLongTerm();			
+
 			
 			// Add the ShadowPanel to the backgroud
 			addShadowPanel();
+			
+			if (loc.getLocation().toLowerCase().equals("mars"))
+			{
+				shorttermButton.setVisible(false);
+				longtermButton.setVisible(false);					
+			}
+			
 		}
     	
 		// Make the JFrame visible
@@ -340,6 +353,8 @@ public class GUI implements ActionListener{
 		longtermButton.setBounds(130, 300, 150, 30);
 		mainWindow.getContentPane().add(longtermButton);
 		
+		
+		
 	}
 	
 	private void changeToLongTerm(){
@@ -367,7 +382,11 @@ public class GUI implements ActionListener{
 	private void setBackgroundImage(Location loc){
 			
 		String imageName = "";
-		String skyCondition = loc.getLW().getSkyCondition().toLowerCase();
+		String skyCondition = "";
+		if (!loc.getLocation().toLowerCase().equals("mars"))
+		skyCondition = loc.getLW().getSkyCondition().toLowerCase();
+		else
+			imageName = "mars.png";
 		
 		// Set the imageName to a picture that is congruent to the
 		// weather conditions of the current location
@@ -600,9 +619,9 @@ public class GUI implements ActionListener{
 		
 		CURRENT_UNITS = units;
 		CURRENT_LOCATION = locationText;
-		Serialize s = new Serialize(locationText, units); //Serialize the new location
 		Location oldLoc = loc;
 		
+		if (!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits()!=units)
 		try {		
 
 			Location userLoc = new Location(units, locationText);	
@@ -619,7 +638,19 @@ public class GUI implements ActionListener{
 			
 			addShadowPanel();
 
-		
+			if (locationText.toLowerCase().equals("mars"))
+			{
+				shorttermButton.setVisible(false);
+				longtermButton.setVisible(false);				
+			}
+			else
+			{
+				shorttermButton.setVisible(true);
+				longtermButton.setVisible(true);
+			}
+			
+			Serialize s = new Serialize(locationText, units); //Serialize the new location
+			loc = userLoc;		
 		} 
 		catch (NullPointerException e) {			
 			field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));	

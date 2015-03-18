@@ -1,5 +1,5 @@
 import java.io.*;
-import java.io.Serializable;
+import java.net.URL;
 
 
 public class Serialize implements Serializable
@@ -18,13 +18,14 @@ public class Serialize implements Serializable
       s.location= loc;
       try
       {
-         FileOutputStream fileOut =
-         new FileOutputStream("src/data.ser");
+    	 //URL url = getClass().getResource("data.ser");
+         //FileOutputStream fileOut = new FileOutputStream(url.getPath());
+    	 FileOutputStream fileOut = new FileOutputStream("data.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
          out.writeObject(s);
          out.close();
          fileOut.close();
-         System.out.printf("Serialized data is saved in /src/data.ser");
+         System.out.println("Serialized data is saved in data.ser");
       }catch(IOException i)
       {
           i.printStackTrace();
