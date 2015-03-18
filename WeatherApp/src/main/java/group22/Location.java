@@ -17,7 +17,7 @@ import org.json.*;
 
 public class Location {
 
-	private String location;
+	private String location = "London, on";
 	private ShortTermForecast shortTermForecast;
 	private LongTermForecast longTermForecast;
 	private LocalWeather localWeather;
@@ -26,7 +26,7 @@ public class Location {
 
 	//Determines am or pm
 	public static String daytime;
-	public static int ihours, iminutes, units;
+	public static int ihours, iminutes, units = 0;
 	
 	//used to check for short term if it is a new date or not
 	public static Boolean NewDay = false;

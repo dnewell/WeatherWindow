@@ -6,7 +6,7 @@ public class Deserialize implements Serializable
 	private static SavedData s;
 	public Deserialize() {	
    {
-      s = null;
+      s = new SavedData();
       try
       {
          //InputStream fileIn = getClass().getResourceAsStream("data.ser");
@@ -17,8 +17,8 @@ public class Deserialize implements Serializable
          fileIn.close();
       }catch(IOException i)
       {
-         i.printStackTrace();
-         return;
+         System.out.println("No Data file found. Loading default information");
+         s.location = "London ON";
       }catch(ClassNotFoundException c)
       {
          System.out.println("SavedData class not found");
