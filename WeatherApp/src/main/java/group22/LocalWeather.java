@@ -25,8 +25,8 @@ public class LocalWeather {
 	private String maxTemp;
 	private String sunrise;
 	private String sunset;
+	private int weatherID;
 
-	
 	// Just making minor comment change to test to make
 	// first push to rep
 	
@@ -81,6 +81,7 @@ public class LocalWeather {
 		this.humidity = "Humidity: "+(int)Main.getDouble("humidity") + "%";
 		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "\u00b0";
 		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "\u00b0";
+		this.weatherID =  Weather.getInt("id");
 		
 		Location.GetTime(sys.getInt("sunrise"));
 		this.sunrise = "Sunrise: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
@@ -193,6 +194,14 @@ public class LocalWeather {
 	 */
 	public String getSunset() {
 		return sunset;
+	}
+	
+	/**
+	 * Getter for the weatherIcon
+	 * @return a string representing a code for the current weather
+	 */
+	public int getWeatherID(){
+		return weatherID;
 	}
 	
 	/**

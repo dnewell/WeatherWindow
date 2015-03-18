@@ -42,7 +42,7 @@ public class ShortTermPanel extends JPanel {
     	
     	//adds ThreeHourPanel objects with a helper method
 		addPeriods(loc);
-
+		
 	}
 
 
