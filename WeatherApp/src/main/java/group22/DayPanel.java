@@ -13,6 +13,7 @@ import javax.swing.*;
  * Used by the GUI, its instances are typically created by the LongTermPanel class
  * 
  * @author David Newell
+ * @author Karsten Babin
  *
  */
 @SuppressWarnings("serial")
@@ -35,26 +36,62 @@ public class DayPanel extends JPanel {
 	 * to the panel
 	 */
 	private void initPanel() {
-		// single vertical column layout
+	
+		// Create a WeatherIcon object to form the weather icons
+		WeatherIcon wI = new WeatherIcon(day.getWeatherID());
+		
+		// Set the layout to a BoxLayout to have items stack on top
+		// of one another
 		this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+		
+		// Make the background of the panels transparent
 		this.setOpaque(false);
+		
+		// Set dimensions of each unique panel
 		this.setSize(new Dimension(91,270));
 		
+		// Add a day of the week label
 		addLabel(day.getDayOfWeek(),15,0,10, "Medium");
+		
+		// Add a temperature label
 		addLabel(day.getTemperature(),30,0,15, "Medium");
 		
-		ResizableImage weatherIcon = new ResizableImage("Sunny_128x128.png", 70, 70);
-    	weatherIcon.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		this.add(weatherIcon);
+		// Add the label for the weather icon
+		JLabel label = new JLabel(wI.getWeatherIcon());	
+		MakeFont createFont = new MakeFont("Sky");
+		Font newFont = createFont.create().deriveFont((float)30);
+		label.setFont(newFont);
+		label.setMaximumSize(new Dimension(70,70));
 		
-    	addLabel(day.getSkyCondition(),12,0,0, "Light");
-		addLabel(day.getPrecipitation(),20,0,15, "Medium");
-		addLabel(day.getMaxTemp(),12,0,15, "Medium");
-		addLabel(day.getMinTemp(),12,0,15, "Medium");
+		// Aligns the icon in the center of the panel
+		label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
-		
+		// Set the icon in the center and bottom of the label
+		label.setHorizontalAlignment(JLabel.CENTER);
+    	label.setVerticalAlignment(JLabel.BOTTOM);
+    	
+    	// Color the image white
+    	label.setForeground(Color.WHITE);
+    	
+    	// Create a spacer between the other elements
+    	this.add((Box.createRigidArea(new Dimension(0,10))));
+ 
+    	// Add the label to the panel
+    	this.add(label);
     	this.validate();
     	this.repaint();
+    	
+    	// Add a sky condition label
+    	addLabel(day.getSkyCondition(),12,0,0, "Light");
+    	
+    	// Add a precipitation label
+		addLabel(day.getPrecipitation(),20,0,15, "Medium");
+		
+		// Add a maximum temperature label
+		addLabel(day.getMaxTemp(),12,0,15, "Medium");
+		
+		// Add a minimum temperature label
+		addLabel(day.getMinTemp(),12,0,15, "Medium");
 		
 	}
 	/**
@@ -62,13 +99,25 @@ public class DayPanel extends JPanel {
 	 * @param text the weather information to add to the label
 	 */
 	private void addLabel(String text, int size, int gapX,  int gapY, String style) {
+		
+		// Create a new JLabel object to apply properties to
 		JLabel label = new JLabel(text);	
+		
+		// Set the font according to the parameter 'style'
 		MakeFont createFont = new MakeFont(style);
 		Font newFont = createFont.create().deriveFont((float)size);
-    	label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		label.setFont(newFont);
-    	label.setForeground(Color.WHITE);
+		
+		// Set the color of the text to white
+		label.setForeground(Color.WHITE);
+		
+		// Center the JLabel in the middle of the panel
+		label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		
+		// Add a invisible box object to act as a top spacer between JLabels
     	this.add((Box.createRigidArea(new Dimension(gapX,gapY))));
+    	
+    	// Add the JLabel to the panel
     	this.add(label);
     	this.validate();
     	this.repaint();

@@ -510,7 +510,7 @@ public class GUI implements ActionListener{
     	
 		// Create a new ShortTermPanel to the JFrame
 		stPanel = new ShortTermPanel(loc);
-    	stPanel.setLocation(10, 335);
+		stPanel.setLocation(10, 335);
     	
      	// Add the ShortTermPanel to the JFrame
     	mainWindow.getContentPane().add(stPanel);

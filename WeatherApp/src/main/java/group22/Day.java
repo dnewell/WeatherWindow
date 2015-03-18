@@ -22,6 +22,8 @@ public class Day {
 	private String precipitation;
 	private String maxTemp;
 	private String minTemp;
+	private int weatherID;
+	
 	
 	
 	/**
@@ -58,6 +60,8 @@ public class Day {
 		this.precipitation = temp.format(precip) + "mm";
 		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0";
 		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0";
+		this.weatherID = Weather.getInt("id");
+		
 	}
 
 	/**
@@ -84,6 +88,14 @@ public class Day {
 		return temperature;
 	}
 
+	/**
+	 * Getter for the weatherIcon
+	 * @return a string representing a code for the current weather
+	 */
+	public int getWeatherID(){
+		return weatherID;
+	}
+	
 	/**
 	 * Setter for temperature
 	 * @param temperature the temperature to set
@@ -131,7 +143,8 @@ public class Day {
 	public String getMinTemp() {
 		return minTemp;
 	}
-
+	
+	
 	/**
 	 * Setter for minTemp
 	 * @param minTemp the minTemp to set

@@ -7,6 +7,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import org.json.*;
 /**
@@ -40,6 +41,7 @@ public class LocalWeatherPanel extends JPanel {
 	    	this.setSize(new Dimension(750,200));
 	  
 	    	LocalWeather lw = loc.getLW();
+	    	WeatherIcon wI = new WeatherIcon(lw.getWeatherID());
 	    	
 	    	String imageName = "";
 	    	String skyCondition = lw.getSkyCondition().toLowerCase();
@@ -78,9 +80,9 @@ public class LocalWeatherPanel extends JPanel {
 			addLabel(skyconditionInfoLabel, lw.getSkyCondition(), 315, 173, 150, 25, "Light", 20);
 			
 			JLabel skyconditionImageLabel = new JLabel();
-			skyconditionImageLabel.setIcon(new ImageIcon(url));
-			skyconditionImageLabel.setBounds(320, 20, 400, 150);
-			this.add(skyconditionImageLabel);
+			skyconditionImageLabel.setHorizontalAlignment(JLabel.CENTER);
+			skyconditionImageLabel.setVerticalAlignment(JLabel.BOTTOM);
+			addLabel(skyconditionImageLabel, wI.getWeatherIcon(), 305, 50, 150, 150, "Sky", 60);
 			
 			JLabel mintempInfoLabel = new JLabel();
 			addLabel(mintempInfoLabel, lw.getMinTemp(), 35, 170, 125, 25, "Light", 20);

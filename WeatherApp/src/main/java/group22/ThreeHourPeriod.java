@@ -19,6 +19,7 @@ public class ThreeHourPeriod {
 	private String temperature;
 	private String skyCondition;
 	private String precipitation;
+	private int weatherID;
 
 	
 	/**
@@ -65,7 +66,8 @@ public class ThreeHourPeriod {
 		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0";
 		this.skyCondition = weather;
 		this.precipitation = temp.format(precip) + "";
-
+		this.weatherID = Weather.getInt("id");
+		
 	}
 	
 
@@ -99,6 +101,14 @@ public class ThreeHourPeriod {
 	 */
 	public String getPrecipitation() {
 		return precipitation;
+	}
+	
+	/**
+	 * Getter for the weatherIcon
+	 * @return a string representing a code for the current weather
+	 */
+	public int getWeatherID(){
+		return weatherID;
 	}
 
 	/**
