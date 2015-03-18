@@ -140,7 +140,7 @@ public class Location {
 	    	scan = new Scanner(url.openStream());
 	    } catch (IOException e)
 	    {
-	    	scan = new Scanner(url.openStream());
+	    	return readJSON(units, addr, s);
 	    }
 	  
 	    String str = new String();
