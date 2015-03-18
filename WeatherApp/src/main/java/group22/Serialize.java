@@ -19,7 +19,7 @@ public class Serialize implements Serializable
       try
       {
          FileOutputStream fileOut =
-         new FileOutputStream("data.ser");
+         new FileOutputStream("src/data.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
          out.writeObject(s);
          out.close();
