@@ -33,7 +33,7 @@ public class GUI implements ActionListener{
 	
 	
 	private static final String APPLICATION_NAME = "WeatherApp";
-	private static String CURRENT_LOCATION;
+	private static String CURRENT_LOCATION = "London ON";
 	public int CURRENT_UNITS = 1;
 	private JFrame mainWindow;
 	private JTextField field;
@@ -59,8 +59,11 @@ public class GUI implements ActionListener{
 		//Deserialize data and set location to London
 		Deserialize de_ser = new Deserialize();
 		s = de_ser.getData();
-		CURRENT_LOCATION = s.location;
-		CURRENT_UNITS = s.units;
+		if (!s.location.equals("null"))
+		{
+			CURRENT_LOCATION = s.location;
+			CURRENT_UNITS = s.units;
+		}
 		
 		mainWindow = new JFrame(APPLICATION_NAME);
 		try {
