@@ -56,7 +56,7 @@ public class ThreeHourPeriod {
 		//Capitalize first letter of cloud condition
 		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		 
-		this.time = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes;
+		this.time = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
 		
 		//Increase day by one
 	    if (Location.NewDay == true)
