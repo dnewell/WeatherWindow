@@ -13,6 +13,8 @@ import org.json.*;
 public class LocalWeather {
 
 	private String updateTime;
+	private String city;
+	private String country;
 	private String userTime;
 	private String temperature;
 	private String skyCondition;
@@ -72,7 +74,7 @@ public class LocalWeather {
 	    
 		this.updateTime = "Last updated: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
 		this.userTime = String.format("Current Time: %tl:%tM %tp%n", now, now, now);
-		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0";
+		this.temperature = temp.format((int)Main.getDouble("temp")) + "\u00b0";
 		this.skyCondition = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		this.precipatation = "Precipitation: "+temp.format(precip) + "%";
 		this.windSpeed = "Wind: "+temp.format(Wind.getDouble("speed") * 3.6) +windSpeedText;
@@ -82,6 +84,8 @@ public class LocalWeather {
 		this.minTemp = "Low: " + temp.format(Main.getDouble("temp_min")) + "\u00b0";
 		this.maxTemp = "High: " + temp.format(Main.getDouble("temp_max")) + "\u00b0";
 		this.weatherID =  Weather.getInt("id");
+		this.city = info.getString("name");
+		this.country = sys.getString("country");
 		
 		Location.GetTime(sys.getInt("sunrise"));
 		this.sunrise = "Sunrise: " + Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
@@ -306,6 +310,31 @@ public class LocalWeather {
 	 */
 	public void setSunset(String sunset) {
 		this.sunset = sunset;
+	}
+	
+	/**
+	 * Sets an updated city
+	 * @param city the city selected
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	/**
+	 * Sets an updated country
+	 * @param country the country of the city
+	 */
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {		
+		return this.city;
+	}
+
+	public String getCountry() {
+		// TODO Auto-generated method stub
+		return this.country;
 	}
 
 	

@@ -45,7 +45,7 @@ public class GUI implements ActionListener{
 	public static Font font;
 	private SavedData s;
 
-	private boolean shorttermState = true;
+	private boolean shorttermState = true, refresh = false;
 	private JButton shorttermButton, longtermButton, celsiusButton, fahrenheitButton;
 	private JPanel shadowPanel;
 	private JLabel backgroundImageLabel = new JLabel();
@@ -624,7 +624,7 @@ public class GUI implements ActionListener{
 		CURRENT_LOCATION = locationText;
 		Location oldLoc = loc;
 		
-		if (!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits()!=units)
+		if ((!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits()!=units) || refresh==true)
 		try {		
 
 			Location userLoc = new Location(units, locationText);	
@@ -633,6 +633,8 @@ public class GUI implements ActionListener{
 			addLTF(userLoc);
 			addSTF(userLoc);
 			addLW(userLoc);  
+			userLoc.setLocation(userLoc.getLW().getCity() + ", " + userLoc.getLW().getCountry());
+			field.setText(userLoc.getLocation());		
 			
 			if(shorttermState == true)
 				changeToShortTerm();
@@ -655,7 +657,7 @@ public class GUI implements ActionListener{
 			Serialize s = new Serialize(locationText, units); //Serialize the new location
 			loc = userLoc;		
 		} 
-		catch (NullPointerException e) {			
+		catch (NullPointerException e) {
 			field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));	
 		}
 	}
