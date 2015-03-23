@@ -58,8 +58,8 @@ public class DayPanel extends JPanel {
 		
 		// Add the label for the weather icon
 		JLabel label = new JLabel(wI.getWeatherIcon());	
-		MakeFont createFont = new MakeFont("Sky");
-		Font newFont = createFont.create().deriveFont((float)30);
+		MakeFont createFont = new MakeFont("Owfont");
+		Font newFont = createFont.getFont().deriveFont((float)30);
 		label.setFont(newFont);
 		label.setMaximumSize(new Dimension(70,70));
 		
@@ -85,7 +85,7 @@ public class DayPanel extends JPanel {
     	addLabel(day.getSkyCondition(),12,0,0, "Light");
     	
     	// Add a precipitation label
-		addLabel(day.getPrecipitation(),20,0,15, "Medium");
+		addLabel(day.getPrecipitation(),12,0,15, "Medium");
 		
 		// Add a maximum temperature label
 		addLabel(day.getMaxTemp(),12,0,15, "Medium");
@@ -98,14 +98,14 @@ public class DayPanel extends JPanel {
 	 * Adds a label to the JPanel, and sets its display attributes
 	 * @param text the weather information to add to the label
 	 */
-	private void addLabel(String text, int size, int gapX,  int gapY, String style) {
+	private void addLabel(String text, int size, int gapX, int gapY, String style) {
 		
 		// Create a new JLabel object to apply properties to
 		JLabel label = new JLabel(text);	
 		
 		// Set the font according to the parameter 'style'
 		MakeFont createFont = new MakeFont(style);
-		Font newFont = createFont.create().deriveFont((float)size);
+		Font newFont = createFont.getFont().deriveFont((float)size);
 		label.setFont(newFont);
 		
 		// Set the color of the text to white

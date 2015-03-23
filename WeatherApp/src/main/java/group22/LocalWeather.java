@@ -38,7 +38,7 @@ public class LocalWeather {
 	 * @throws Exception
 	 */
 	public LocalWeather(JSONObject info) throws Exception {
-
+	
 		DecimalFormat temp = new DecimalFormat("#");
 		Date now = new Date();
 		
@@ -95,6 +95,7 @@ public class LocalWeather {
 		
 		Location.NewDay = false;
 	}
+	
 	
 	/**
 	 * Gets the time when the current weather was last updated by the weather service

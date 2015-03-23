@@ -55,8 +55,8 @@ public class ThreeHourPanel extends JPanel {
     	
 		// Add the label for the weather icon
 		JLabel label = new JLabel(wI.getWeatherIcon());	
-		MakeFont createFont = new MakeFont("Sky");
-		Font newFont = createFont.create().deriveFont((float)30);
+		MakeFont createFont = new MakeFont("Owfont");
+		Font newFont = createFont.getFont().deriveFont((float)30);
 		label.setFont(newFont);
 		label.setMaximumSize(new Dimension(70,70));
 		
@@ -82,7 +82,7 @@ public class ThreeHourPanel extends JPanel {
 		addLabel(period.getSkyCondition(), 12, 0, 5,"Light");
 		
 		// Add a precipitation label
-    	addLabel(period.getPrecipitation(),20,0,20, "Medium");
+    	addLabel(period.getPrecipitation(),12,0,20, "Medium");
 
     	
     	this.validate();
@@ -102,7 +102,7 @@ public class ThreeHourPanel extends JPanel {
 		MakeFont createFont = new MakeFont(style);
 		
 		// Set the font according to the parameter 'style'
-		Font newFont = createFont.create().deriveFont((float)size);
+		Font newFont = createFont.getFont().deriveFont((float)size);
     	label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		label.setFont(newFont);
 		

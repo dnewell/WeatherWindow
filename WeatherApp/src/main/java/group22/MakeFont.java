@@ -3,20 +3,11 @@ import java.io.InputStream;
 
 public class MakeFont {
 
-	private String style;
-	private InputStream fontIS;
+	private Font newFont;
 	
 	public MakeFont(String style){
-		this.style = style;
-	}
-	
-	/**
-	 * Creates a new font using the global variable 'style'
-	 * @return a new font 
-	 */
-	public Font create(){
 		
-		Font newFont = null;
+		InputStream fontIS;
 		
 		// Check what 'style' is set and choose the appropriate font 
 		if (style == "Light")
@@ -27,9 +18,11 @@ public class MakeFont {
 			fontIS = this.getClass().getResourceAsStream("HelveticaNeue-Bold.otf");
 		else if (style == "UltraLight")
 			fontIS = this.getClass().getResourceAsStream("HelveticaNeue-UltraLight.otf");
-		else if (style == "Sky")
+		else if (style == "Owfont")
 			fontIS = this.getClass().getResourceAsStream("owfont-regular.otf");
-		else if (style == "Awesome")
+		else if (style == "WeatherIcons")
+			fontIS = this.getClass().getResourceAsStream("WeatherIcons-Regular.otf");
+		else if (style == "FontAwesome")
 			fontIS = this.getClass().getResourceAsStream("FontAwesome.otf");
 		else 
 			fontIS = this.getClass().getResourceAsStream("HelveticaNeue-UltraLight.otf");
@@ -41,7 +34,14 @@ public class MakeFont {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-						
+		
+	}
+	
+	/**
+	 * Creates a new font using the global variable 'style'
+	 * @return a new font 
+	 */
+	public Font getFont(){
 		return newFont;
 	}
 	
