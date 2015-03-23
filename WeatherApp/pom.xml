@@ -25,12 +25,39 @@
           <include>HelveticaNeue-UltraLight.otf</include>
           <include>HelveticaNeue-UltraLight.otf</include>
           <include>owfont-regular.otf</include>
+	  <include>WeatherIcons-Regular.otf</include>
           <include>FontAwesome.otf.otf</include>
-		<include>Clear_Sky_750x630.png</include>
-		<include>Sunny_750x630.png</include>
-		<include>Sunny_Clouds_750x630.png</include>
-		<include>Rain_750x630.png</include>
-		<include>Clear_Sky_750x630.png</include>
+		<include>BrokenCloudsDay.png</include>
+		<include>ClearSkyDay.png</include>
+		<include>ColdDay.png</include>
+		<include>Dust.png</include>
+		<include>DustWhirlwind.png</include>
+		<include>FewCloudsDay.png</include>
+		<include>Fog.png</include>
+		<include>FreezingRainDay.png</include>
+		<include>Hail.png</include>
+		<include>Haze.png</include>
+		<include>HeavyRainDay.png</include>
+		<include>HeavyThunderstormDay.png</include>
+		<include>HotDay.png</include>
+		<include>HurricaneDay.png</include>
+		<include>LightRainDay.png</include>
+		<include>LightSnowDay.png</include>
+		<include>LightThunderstormDay.png</include>
+		<include>MistDay.png</include>
+		<include>OvercastDay.png</include>
+		<include>RainDay.png</include>
+		<include>Sandstorm.png</include>
+		<include>ScatteredCloudsDay.png</include>
+		<include>Sleet.png</include>
+		<include>Smoke.png</include>
+		<include>SnowDay.png</include>
+		<include>ThunderstormDay.png</include>
+		<include>Tornado.png</include>
+		<include>TropicalStormDay.png</include>
+		<include>VolcanicAsh.png</include>
+		<include>WindSquallDay.png</include>
+		<include>WindyDay.png</include>		
 		<include>mars.png</include>
         </includes>
       </resource>

@@ -35,6 +35,7 @@ public class LocalWeatherPanel extends JPanel {
 		 * @throws Exception if an error occurs
 		 */
 		private void initPanel(Location loc) throws Exception {
+			
 			this.setLayout(null);
 			this.setOpaque(false);
 			this.setBackground(new Color(255,255,255,100));
@@ -42,6 +43,7 @@ public class LocalWeatherPanel extends JPanel {
 	  
 	    	LocalWeather lw = null;
 	    	MarsWeather mw = null;
+	    	
 	    	
 	    	if (!loc.getLocation().toLowerCase().equals("mars"))
 	    		lw = loc.getLW();
@@ -90,25 +92,53 @@ public class LocalWeatherPanel extends JPanel {
 			JLabel humidityTitleLabel = new JLabel();
 			JLabel airpressureInfoLabel = new JLabel();
 			JLabel windInfoLabel = new JLabel();
+			JLabel sunriseIconLabel = new JLabel();
+			JLabel sunsetIconLabel = new JLabel();
+			JLabel humidityIconLabel = new JLabel();
+			JLabel airpressureIconLabel = new JLabel();
+			JLabel windIconLabel = new JLabel();
 			
 			if (!loc.getLocation().toLowerCase().equals("mars"))
 			{
+				
+				
+				
 				addLabel(timeInfoLabel, lw.getUserTime(), 25, 0, 180, 20, "Light", 15);	    	
 				addLabel(lastupdateInfoLabel, lw.getUpdateTime(), 205, 0, 225, 20, "Light", 15);			
 				addLabel(currenttemperatureInfoLabel, lw.getTemperature(), -45, 20, 400, 150, "Light", 145);			
-				addLabel(skyconditionInfoLabel, lw.getSkyCondition(), 315, 173, 150, 25, "Light", 20);			
+				addLabel(skyconditionInfoLabel, lw.getSkyCondition(), 307, 173, 150, 25, "Light", 15);			
 				addLabel(mintempInfoLabel, lw.getMinTemp(), 35, 170, 125, 25, "Light", 20);			
 				addLabel(maxtempInfoLabel, lw.getMaxTemp(), 170, 170, 125, 25, "Light", 20);			
+				
+				addLabel(sunriseIconLabel, new WeatherIcon("f051").getWeatherIcon(), 500, 33, 25, 25, "WeatherIcons", 10);
+				sunriseIconLabel.setHorizontalAlignment(JLabel.CENTER);
+				sunriseIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 				addLabel(sunriseInfoLabel, lw.getSunrise(), 535, 35, 200, 25, "Light", 18);
+				
+				addLabel(sunsetIconLabel, new WeatherIcon("f052").getWeatherIcon(), 500, 68, 25, 25, "WeatherIcons", 10);
+				sunsetIconLabel.setHorizontalAlignment(JLabel.CENTER);
+				sunsetIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 				addLabel(sunsetTitleLabel, lw.getSunset(), 535, 70, 200, 25, "Light", 18);			
+				
+				addLabel(humidityIconLabel, new WeatherIcon("f04e").getWeatherIcon(), 500, 107, 25, 25, "WeatherIcons", 14);
+				humidityIconLabel.setHorizontalAlignment(JLabel.CENTER);
+				humidityIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 				addLabel(humidityTitleLabel, lw.getHumidity(), 535, 105, 200, 25, "Light", 18);			
+				
+				addLabel(airpressureIconLabel, new WeatherIcon("f053").getWeatherIcon(), 500, 138, 25, 25, "WeatherIcons", 10);
+				airpressureIconLabel.setHorizontalAlignment(JLabel.CENTER);
+				airpressureIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 				addLabel(airpressureInfoLabel, lw.getPressure(), 535, 140, 200, 25, "Light", 18);			
+				
+				addLabel(windIconLabel, new WeatherIcon("f050").getWeatherIcon(), 500, 172, 25, 25, "WeatherIcons", 10);
+				windIconLabel.setHorizontalAlignment(JLabel.CENTER);
+				windIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 				addLabel(windInfoLabel, lw.getWindSpeed()+" "+lw.getWindDirection(), 535, 174, 175, 25, "Light", 18);
 				
 				JLabel skyconditionImageLabel = new JLabel();
 				skyconditionImageLabel.setHorizontalAlignment(JLabel.CENTER);
 				skyconditionImageLabel.setVerticalAlignment(JLabel.BOTTOM);
-				addLabel(skyconditionImageLabel, wI.getWeatherIcon(), 305, 50, 150, 150, "Sky", 60);
+				addLabel(skyconditionImageLabel, wI.getWeatherIcon(), 305, 35, 150, 150, "Owfont", 60);
 			}	
 			else 
 			{
@@ -134,7 +164,7 @@ public class LocalWeatherPanel extends JPanel {
 		 * @param text the weather information for the label
 		 */
 		private void addLabel(JLabel label, String text, int x, int y, int width, int height, String style, int fontSize){
-			Font newFont = new MakeFont(style).create();
+			Font newFont = new MakeFont(style).getFont();
 			label.setText(text);
 			label.setFont(newFont.deriveFont((float)fontSize));
 			label.setForeground(Color.WHITE);

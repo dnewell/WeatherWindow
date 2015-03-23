@@ -36,6 +36,15 @@ public class Day {
 		
 		SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd");
 		DecimalFormat temp = new DecimalFormat("#");
+		DecimalFormat prep = new DecimalFormat("#.#");
+		
+		String measurement = "inches";
+		double prepMultiplier = 0.0393701;
+		
+		if(Location.getUnits() == 0){
+			measurement = "mm";
+			prepMultiplier = 1.0;
+		}
 		
 		Double precip = 0.0;
 		//get needed JSON Objects and timestamp
@@ -49,15 +58,15 @@ public class Day {
 		
 		//Get precipitation levels if any
 		if (list.has("snow"))
-	    	precip += list.getDouble("snow");
+	    	precip += list.getDouble("snow")*prepMultiplier;
 	    if (list.has("rain"))
-	    	precip += list.getDouble("rain");
+	    	precip += list.getDouble("rain")*prepMultiplier;
 		    
 	    this.dayOfWeek = format.format(Location.cal.getTime());
 	    Location.cal.add(Calendar.DATE, 1);
 		this.temperature = temp.format(Temp.getDouble("day")) + "\u00b0";
 		this.skyCondition = weather;
-		this.precipitation = temp.format(precip) + "mm";
+		this.precipitation = prep.format(precip)+" "+measurement;
 		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0";
 		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0";
 		this.weatherID = Weather.getInt("id");
