@@ -19,7 +19,7 @@ public class WeatherIcon {
 	 * @param weatherCode a integer id value from OWM of the current sky condition
 	 */
 	public WeatherIcon(int weatherCode) {
-	
+		
 		switch (weatherCode) {
 
 		// THUNDERSTORM
@@ -472,6 +472,7 @@ public class WeatherIcon {
 		// Creates an error icon image
 		case 9999:
 			content = "f071";
+			this.weatherCode = 9999;
 			break;
 		}
 		

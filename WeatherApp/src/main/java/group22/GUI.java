@@ -195,6 +195,9 @@ public class GUI implements ActionListener {
 		refreshButton.setContentAreaFilled(false);
 		refreshButton.setBorderPainted(false);
 
+		// Change the cursor of the mouse to a hand to represent a clickable button
+		refreshButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		// Define the actions of the button
 		refreshButton.addActionListener(new ActionListener() {
 
@@ -239,7 +242,10 @@ public class GUI implements ActionListener {
 		// Make a new font for the button
 		MakeFont makenewFont = new MakeFont("Bold");
 		celsiusButton.setFont(makenewFont.getFont().deriveFont(40f));
-
+		
+		// Change the cursor of the mouse to a hand to represent a clickable button
+		celsiusButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		// Define the actions of the button
 		celsiusButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -251,7 +257,7 @@ public class GUI implements ActionListener {
 		celsiusButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		celsiusButton.setForeground(Color.WHITE);
 		celsiusButton.setBounds(600, 35, 90, 50);
-		celsiusButton.setOpaque(true);
+		celsiusButton.setOpaque(false);
 		celsiusButton.setContentAreaFilled(false);
 		celsiusButton.setBorderPainted(false);
 		mainWindow.getContentPane().add(celsiusButton);
@@ -305,7 +311,8 @@ public class GUI implements ActionListener {
 		MakeFont makenewFont = new MakeFont("Bold");
 		fahrenheitButton.setFont(makenewFont.getFont().deriveFont(40f));
 		
-		fahrenheitButton.setRolloverEnabled(true);
+		// Change the cursor of the mouse to a hand to represent a clickable button
+		fahrenheitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		// Define the actions of the button
 		fahrenheitButton.addActionListener(new ActionListener() {
@@ -317,8 +324,7 @@ public class GUI implements ActionListener {
 		// Set other properties of the button and its text
 		fahrenheitButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		fahrenheitButton.setForeground(Color.WHITE);
-		fahrenheitButton.setBounds(660, 34, 85, 50);
-		fahrenheitButton.setBackground(Color.BLACK);
+		fahrenheitButton.setBounds(660, 34, 90, 50);
 		fahrenheitButton.setOpaque(false);
 		fahrenheitButton.setContentAreaFilled(false);
 		fahrenheitButton.setBorderPainted(false);
@@ -379,6 +385,9 @@ public class GUI implements ActionListener {
 		shorttermButton.setOpaque(false);
 		shorttermButton.setContentAreaFilled(false);
 		shorttermButton.setBorderPainted(false);
+		
+		// Change the cursor of the mouse to a hand to represent a clickable button
+		shorttermButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		// Adds the button the GUI
 		mainWindow.getContentPane().add(shorttermButton);
@@ -441,6 +450,9 @@ public class GUI implements ActionListener {
 		longtermButton.setBorderPainted(false);
 		longtermButton.setBounds(130, 300, 150, 30);
 		
+		// Change the cursor of the mouse to a hand to represent a clickable button
+		longtermButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				
 		// Adds the button the GUI
 		mainWindow.getContentPane().add(longtermButton);
 		

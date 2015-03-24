@@ -76,6 +76,9 @@ public class Day {
 		
 			// If OpenWeatherMap does not have enough weather information apply the below info
 		} catch (JSONException e) {
+			
+			this.dayOfWeek = format.format(Location.cal.getTime());
+		    Location.cal.add(Calendar.DATE, 1);
 			this.temperature = "N/A";
 			this.skyCondition = "N/A";
 			this.precipitation = "N/A";
