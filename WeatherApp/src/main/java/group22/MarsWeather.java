@@ -36,12 +36,12 @@ public class MarsWeather {
 		   //TIME
 		   Date now = new Date();
 		   
-		 //TEMPERATURE
+		   //TEMPERATURE
 		   int maxTemp = data.getInt("max_temp");
 		   int minTemp = data.getInt("min_temp");
 		   int avgTemp = (maxTemp+minTemp)/2;
 		   
-		 //TEMPERATURE
+		   //TEMPERATURE
 		   int maxFTemp = data.getInt("max_temp_fahrenheit");
 		   int minFTemp = data.getInt("min_temp_fahrenheit");
 		   int avgFTemp = (maxFTemp+minFTemp)/2;
