@@ -43,14 +43,14 @@ public class LocalWeatherPanel extends JPanel {
 	    	// Access the MarsWeather weather information
 	    	MarsWeather mw = null;
 	    	
-	    	// Access the WeatherIcon information
-	    	WeatherIcon wI = new WeatherIcon(lw.getWeatherID());
-	    	
 	    	// Check if the panel will display local or mars weather information
 	    	if (!loc.getLocation().toLowerCase().equals("mars"))
 	    		lw = loc.getLW();
 	    	else 
 	    		mw = loc.getMD();
+	    	
+	    	// Access the WeatherIcon information
+	    	WeatherIcon wI = new WeatherIcon(lw.getWeatherID());
 	    	
 		    // Create the JLabels necessary to display weather information	
 	    	JLabel timeInfoLabel = new JLabel();
