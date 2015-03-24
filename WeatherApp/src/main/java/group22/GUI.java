@@ -28,48 +28,55 @@ import java.net.URL;
  */
 public class GUI implements ActionListener {
 
-	private static final String APPLICATION_NAME = "WeatherApp";
+	// Set the application name
+	private static final String APPLICATION_NAME = "Weather Window";
+	
+	// Data from data.ser file
 	private static String CURRENT_LOCATION = "London ON";
 	public int CURRENT_UNITS = 1;
+	
+	// Main program window
 	private JFrame mainWindow;
-	private JTextField field;
-
+	
+	// Panels that reside within the main frame
+	private JPanel shadowPanel;
 	private LongTermPanel ltPanel;
 	private ShortTermPanel stPanel;
 	private LocalWeatherPanel lwPanel;
-	private Location loc;
-	public static Font font;
-	private SavedData s;
+	
+	// Swing elements added to the main frame
+	private JTextField field;
+	private JButton shorttermButton, longtermButton, celsiusButton, fahrenheitButton, refreshButton;
+	private JLabel backgroundImageLabel, greyLineLabelTop,  greyLineLabelBottom;
 
+	// Other elements needed for running/managing the GUI
+	private Location loc;
+	private SavedData savedData;
 	private boolean shorttermState = true, refresh = false;
-	private JButton shorttermButton, longtermButton, celsiusButton,
-			fahrenheitButton, refreshButton;
-	private JPanel shadowPanel;
-	private JLabel backgroundImageLabel = new JLabel();
-	private JLabel greyLineLabelTop = new JLabel();
-	private JLabel greyLineLabelBottom = new JLabel();
 
 	/**
-	 * Constructs JFrame which contains the GUI, and sets the default location.
+	 * Constructs JFrame which contains the GUI, and sets the default location
 	 */
 	public GUI() {
 
 		// Deserialize data and set location to London
 		Deserialize de_ser = new Deserialize();
-		s = de_ser.getData();
-		if (!s.location.equals("null")) {
-			CURRENT_LOCATION = s.location;
-			CURRENT_UNITS = s.units;
+		savedData = de_ser.getData();
+		if (!savedData.location.equals("null")) {
+			CURRENT_LOCATION = savedData.location;
+			CURRENT_UNITS = savedData.units;
 		}
 
+		// Create the main window for the GUI, and apply it's name
 		mainWindow = new JFrame(APPLICATION_NAME);
 		try {
+			// Get initial location based on info from the data.ser
 			loc = new Location(CURRENT_UNITS, CURRENT_LOCATION);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		setFont();
+		// Initialize the GUI
 		this.initGUI();
 
 	}
@@ -81,6 +88,7 @@ public class GUI implements ActionListener {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// Build the elements of the GUI
 					buildHierarchy();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -92,9 +100,7 @@ public class GUI implements ActionListener {
 	/**
 	 * Formats and makes visible the main program JFrame, after adding all child
 	 * components to its hierarchy
-	 * 
-	 * @throws Exception
-	 *             if an error occurs
+	 * @throws Exception if an error occurs
 	 */
 	public void buildHierarchy() throws Exception {
 
@@ -112,6 +118,7 @@ public class GUI implements ActionListener {
 		// Add a search field to the top of the application
 		addLocationField();
 
+		// While there is a valid location, create the GUI 
 		if (loc != null) {
 
 			if (!loc.getLocation().toLowerCase().equals("mars")) {
@@ -125,6 +132,8 @@ public class GUI implements ActionListener {
 			// Add the current forecast to the frame
 			addLW(loc);
 
+			// Add a refresh button that updates the weather information for
+			// the local, short-term, and long-term views
 			addRefreshButton();
 
 			// Add the Celsius and Fahrenheit buttons to the frame
@@ -148,11 +157,15 @@ public class GUI implements ActionListener {
 				else
 					changeToLongTerm();
 
-			// Add the ShadowPanel to the background
+			// Add grey divisional lines to the bottom of the GUI 
 			addGreyLines();
+			
+			// Add a ShadowPanel to the background
 			addShadowPanel();
 
+			// Check if Mars is the searched location
 			if (loc.getLocation().toLowerCase().equals("mars")) {
+				// If so hide the short-term and long-term panels
 				shorttermButton.setVisible(false);
 				longtermButton.setVisible(false);
 			}
@@ -163,14 +176,18 @@ public class GUI implements ActionListener {
 		mainWindow.setVisible(true);
 	}
 
+	/**
+	 * Adds a JButton to the GUI that updates the weather information
+	 */
 	private void addRefreshButton() {
 
+		// Remove the weather button if it already exists
 		if (refreshButton != null)
 			mainWindow.remove(refreshButton);
 
+		// Create and apply the properties for the refresh button
 		refreshButton = new JButton();
-		refreshButton.setFont(new MakeFont("WeatherIcons").getFont()
-				.deriveFont(22f));
+		refreshButton.setFont(new MakeFont("WeatherIcons").getFont().deriveFont(22f));
 		refreshButton.setText(new WeatherIcon("f03e").getWeatherIcon());
 		refreshButton.setForeground(Color.WHITE);
 		refreshButton.setHorizontalAlignment(JButton.CENTER);
@@ -183,6 +200,7 @@ public class GUI implements ActionListener {
 		// Define the actions of the button
 		refreshButton.addActionListener(new ActionListener() {
 
+			// Set the action code when the refresh button is pressed
 			public void actionPerformed(ActionEvent e) {
 
 				try {
@@ -194,13 +212,14 @@ public class GUI implements ActionListener {
 			}
 		});
 
+		// Add the refresh button to the GUI
 		mainWindow.getContentPane().add(refreshButton);
 		refreshGUI();
 
 	}
 
 	/**
-	 * Creates a button to convert the weather information to Celsius
+	 * Creates a JButton to convert the weather information to Celsius
 	 */
 	private void addCelsiusButton() {
 
@@ -260,7 +279,7 @@ public class GUI implements ActionListener {
 	}
 
 	/**
-	 * Creates a button to convert the weather information to Fahrenheit
+	 * Creates a JButton to convert the weather information to Fahrenheit
 	 */
 	private void addFahrenheitButton() {
 
@@ -319,30 +338,44 @@ public class GUI implements ActionListener {
 
 	}
 
+	/**
+	 * Creates a JButton that changes to the Short-term weather panel
+	 */
 	private void addShortTermButton() {
 
+		// Create a new JButton
 		shorttermButton = new JButton("Short-term");
+		
+		// Apply the properties of the new button
 		MakeFont makenewFont = new MakeFont("Light");
 		shorttermButton.setFont(makenewFont.getFont().deriveFont(18f));
-		shorttermButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				changeToShortTerm();
-			}
-		});
-
 		shorttermButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		shorttermButton.setForeground(Color.WHITE);
-
 		shorttermButton.setBounds(15, 300, 150, 30);
 		shorttermButton.setBackground(Color.BLACK);
 		shorttermButton.setOpaque(false);
 		shorttermButton.setContentAreaFilled(false);
 		shorttermButton.setBorderPainted(false);
+		
+		// Adds the button the GUI
 		mainWindow.getContentPane().add(shorttermButton);
+		
+		// Logic code that changes to the short-term panel when pressed
+		shorttermButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeToShortTerm();
+			}
+		});
+		
+		// Refresh the GUI with the button added
 		refreshGUI();
 
 	}
 
+	/**
+	 * Applies changes to the formating of the Short-term and Long-term
+	 * JButton text when the Short-term button is pressed
+	 */
 	private void changeToShortTerm() {
 
 		longtermButton.setForeground(new Color(215, 215, 215, 255));
@@ -357,24 +390,22 @@ public class GUI implements ActionListener {
 		ltPanel.setVisible(false);
 		stPanel.setVisible(true);
 
+		// Refresh the GUI
 		refreshGUI();
 
 	}
 
+	/**
+	 * Creates a JButton that changes to the Long-term weather panel
+	 */
 	private void addLongTermButton() {
 
+		// Create a new JButton
 		longtermButton = new JButton("Long-term");
+		
+		// Apply the properties of the new button
 		MakeFont makenewFont = new MakeFont("Light");
 		longtermButton.setFont(makenewFont.getFont().deriveFont(18f));
-
-		longtermButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				changeToLongTerm();
-
-			}
-		});
-
 		longtermButton.setVerticalAlignment(SwingConstants.BOTTOM);
 		longtermButton.setForeground(Color.WHITE);
 		longtermButton.setBackground(Color.BLACK);
@@ -382,11 +413,28 @@ public class GUI implements ActionListener {
 		longtermButton.setContentAreaFilled(false);
 		longtermButton.setBorderPainted(false);
 		longtermButton.setBounds(130, 300, 150, 30);
+		
+		// Adds the button the GUI
 		mainWindow.getContentPane().add(longtermButton);
+		
+		// Logic code that changes to the short-term panel when pressed
+		longtermButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				changeToLongTerm();
+
+			}
+		});
+		
+		// Refresh the GUI with the button added
 		refreshGUI();
 
 	}
 
+	/**
+	 * Applies changes to the formating of the Long-term and Short-term
+	 * JButton text when the Long-term button is pressed
+	 */
 	private void changeToLongTerm() {
 
 		shorttermButton.setForeground(new Color(215, 215, 215, 255));
@@ -400,20 +448,21 @@ public class GUI implements ActionListener {
 
 		stPanel.setVisible(false);
 		ltPanel.setVisible(true);
+		
+		// Refresh the GUI
 		refreshGUI();
 
 	}
 
 	/**
 	 * Changes the background image to suit the weather of that location
-	 * 
-	 * @param loc
-	 *            the location (i.e city or Mars)
+	 * @param loc the location (i.e city or Mars)
 	 */
 	private void setBackgroundImage(Location loc) {
 
-		String imageName = "";
-		String skyCondition = "";
+		String imageName, skyCondition = "";
+		
+		// Set a background image for the Mars JPanel
 		if (!loc.getLocation().toLowerCase().equals("mars"))
 			skyCondition = loc.getLW().getSkyCondition().toLowerCase();
 		else
@@ -426,6 +475,7 @@ public class GUI implements ActionListener {
 		URL url = getClass().getResource(wI.getWeatherBackground());
 
 		// Set the size of the JLabel and apply the image
+		backgroundImageLabel = new JLabel();
 		backgroundImageLabel.setSize(750, 630);
 		backgroundImageLabel.setIcon(new ImageIcon(url));
 
@@ -445,8 +495,7 @@ public class GUI implements ActionListener {
 		field = new JTextField(15);
 
 		// Set properties for the text field
-		field.setText(loc.getLocation().substring(0, 1).toUpperCase()
-				+ loc.getLocation().substring(1));
+		field.setText(loc.getLocation().substring(0, 1).toUpperCase()+ loc.getLocation().substring(1));
 		field.addActionListener(this);
 		field.setLocation(30, 30);
 		field.setSize(500, 50);
@@ -456,8 +505,7 @@ public class GUI implements ActionListener {
 		field.setForeground(Color.WHITE);
 
 		// Set the properties for the text field border
-		Border border = BorderFactory.createLineBorder(new Color(255, 255, 255,
-				40));
+		Border border = BorderFactory.createLineBorder(new Color(255, 255, 255, 40));
 		field.setBorder(border);
 		field.setCaretColor(new Color(255, 255, 255, 140));
 		field.setVisible(true);
@@ -476,33 +524,50 @@ public class GUI implements ActionListener {
 
 	/**
 	 * Validates and refreshGUIes the main JFrame hierarchy
-	 * 
 	 * @throws Exception
 	 */
 	private void refresh() throws Exception {
 		updateGUI(CURRENT_UNITS, CURRENT_LOCATION);
 	}
 
+	/**
+	 * Adds two JLabels that form grey divisional lines at the bottom of the GUI
+	 */
 	private void addGreyLines() {
 
+		// Create a new JLabel
+		greyLineLabelTop = new JLabel();
+		
+		// Check if the top grey label exists; if so remove it
 		if (greyLineLabelTop != null)
 			mainWindow.remove(greyLineLabelTop);
 
+		// Set properties for the top grey line
 		greyLineLabelTop.setBackground(new Color(245, 245, 245, 125));
 		greyLineLabelTop.setOpaque(true);
 		greyLineLabelTop.setBounds(15, 332, 720, 2);
 		greyLineLabelTop.setVisible(true);
+		
+		// Add the top grey line to the GUI
 		mainWindow.getContentPane().add(greyLineLabelTop);
 
+		// Create a new JLabel
+		greyLineLabelBottom = new JLabel();
+		
+		// Check if the bottom grey label exists; if so remove it
 		if (greyLineLabelBottom != null)
 			mainWindow.remove(greyLineLabelBottom);
 
+		// Set properties for the bottom grey line
 		greyLineLabelBottom.setBackground(new Color(245, 245, 245, 125));
 		greyLineLabelBottom.setOpaque(true);
 		greyLineLabelBottom.setBounds(15, 590, 720, 2);
 		greyLineLabelBottom.setVisible(true);
+		
+		// Add the bottom grey line to the GUI
 		mainWindow.getContentPane().add(greyLineLabelBottom);
 
+		// Refresh the GUI
 		refreshGUI();
 
 	}
@@ -533,11 +598,8 @@ public class GUI implements ActionListener {
 
 	/**
 	 * Adds the local weather panel to the main JFrame hierarchy
-	 * 
-	 * @param loc
-	 *            the location
-	 * @throws Exception
-	 *             if an error occurs
+	 * @param loc the location
+	 * @throws Exception if an error occurs
 	 */
 	private void addLW(Location loc) throws Exception {
 
@@ -557,10 +619,8 @@ public class GUI implements ActionListener {
 
 	/**
 	 * Adds the short term weather panel to the main JFrame hierarchy
-	 * 
-	 * @param loc
-	 *            the location
-	 * @throws Exception
+	 * @param loc the location
+	 * @throws Exception if an error occurs
 	 */
 	private void addSTF(Location loc) throws Exception {
 
@@ -583,10 +643,8 @@ public class GUI implements ActionListener {
 	/**
 	 * Adds the DayPanel (which organizes 5 DayPanel objects) to the main JFrame
 	 * hierarchy
-	 * 
-	 * @param loc
-	 *            the location
-	 * @throws Exception
+	 * @param loc the location
+	 * @throws Exception if an error occurs
 	 */
 	private void addLTF(Location loc) throws Exception {
 
@@ -608,24 +666,7 @@ public class GUI implements ActionListener {
 	}
 
 	/**
-	 * Sets the GUI.font global variable. TODO it may be better to register the
-	 * font with the Graphics Environment
-	 */
-	private void setFont() {
-		// File fontFile;
-		InputStream is = this.getClass().getResourceAsStream(
-				"HelveticaNeue-UltraLight.otf");
-		try {
-			font = Font.createFont(Font.TRUETYPE_FONT, is);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Handles the ActionEvents for the location JTextField field object
-	 * 
 	 * @Override
 	 */
 	public void actionPerformed(ActionEvent e) {
@@ -644,24 +685,24 @@ public class GUI implements ActionListener {
 
 	/**
 	 * Handles GUI update on location change
-	 * 
-	 * @param locationText
-	 *            the location (i.e a city or Mars)
-	 * @throws Exception
-	 *             invalid location
+	 * @param locationText the location (i.e a city or Mars)
+	 * @throws Exception invalid location
 	 */
 	private void updateGUI(int units, String locationText) throws Exception {
 
+		// Sets the current weather metric and location
 		CURRENT_UNITS = units;
 		CURRENT_LOCATION = locationText;
+		
+		// Applies the current location
 		Location oldLoc = loc;
 
+		// Only update the GUI if 
 		if ((!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits() != units)|| refresh == true){
 			try {
 
 				try {
-					mainWindow.setCursor(Cursor
-							.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					mainWindow.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
 					Location userLoc = new Location(units, locationText);
 
@@ -689,19 +730,15 @@ public class GUI implements ActionListener {
 						shorttermButton.setVisible(true);
 						longtermButton.setVisible(true);
 					}
-
-					Serialize s = new Serialize(locationText, units); // Serialize
-																		// the
-																		// new
-																		// location
+					
+					
 					loc = userLoc;
 				} finally {
 					mainWindow.setCursor(Cursor.getDefaultCursor());
 				}
+				
 			} catch (NullPointerException e) {
-				field.setText(oldLoc.getLocation().substring(0, 1)
-						.toUpperCase()
-						+ oldLoc.getLocation().substring(1));
+				field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));
 			}
 			refresh = false;
 		}

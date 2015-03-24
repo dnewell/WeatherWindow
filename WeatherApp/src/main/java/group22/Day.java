@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 public class Day {
 	
+	// Global Attributes
 	private String dayOfWeek;
 	private String temperature;
 	private String skyCondition;
