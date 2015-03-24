@@ -58,7 +58,13 @@ public class DayPanel extends JPanel {
 		
 		// Add the label for the weather icon
 		JLabel label = new JLabel(wI.getWeatherIcon());	
+		
 		MakeFont createFont = new MakeFont("Owfont");
+		
+		if(wI.getWeatherCode() == 9999){
+			createFont = new MakeFont("WeatherIcons");
+		}
+		
 		Font newFont = createFont.getFont().deriveFont((float)30);
 		label.setFont(newFont);
 		label.setMaximumSize(new Dimension(70,70));

@@ -49,28 +49,40 @@ public class Day {
 		
 		Double precip = 0.0;
 		//get needed JSON Objects and timestamp
-		JSONObject list = info.getJSONArray("list").getJSONObject(index);
-		JSONObject Temp = list.getJSONObject("temp");
-		JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
-		Location.GetTime(list.getInt("dt"));
+		JSONObject list;
+		try{
+			list = info.getJSONArray("list").getJSONObject(index);
+			JSONObject Temp = list.getJSONObject("temp");
+			JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
+			Location.GetTime(list.getInt("dt"));
+			
+			//Capitalize first letter of cloud condition
+			String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
+			
+			//Get precipitation levels if any
+			if (list.has("snow"))
+		    	precip += list.getDouble("snow")*prepMultiplier;
+		    if (list.has("rain"))
+		    	precip += list.getDouble("rain")*prepMultiplier;
 		
-		//Capitalize first letter of cloud condition
-		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
+		    this.dayOfWeek = format.format(Location.cal.getTime());
+		    Location.cal.add(Calendar.DATE, 1);
+			this.temperature = temp.format(Temp.getDouble("day")) + "\u00b0";
+			this.skyCondition = weather;
+			this.precipitation = prep.format(precip)+" "+measurement;
+			this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0";
+			this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0";
+			this.weatherID = Weather.getInt("id");
 		
-		//Get precipitation levels if any
-		if (list.has("snow"))
-	    	precip += list.getDouble("snow")*prepMultiplier;
-	    if (list.has("rain"))
-	    	precip += list.getDouble("rain")*prepMultiplier;
-		    
-	    this.dayOfWeek = format.format(Location.cal.getTime());
-	    Location.cal.add(Calendar.DATE, 1);
-		this.temperature = temp.format(Temp.getDouble("day")) + "\u00b0";
-		this.skyCondition = weather;
-		this.precipitation = prep.format(precip)+" "+measurement;
-		this.maxTemp = "High: " + temp.format(Temp.getDouble("max")) + "\u00b0";
-		this.minTemp = "Low: " + temp.format(Temp.getDouble("min")) + "\u00b0";
-		this.weatherID = Weather.getInt("id");
+			// If OpenWeatherMap does not have enough weather information apply the below info
+		} catch (JSONException e) {
+			this.temperature = "N/A";
+			this.skyCondition = "N/A";
+			this.precipitation = "N/A";
+			this.maxTemp = "N/A";
+			this.minTemp = "N/A";
+			this.weatherID = 9999;
+		}
 		
 	}
 

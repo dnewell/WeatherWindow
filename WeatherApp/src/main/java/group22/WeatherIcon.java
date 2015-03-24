@@ -12,6 +12,7 @@ public class WeatherIcon {
 
 	private String weatherBackground;
 	private String content;
+	private int weatherCode;
 
 	/**
 	 * Constructs a WeatherIcon object
@@ -468,6 +469,10 @@ public class WeatherIcon {
 			content = "EE22";
 			break;
 		
+		// Creates an error icon image
+		case 9999:
+			content = "f071";
+			break;
 		}
 		
 	}
@@ -519,6 +524,14 @@ public class WeatherIcon {
 	 */
 	public String getWeatherBackground(){
 		return weatherBackground;
+	}
+	
+	/**
+	 * Get the weather ID passed to the main constructor
+	 * @return a integer representing a icon code
+	 */
+	public int getWeatherCode(){
+		return weatherCode;
 	}
 
 }
