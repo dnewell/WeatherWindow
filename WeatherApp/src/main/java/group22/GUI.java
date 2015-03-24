@@ -697,32 +697,51 @@ public class GUI implements ActionListener {
 		// Applies the current location
 		Location oldLoc = loc;
 
-		// Only update the GUI if 
+		// Conditions for updating the GUI
 		if ((!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits() != units)|| refresh == true){
 			try {
 
 				try {
+					// Show a spinning circle to tell the user the program is doing something
 					mainWindow.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
+					// Get the location
 					Location userLoc = new Location(units, locationText);
 
+					// Set a new background image
 					setBackgroundImage(userLoc);
+					
+					// Update Long-term panel
 					addLTF(userLoc);
+					
+					// Update the Short-term panel
 					addSTF(userLoc);
+					
+					// Update the Local weather panel
 					addLW(userLoc);
-					userLoc.setLocation(userLoc.getLW().getCity() + ", "
-							+ userLoc.getLW().getCountry());
+					
+					// Set the new location
+					userLoc.setLocation(userLoc.getLW().getCity() + ", " + userLoc.getLW().getCountry());
+					
+					// Set the text in the text field to the returned location by the API call
 					field.setText(userLoc.getLocation());
 
+					// Change back to the Short-term panel
 					if (shorttermState == true)
 						changeToShortTerm();
 					else
 						changeToLongTerm();
 
+					// Re-add the refresh button
 					addRefreshButton();
+					
+					// Re-add the grey lines
 					addGreyLines();
+					
+					// Re-add the shadow panel
 					addShadowPanel();
 
+					// Set the visibility if the location is mars
 					if (locationText.toLowerCase().equals("mars")) {
 						shorttermButton.setVisible(false);
 						longtermButton.setVisible(false);
@@ -731,15 +750,19 @@ public class GUI implements ActionListener {
 						longtermButton.setVisible(true);
 					}
 					
-					
 					loc = userLoc;
+					
 				} finally {
+					// End the animation of the loading circle on the mouse cursor
 					mainWindow.setCursor(Cursor.getDefaultCursor());
 				}
 				
+			// Set the text in the text field back to the old location if the new location input is invalid
 			} catch (NullPointerException e) {
 				field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));
 			}
+			
+			// Set refresh back to false
 			refresh = false;
 		}
 	}

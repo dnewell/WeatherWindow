@@ -50,7 +50,7 @@ public class LocalWeather {
 	    JSONObject Wind = info.getJSONObject("wind");
 	    JSONObject Clouds = info.getJSONObject("clouds");
 	    
-	    Double precip=0.00;
+	    Double precip = 0.00;
 
 	    Location.GetTime(info.getInt("dt"));	  
 	    
@@ -208,6 +208,22 @@ public class LocalWeather {
 	public int getWeatherID(){
 		return weatherID;
 	}
+
+	/**
+	 * Gets the current country
+	 * @return a string representing the current country
+	 */
+	public String getCountry() {
+		return this.country;
+	}
+
+	/**
+	 * Gets the current city
+	 * @return a string representing the current city
+	 */
+	public String getCity() {		
+		return this.city;
+	}
 	
 	/**
 	 * Sets the time when the current weather was last updated 
@@ -328,16 +344,5 @@ public class LocalWeather {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	public String getCity() {		
-		return this.city;
-	}
-
-	public String getCountry() {
-		// TODO Auto-generated method stub
-		return this.country;
-	}
-
-	
 	
 }

@@ -29,6 +29,7 @@ public class ThreeHourPanel extends JPanel {
 		this.period = period;
 		initPanel();
 	}
+	
 	/**
 	 * Initializes the panel and sets its display attributes.
 	 */
