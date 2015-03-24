@@ -513,6 +513,10 @@ public class WeatherIcon {
 
 	}
 	
+	/**
+	 * Gets the weather background
+	 * @return a string the name of a weather background
+	 */
 	public String getWeatherBackground(){
 		return weatherBackground;
 	}

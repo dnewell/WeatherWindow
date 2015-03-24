@@ -173,13 +173,15 @@ public class Location {
 	    	    
 	    return res;	    
 	}
+	
 	/**
 	 * Converts cardinal directions from a numeric representation to text
 	 * @param deg direction in degrees
 	 * @return a friendly text representation of the direction
 	 */
 	public static String Direction (double deg)
-	   {		   
+	   {		
+		   // Based on degree return a accurate direction
 		   if (deg <=22.5 || deg >=337.5)
 			   return "N";
 		   else if (deg <=67.5 )
@@ -196,6 +198,7 @@ public class Location {
 			   return "W";
 		   else return "NW";
 	   }
+	
 	/**
 	 * Converts Epoch time from OpenWeatherMap api to a more
 	 * user friendly format
@@ -237,12 +240,13 @@ public class Location {
 		 		else NewDay = false;
 		 	}
 	   }	
+	 
+	 
 	/*
 	 * Maybe unnecessary? Constructor creates the forecasts.
 	 */
 	@SuppressWarnings("unused")
 	private void createForecasts() {
-
 		throw new UnsupportedOperationException();
 	}
 	

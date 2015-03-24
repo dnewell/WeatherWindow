@@ -1,13 +1,9 @@
 import java.io.*;
 import java.net.URL;
 
-
 public class Serialize implements Serializable
 {
    
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public Serialize(String loc, int units)
@@ -27,7 +23,9 @@ public class Serialize implements Serializable
          out.close();
          fileOut.close();
          System.out.println("Serialized data is saved in data.ser");
+      
       }catch(IOException i)
+      
       {
           i.printStackTrace();
       }

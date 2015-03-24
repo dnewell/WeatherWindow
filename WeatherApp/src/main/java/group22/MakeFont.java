@@ -1,6 +1,10 @@
 import java.awt.Font;
 import java.io.InputStream;
 
+/**
+ * Creates new fonts based on a input style representing a font file.
+ * @author Karsten Babin
+ */
 public class MakeFont {
 
 	private Font newFont;
@@ -31,7 +35,6 @@ public class MakeFont {
 			newFont = Font.createFont(Font.TRUETYPE_FONT, fontIS);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		

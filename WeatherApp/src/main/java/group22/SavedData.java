@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
- class SavedData implements Serializable{
-		    public int units;
-		    public String location;
-	  }
+/**
+ * Structures the saved information
+ */
+
+class SavedData implements Serializable {
+	public int units;
+	public String location;
+}

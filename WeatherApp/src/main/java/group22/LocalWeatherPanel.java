@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * The LocalWeatherPanel class displays the current forecast
+ * The LocalWeatherPanel class displays the current forecast and Mars weather information
  * 
  * @author David Newell
  * @author David Langford
@@ -31,51 +31,28 @@ public class LocalWeatherPanel extends JPanel {
 		 */
 		private void initPanel(Location loc) throws Exception {
 			
+			// Sets properties for the LocalWeatherPanel
 			this.setLayout(null);
 			this.setOpaque(false);
 			this.setBackground(new Color(255,255,255,100));
 	    	this.setSize(new Dimension(750,200));
 	  
+	    	// Access the LocalWeather weather information
 	    	LocalWeather lw = null;
+	    	
+	    	// Access the MarsWeather weather information
 	    	MarsWeather mw = null;
 	    	
+	    	// Access the WeatherIcon information
+	    	WeatherIcon wI = new WeatherIcon(lw.getWeatherID());
 	    	
+	    	// Check if the panel will display local or mars weather information
 	    	if (!loc.getLocation().toLowerCase().equals("mars"))
 	    		lw = loc.getLW();
-	    	else mw = loc.getMD();
+	    	else 
+	    		mw = loc.getMD();
 	    	
-	    	WeatherIcon wI = null;
-	    	
-	    	if (!loc.getLocation().toLowerCase().equals("mars"))
-	    	{
-		    	
-		    	wI = new WeatherIcon(lw.getWeatherID());
-		    	
-		    	String imageName = "";
-		    	String skyCondition = lw.getSkyCondition().toLowerCase();
-		    	
-		    	if(skyCondition.equals("sky is clear"))
-		    		imageName = "Sunny_128x128.png";
-		    	else if(skyCondition.equals("few clouds"))
-		    		imageName = "Sunny_Cloud_128x128.png";
-		    	else if(skyCondition.equals("scattered clouds"))
-		    		imageName = "Cloudy_128x128.png";
-		    	else if(skyCondition.equals("broken clouds"))
-		    		imageName = "Cloudy_128x128.png";
-		    	else if(skyCondition.equals("shower rain"))
-		    		imageName = "LightRain_128x128.png";
-		    	else if(skyCondition.equals("rain"))
-		    		imageName = "LightRain_128x128.png";
-		    	else if(skyCondition.equals("thunderstorm"))
-		    		imageName = "Thunder_128x128.png";
-		    	else if(skyCondition.equals("snow"))
-		    		imageName = "Snow_128x128.png";
-		    	else if(skyCondition.equals("mist"))
-		    		imageName = "Cloudy_128x128.png";
-		    	
-		    	URL url = getClass().getResource(imageName);
-	    	}
-	    	
+		    // Create the JLabels necessary to display weather information	
 	    	JLabel timeInfoLabel = new JLabel();
 			JLabel lastupdateInfoLabel = new JLabel();
 			JLabel currenttemperatureInfoLabel = new JLabel("", JLabel.CENTER);
@@ -93,11 +70,10 @@ public class LocalWeatherPanel extends JPanel {
 			JLabel airpressureIconLabel = new JLabel();
 			JLabel windIconLabel = new JLabel();
 			
-			if (!loc.getLocation().toLowerCase().equals("mars"))
-			{
+			// Set the weather for the local view
+			if (!loc.getLocation().toLowerCase().equals("mars")){
 				
-				
-				
+				// Add the text based weather information
 				addLabel(timeInfoLabel, lw.getUserTime(), 25, 0, 180, 20, "Light", 15);	    	
 				addLabel(lastupdateInfoLabel, lw.getUpdateTime(), 205, 0, 225, 20, "Light", 15);			
 				addLabel(currenttemperatureInfoLabel, lw.getTemperature(), -45, 20, 400, 150, "Light", 145);			
@@ -105,6 +81,7 @@ public class LocalWeatherPanel extends JPanel {
 				addLabel(mintempInfoLabel, lw.getMinTemp(), 35, 170, 125, 25, "Light", 20);			
 				addLabel(maxtempInfoLabel, lw.getMaxTemp(), 170, 170, 125, 25, "Light", 20);			
 				
+				// Add icons to their matching labels
 				addLabel(sunriseIconLabel, new WeatherIcon("f051").getWeatherIcon(), 500, 33, 25, 25, "WeatherIcons", 10);
 				sunriseIconLabel.setHorizontalAlignment(JLabel.CENTER);
 				sunriseIconLabel.setVerticalAlignment(JLabel.BOTTOM);
@@ -134,9 +111,10 @@ public class LocalWeatherPanel extends JPanel {
 				skyconditionImageLabel.setHorizontalAlignment(JLabel.CENTER);
 				skyconditionImageLabel.setVerticalAlignment(JLabel.BOTTOM);
 				addLabel(skyconditionImageLabel, wI.getWeatherIcon(), 305, 35, 150, 150, "Owfont", 60);
-			}	
-			else 
-			{
+			}
+			
+			// Set the weather for Mars
+			else {
 				addLabel(timeInfoLabel, mw.getdate(), 25, 0, 280, 20, "Light", 15);	    	
 				//addLabel(lastupdateInfoLabel, mw.getUpdateTime(), 205, 0, 225, 20, "Light", 15);	
 				if (loc.units == 0)

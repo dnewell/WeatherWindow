@@ -35,7 +35,10 @@ public class ShortTermPanel extends JPanel {
 	 */
 	private void initPanel(Location loc) throws Exception {
 		
+		// Define the layout for the panel
 		GridLayout layout = new GridLayout(1,0);
+		
+		// Set the properties for the panel
 		this.setOpaque(false);
 		this.setLayout(layout);
 		this.setSize(new Dimension(730,270));
