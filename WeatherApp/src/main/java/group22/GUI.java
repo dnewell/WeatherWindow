@@ -14,7 +14,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -48,7 +47,7 @@ public class GUI implements ActionListener {
 	private JTextField field;
 	private JButton shorttermButton, longtermButton, celsiusButton, fahrenheitButton, refreshButton;
 	private JLabel backgroundImageLabel, greyLineLabelTop,  greyLineLabelBottom;
-
+	
 	// Other elements needed for running/managing the GUI
 	private Location loc;
 	private SavedData savedData;
@@ -113,7 +112,6 @@ public class GUI implements ActionListener {
 
 		// Apply a background image to the JFrame
 		setBackgroundImage(loc);
-		mainWindow.setContentPane(backgroundImageLabel);
 
 		// Add a search field to the top of the application
 		addLocationField();
@@ -181,7 +179,7 @@ public class GUI implements ActionListener {
 	 */
 	private void addRefreshButton() {
 
-		// Remove the weather button if it already exists
+		// Remove the weather refresh button if it already exists
 		if (refreshButton != null)
 			mainWindow.remove(refreshButton);
 
@@ -219,10 +217,22 @@ public class GUI implements ActionListener {
 	}
 
 	/**
+	 * Validates and refreshGUIes the main JFrame hierarchy
+	 * @throws Exception
+	 */
+	private void refresh() throws Exception {
+		updateGUI(CURRENT_UNITS, CURRENT_LOCATION);
+	}
+	
+	/**
 	 * Creates a JButton to convert the weather information to Celsius
 	 */
 	private void addCelsiusButton() {
 
+		// Remove the Celsius button if it already exists
+		if (celsiusButton != null)
+			mainWindow.remove(celsiusButton);
+		
 		// Define the text for the Celsius button
 		celsiusButton = new JButton("C" + "\u00b0");
 
@@ -256,7 +266,8 @@ public class GUI implements ActionListener {
 		// Updates the app with weather information in Celsius
 		// by reloading new weather information in Celsius
 		try {
-			updateGUI(0, field.getText());
+			if(CURRENT_UNITS != 0)
+				updateGUI(0, field.getText());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -283,13 +294,19 @@ public class GUI implements ActionListener {
 	 */
 	private void addFahrenheitButton() {
 
+		// Remove the Fahrenheit button if it already exists
+		if (fahrenheitButton != null)
+			mainWindow.remove(fahrenheitButton);
+		
 		// Define the text for the Fahrenheit button
 		fahrenheitButton = new JButton("F" + "\u00b0");
 
 		// Make a new font for the button
 		MakeFont makenewFont = new MakeFont("Bold");
 		fahrenheitButton.setFont(makenewFont.getFont().deriveFont(40f));
-
+		
+		fahrenheitButton.setRolloverEnabled(true);
+		
 		// Define the actions of the button
 		fahrenheitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -313,10 +330,12 @@ public class GUI implements ActionListener {
 	 * Changes the metric for the weather information to Fahrenheit
 	 */
 	private void stateFahrenheit() {
+		
 		// Updates the app with weather information in Fahrenheit
 		// by reloading new weather information in Fahrenheit
 		try {
-			updateGUI(1, field.getText());
+			if(CURRENT_UNITS != 1)
+				updateGUI(1, field.getText());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -343,6 +362,10 @@ public class GUI implements ActionListener {
 	 */
 	private void addShortTermButton() {
 
+		// Remove the Short-term button if it already exists
+		if (shorttermButton != null)
+			mainWindow.remove(shorttermButton);
+		
 		// Create a new JButton
 		shorttermButton = new JButton("Short-term");
 		
@@ -400,6 +423,10 @@ public class GUI implements ActionListener {
 	 */
 	private void addLongTermButton() {
 
+		// Remove the Long-term button if it already exists
+		if (longtermButton != null)
+			mainWindow.remove(longtermButton);
+		
 		// Create a new JButton
 		longtermButton = new JButton("Long-term");
 		
@@ -460,6 +487,9 @@ public class GUI implements ActionListener {
 	 */
 	private void setBackgroundImage(Location loc) {
 
+		if (backgroundImageLabel != null)
+			mainWindow.remove(backgroundImageLabel);
+		
 		String imageName, skyCondition = "";
 		
 		// Set a background image for the Mars JPanel
@@ -478,6 +508,10 @@ public class GUI implements ActionListener {
 		backgroundImageLabel = new JLabel();
 		backgroundImageLabel.setSize(750, 630);
 		backgroundImageLabel.setIcon(new ImageIcon(url));
+		mainWindow.setContentPane(backgroundImageLabel);
+		
+		// Refresh the GUI
+		refreshGUI();
 
 	}
 
@@ -485,7 +519,10 @@ public class GUI implements ActionListener {
 	 * Adds a text field through which the user can change locations
 	 */
 	private void addLocationField() {
-		// Font newFont = GUI.font.deriveFont(45f);
+		
+		// Remove the text if it already exists in the GUI
+		if (field != null)
+			mainWindow.remove(field);
 
 		// Create a new font based on the needs for that element
 		MakeFont makeNewFont = new MakeFont("UltraLight");
@@ -512,6 +549,7 @@ public class GUI implements ActionListener {
 
 		// Add the text field to the JFrame
 		mainWindow.add(field);
+		refreshGUI();
 	}
 
 	/**
@@ -522,13 +560,6 @@ public class GUI implements ActionListener {
 		mainWindow.repaint();
 	}
 
-	/**
-	 * Validates and refreshGUIes the main JFrame hierarchy
-	 * @throws Exception
-	 */
-	private void refresh() throws Exception {
-		updateGUI(CURRENT_UNITS, CURRENT_LOCATION);
-	}
 
 	/**
 	 * Adds two JLabels that form grey divisional lines at the bottom of the GUI
@@ -694,6 +725,9 @@ public class GUI implements ActionListener {
 		CURRENT_UNITS = units;
 		CURRENT_LOCATION = locationText;
 		
+		// Saves the new location and current units as default presets next time software loads
+		Serialize newSavedData = new Serialize(CURRENT_LOCATION, CURRENT_UNITS);
+		
 		// Applies the current location
 		Location oldLoc = loc;
 
@@ -710,6 +744,22 @@ public class GUI implements ActionListener {
 
 					// Set a new background image
 					setBackgroundImage(userLoc);
+					
+					// Re-add the search field
+					addLocationField();
+					
+					// Re-add the Celsius and Fahrenheit Buttons
+					addCelsiusButton();
+					addFahrenheitButton();
+					
+					if (CURRENT_UNITS == 1)
+						stateFahrenheit();
+					else
+						stateCelsius();
+					
+					// Re-add the Short-term and Long-ter Buttons
+					addShortTermButton();
+					addLongTermButton();
 					
 					// Update Long-term panel
 					addLTF(userLoc);
@@ -751,6 +801,7 @@ public class GUI implements ActionListener {
 					}
 					
 					loc = userLoc;
+					
 					
 				} finally {
 					// End the animation of the loading circle on the mouse cursor

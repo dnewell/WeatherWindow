@@ -42,16 +42,17 @@ public class ThreeHourPeriod {
 			prepMultiplier = 1.0;
 		}
 		
-		//get needed JSON Objects and timestamp
-		JSONObject list = res.getJSONArray("list").getJSONObject(index);
-		JSONObject Main = list.getJSONObject("main");
-		JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
-		@SuppressWarnings("unused")
-		JSONObject Clouds = list.getJSONObject("clouds");
-		Location.GetTime(list.getInt("dt"));
+		try{
+			//get needed JSON Objects and timestamp
+			JSONObject list = res.getJSONArray("list").getJSONObject(index);
+			JSONObject Main = list.getJSONObject("main");
+			JSONObject Weather = list.getJSONArray("weather").getJSONObject(0);
+			@SuppressWarnings("unused")
+			JSONObject Clouds = list.getJSONObject("clouds");
+			Location.GetTime(list.getInt("dt"));
 		
-		//Get precipitation levels if any
-		 if (list.has("snow"))
+			//Get precipitation levels if any
+			if (list.has("snow"))
 		    	if (list.getJSONObject("snow").has("3h"))
 		    		precip += list.getJSONObject("snow").getDouble("3h")*prepMultiplier;
 		    	else 
@@ -62,20 +63,31 @@ public class ThreeHourPeriod {
 			    	else 
 			    		precip += list.getJSONObject("rain").getDouble("1h")*prepMultiplier;
 		    
-		//Capitalize first letter of cloud condition
-		String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
+		    //Capitalize first letter of cloud condition
+		    String weather = Weather.getString("description").substring(0, 1).toUpperCase() + Weather.getString("description").substring(1);
 		 
-		this.time = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
+		    this.time = Location.ihours + ":" + (Location.iminutes < 10 ? "0" : "") + Location.iminutes + " " + Location.daytime;
 		
-		//Increase day by one
-	    if (Location.NewDay == true)
-		    Location.cal.add(Calendar.DATE, 1);
+		    //Increase day by one
+		    if (Location.NewDay == true)
+		    	Location.cal.add(Calendar.DATE, 1);
 		
-		//this.time += format.format(Location.cal.getTime());
-		this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0";
-		this.skyCondition = weather;
-		this.precipitation = prep.format(precip)+" "+measurement;
-		this.weatherID = Weather.getInt("id");
+		    //this.time += format.format(Location.cal.getTime());
+		    this.temperature = temp.format(Main.getDouble("temp")) + "\u00b0";
+		    this.skyCondition = weather;
+		    this.precipitation = prep.format(precip)+" "+measurement;
+		    this.weatherID = Weather.getInt("id");
+		
+		// If OpenWeatherMap does not generate enough short weather information, fill it in with the below info
+		} catch (JSONException e){
+			
+			this.temperature = "N/A";
+			this.skyCondition = "N/A";
+			this.precipitation = "N/A";
+			this.weatherID = 9999;
+			
+		}
+		
 		
 	}
 	
