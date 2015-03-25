@@ -51,7 +51,7 @@ public class DayPanel extends JPanel {
 		this.setSize(new Dimension(91,270));
 		
 		// Add a day of the week label
-		addLabel(day.getDayOfWeek(),15,0,10, "Medium");
+		addLabel(day.getDayOfWeek(),12,0,10, "Medium");
 		
 		// Add a temperature label
 		addLabel(day.getTemperature(),30,0,15, "Medium");
