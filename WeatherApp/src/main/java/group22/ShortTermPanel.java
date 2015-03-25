@@ -1,13 +1,6 @@
-
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 
 /**
  * This class displays the Short Term Forecast, by creating/containing 
@@ -28,6 +21,7 @@ public class ShortTermPanel extends JPanel {
 	public ShortTermPanel(Location loc) throws Exception {		
 		initPanel(loc);
 	}
+	
 	/**
 	 * Initializes the panel and sets its display attributes.
 	 * @param loc a location such as a city or planet
@@ -44,10 +38,8 @@ public class ShortTermPanel extends JPanel {
 		this.setSize(new Dimension(730,270));
     	
     	//adds ThreeHourPanel objects with a helper method
-		addPeriods(loc);
-		
+		addPeriods(loc);		
 	}
-
 
 	/**
 	 * Populates the panel with ThreeHourPanels objects
@@ -76,5 +68,4 @@ public class ShortTermPanel extends JPanel {
 		}
 	}
 	
-
 }

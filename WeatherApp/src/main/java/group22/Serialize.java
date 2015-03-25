@@ -1,6 +1,11 @@
 import java.io.*;
-import java.net.URL;
 
+
+/**
+ * Serializes the data.ser file to store user presets
+ * 
+ * @author Team 22
+ */
 public class Serialize implements Serializable
 {
    

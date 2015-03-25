@@ -1,7 +1,5 @@
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -131,39 +129,4 @@ public class ThreeHourPeriod {
 	public int getWeatherID(){
 		return weatherID;
 	}
-
-	/**
-	 * Set an updated title for the day of the week
-	 * @param dayOfWeek the updated title to set for the current day
-	 */
-	public void setTime(String newTime) {
-		this.time = newTime;
-	}
-
-	/**
-	 * Set an updated temperature value
-	 * @param temperature the updated temperature information to set
-	 */
-	public void setTemperature(String temperature) {
-		this.temperature = temperature;
-	}
-
-	/**
-	 * Set an updated sky condition value
-	 * @param skyCondition the updated sky condition information to set
-	 */
-	public void setSkyCondition(String skyCondition) {
-		this.skyCondition = skyCondition;
-	}
-
-	/**
-	 * Set an updated precipitation value
-	 * @param precipitation the updated precipitation value to set
-	 */
-	public void setPrecipitation(String precipitation) {
-		this.precipitation = precipitation;
-	}
-
-
-
 }
