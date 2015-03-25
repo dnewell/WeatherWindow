@@ -26,7 +26,7 @@
           <include>HelveticaNeue-UltraLight.otf</include>
           <include>owfont-regular.otf</include>
 	  <include>WeatherIcons-Regular.otf</include>
-          <include>FontAwesome.otf.otf</include>
+          <include>FontAwesome.otf</include>
 		<include>BrokenCloudsDay.png</include>
 		<include>ClearSkyDay.png</include>
 		<include>ColdDay.png</include>
