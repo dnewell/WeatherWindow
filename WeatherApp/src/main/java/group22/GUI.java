@@ -3,7 +3,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import java.awt.Cursor;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -42,6 +44,7 @@ public class GUI implements ActionListener {
 	private LongTermPanel ltPanel;
 	private ShortTermPanel stPanel;
 	private LocalWeatherPanel lwPanel;
+	private MarsWeatherPanel mwPanel;
 	
 	// Swing elements added to the main frame
 	private JTextField field;
@@ -125,10 +128,15 @@ public class GUI implements ActionListener {
 
 				// Add the short-term forecast to the frame
 				addSTF(loc);
+				
+				// Add the current forecast to the frame
+				addLW(loc);
+			}
+			else{
+				addMW(loc);
 			}
 
-			// Add the current forecast to the frame
-			addLW(loc);
+
 
 			// Add a refresh button that updates the weather information for
 			// the local, short-term, and long-term views
@@ -172,6 +180,35 @@ public class GUI implements ActionListener {
 
 		// Make the JFrame visible
 		mainWindow.setVisible(true);
+	}
+
+	private void addMW(Location loc2) {
+		// Remove the old MarsWeatherPanel when updating to a new location
+		if (mwPanel != null) {
+			mainWindow.remove(mwPanel);
+		}
+		if (lwPanel != null) {
+			mainWindow.remove(lwPanel);
+		}
+		if (stPanel != null) {
+			mainWindow.remove(stPanel);
+		}
+		if (ltPanel != null) {
+			mainWindow.remove(ltPanel);
+		}
+
+		// Create a new LocationWeatherPanel to the JFrame
+		try {
+			mwPanel = new MarsWeatherPanel(loc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mwPanel.setLocation(10, 85);
+
+		// Add the LocalWeatherPanel to the JFrame
+		mainWindow.getContentPane().add(mwPanel);
+		refreshGUI();
 	}
 
 	/**
@@ -224,7 +261,7 @@ public class GUI implements ActionListener {
 	 * @throws Exception
 	 */
 	private void refresh() throws Exception {
-		updateGUI(CURRENT_UNITS, CURRENT_LOCATION);
+		updateGUI(loc.getUnits(), loc.getLocation());
 	}
 	
 	/**
@@ -498,23 +535,21 @@ public class GUI implements ActionListener {
 	 * @param loc the location (i.e city or Mars)
 	 */
 	private void setBackgroundImage(Location loc) {
-
+		WeatherIcon wI;
+		URL url;
 		if (backgroundImageLabel != null)
 			mainWindow.remove(backgroundImageLabel);
 		
 		String imageName, skyCondition = "";
 		
 		// Set a background image for the Mars JPanel
-		if (!loc.getLocation().toLowerCase().equals("mars"))
+		if (!loc.getLocation().toLowerCase().equals("mars")){
 			skyCondition = loc.getLW().getSkyCondition().toLowerCase();
-		else
-			imageName = "mars.png";
-
-		LocalWeather lw = loc.getLW();
-		WeatherIcon wI = new WeatherIcon(lw.getWeatherID());
-
-		// Get the picture
-		URL url = getClass().getResource(wI.getWeatherBackground());
+			wI = new WeatherIcon(loc.getLW().getWeatherID());
+			url = getClass().getResource(wI.getWeatherBackground());
+		} else {
+			url = getClass().getResource("mars.png");
+		}
 
 		// Set the size of the JLabel and apply the image
 		backgroundImageLabel = new JLabel();
@@ -533,9 +568,9 @@ public class GUI implements ActionListener {
 	private void addLocationField() {
 		
 		// Remove the text if it already exists in the GUI
-		if (field != null)
+		if (field != null){
 			mainWindow.remove(field);
-
+		}
 		// Create a new font based on the needs for that element
 		MakeFont makeNewFont = new MakeFont("UltraLight");
 		Font locationfieldFont = makeNewFont.getFont().deriveFont(45f);
@@ -737,25 +772,26 @@ public class GUI implements ActionListener {
 		CURRENT_UNITS = units;
 		CURRENT_LOCATION = locationText;
 		
-		// Saves the new location and current units as default presets next time software loads
-		Serialize newSavedData = new Serialize(CURRENT_LOCATION, CURRENT_UNITS);
-		
+
 		// Applies the current location
 		Location oldLoc = loc;
 
 		// Conditions for updating the GUI
 		if ((!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits() != units)|| refresh == true){
-			try {
 
-				try {
+
 					// Show a spinning circle to tell the user the program is doing something
 					mainWindow.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
 					// Get the location
-					Location userLoc = new Location(units, locationText);
+					try {
+						loc = new Location(units, locationText);
+					} catch (Exception e) {
+						System.out.println(e);
+					}
 
 					// Set a new background image
-					setBackgroundImage(userLoc);
+					setBackgroundImage(loc);
 					
 					// Re-add the search field
 					addLocationField();
@@ -768,32 +804,45 @@ public class GUI implements ActionListener {
 						stateFahrenheit();
 					else
 						stateCelsius();
-					
-					// Re-add the Short-term and Long-ter Buttons
-					addShortTermButton();
-					addLongTermButton();
-					
-					// Update Long-term panel
-					addLTF(userLoc);
-					
-					// Update the Short-term panel
-					addSTF(userLoc);
-					
-					// Update the Local weather panel
-					addLW(userLoc);
-					
-					// Set the new location
-					userLoc.setLocation(userLoc.getLW().getCity() + ", " + userLoc.getLW().getCountry());
-					
+	
+					if (!loc.getLocation().toLowerCase().equals("mars")) {
+						loc.setLocation(loc.getLW().getCity() + ", " + loc.getLW().getCountry());
+						// Re-add the Short-term and Long-ter Buttons
+						addShortTermButton();
+						addLongTermButton();
+						shorttermButton.setVisible(true);
+						longtermButton.setVisible(true);
+						// Update Long-term panel
+						addLTF(loc);
+						
+						// Update the Short-term panel
+						addSTF(loc);
+						
+						// Update the Local weather panel
+						addLW(loc);
+					} else {
+						shorttermButton.setVisible(false);
+						longtermButton.setVisible(false);
+						//Mars does not have a local weather, capitalize mars if needed
+						loc.setLocation(loc.getLocation().substring(0, 1).toUpperCase() + loc.getLocation().substring(1));
+						addMW(loc);
+					}
+				
 					// Set the text in the text field to the returned location by the API call
-					field.setText(userLoc.getLocation());
+					field.setText(loc.getLocation());
 
-					// Change back to the Short-term panel
-					if (shorttermState == true)
-						changeToShortTerm();
-					else
-						changeToLongTerm();
-
+					// Saves the new location and current units as default presets next time software loads
+					new Serialize(loc.getLocation(), loc.getUnits());
+				
+					
+					// Switch between short term and long term
+					if(!loc.getLocation().toLowerCase().equals("mars")){
+						if (shorttermState == true){
+							changeToShortTerm();
+						} else {
+							changeToLongTerm();
+						}
+					}
 					// Re-add the refresh button
 					addRefreshButton();
 					
@@ -802,31 +851,15 @@ public class GUI implements ActionListener {
 					
 					// Re-add the shadow panel
 					addShadowPanel();
-
-					// Set the visibility if the location is mars
-					if (locationText.toLowerCase().equals("mars")) {
-						shorttermButton.setVisible(false);
-						longtermButton.setVisible(false);
-					} else {
-						shorttermButton.setVisible(true);
-						longtermButton.setVisible(true);
-					}
-					
-					loc = userLoc;
-					
-					
-				} finally {
+		
 					// End the animation of the loading circle on the mouse cursor
 					mainWindow.setCursor(Cursor.getDefaultCursor());
-				}
 				
-			// Set the text in the text field back to the old location if the new location input is invalid
-			} catch (NullPointerException e) {
-				field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));
-			}
-			
-			// Set refresh back to false
 			refresh = false;
+			
+		}
+		else{
+			field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));
 		}
 	}
 }

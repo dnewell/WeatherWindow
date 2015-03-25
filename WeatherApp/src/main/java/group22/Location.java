@@ -47,10 +47,11 @@ public class Location {
 		this.location = location;
 		this.units = units;
 		/*
-		 * MARS case handling.  There are many different ways (and possible places) we could handle this.
-		 * 
-		 */		if (getLocation().toLowerCase().equals("mars"))
+		 * MARS case handling. 
+		 */		
+		if (getLocation().toLowerCase().equals("mars")){
 			this.marsWeather = new MarsWeather(readJSON(units, "", "mars"));
+		}
 		 else {
 			this.shortTermForecast = new ShortTermForecast(readJSON(units, location, "short term"));
 			this.longTermForecast = new LongTermForecast(readJSON(units,location, "long term"));
