@@ -1,13 +1,10 @@
-
 /**
  * Takes an id code integer from OWM and looks up the corresponding 
  * hex number to form a new unicode value.  That unicode value is
  * associated with a weather image from the owfont-regular.otf font pack.
  * 
  * @author Karsten Babin
- *
  */
-
 public class WeatherIcon {
 
 	private String weatherBackground;

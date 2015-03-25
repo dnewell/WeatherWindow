@@ -95,7 +95,6 @@ public class Location {
 	public JSONObject readJSON(int units, String addr, String s) throws Exception
 	{
 		String api = null;
-		String key = "&APPID=e57e5d3a71d17c47936c8513bdd97825";
 		String units_text = "&units=metric";
 		if(units==1)
 			units_text = "&units=imperial";
@@ -106,7 +105,6 @@ public class Location {
 			api = "http://api.openweathermap.org/data/2.5/weather?q=";
 			api += URLEncoder.encode(addr, "UTF-8");
 			api += units_text;
-			//api += key;
 		}
 		else if (s == "short term")
 		{

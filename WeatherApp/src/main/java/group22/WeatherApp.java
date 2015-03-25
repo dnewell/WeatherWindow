@@ -1,8 +1,7 @@
 /**
- * WeatherApp the main class for a weather viewing program, that allows
- * a user to see the current weather as well as forecasts for any desired location
- * 
- * TODO consider integrating the main method into the GUI class 
+ * WeatherApp is the main class for Team 22's weather viewing program. It allows
+ * a user to see the current weather as well as forecasts for any earth city,
+ * as well as the conditions on Mars as reported by the Curiosity Rover
  * 
  * @author David Newell
  * @author David Langford

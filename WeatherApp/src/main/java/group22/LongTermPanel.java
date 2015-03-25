@@ -1,5 +1,3 @@
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -10,8 +8,6 @@ import javax.swing.JPanel;
  * 
  * @author David Newell
  */
-
-
 public class LongTermPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;

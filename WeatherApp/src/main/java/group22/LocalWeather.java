@@ -43,13 +43,11 @@ public class LocalWeather {
 		Date now = new Date();
 		
 		//Declare Json Objects for use
-	    JSONObject loc = info.getJSONObject("coord");
 	    JSONObject Weather = info.getJSONArray("weather").getJSONObject(0);
 	    JSONObject sys = info.getJSONObject("sys");
 	    JSONObject Main = info.getJSONObject("main");
 	    JSONObject Wind = info.getJSONObject("wind");
-	    JSONObject Clouds = info.getJSONObject("clouds");
-	    
+    
 	    Double precip = 0.00;
 
 	    Location.GetTime(info.getInt("dt"));	  
@@ -223,126 +221,5 @@ public class LocalWeather {
 	 */
 	public String getCity() {		
 		return this.city;
-	}
-	
-	/**
-	 * Sets the time when the current weather was last updated 
-	 * @param updateTime the time to set to the updateTime variable
-	 */
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
-	}
-	
-	/**
-	 * Sets an updated time for the current time
-	 * @param userTime the time to set to the userTime variable
-	 */
-	public void setUserTime(String userTime) {
-		this.userTime = userTime;
-	}
-	
-	/**
-	 * Sets an updated temperature for the current temperature
-	 * @param temperature the temperature to set to the temperature variable
-	 */
-	public void setTemperature(String temperature) {
-		this.temperature = temperature;
-	}
-	
-	/**
-	 * Sets an updated sky condition for the current temperature 
-	 * @param skyCondition the skyCondition to set to the skyCondition variable
-	 */
-	public void setSkyCondition(String skyCondition) {
-		this.skyCondition = skyCondition;
-	}
-	
-	/**
-	 * Sets an updated amount of precipitation 
-	 * @param precipatation the precipitation amount to set precipitation variable
-	 */
-	public void setPrecipatation(String precipatation) {
-		this.precipatation = precipatation;
-	}
-	
-	/**
-	 * Sets an updated wind speed value for the current wind speed
-	 * @param windSpeed the wind speed to set the wind speed variable
-	 */
-	public void setWindSpeed(String windSpeed) {
-		this.windSpeed = windSpeed;
-	}
-	
-	/**
-	 * Sets an updated wind direction value for the current wind direction
-	 * @param windDirection the windDirection to set the windDirection variable
-	 */
-	public void setWindDirection(String windDirection) {
-		this.windDirection = windDirection;
-	}
-	
-	/**
-	 * Sets an updated atmospheric pressure value to the current pressure value
-	 * @param pressure the atmospheric pressure to set to the pressure variable
-	 */
-	public void setPressure(String pressure) {
-		this.pressure = pressure;
-	}
-	
-	/**
-	 * Sets an updated humidity value to the current humidity value
-	 * @param humidity the humidity to set to the humidity variable
-	 */
-	public void setHumidity(String humidity) {
-		this.humidity = humidity;
-	}
-	
-	/**
-	 * Sets an updated minimum temperature value to the current minimum temperature
-	 * @param minTemp the minimum temperature to set to the minTemp variable
-	 */
-	public void setMinTemp(String mStringemp) {
-		this.minTemp = mStringemp;
-	}
-	
-	/**
-	 * Sets an updated maximum temperature value to the current maximum temperature
-	 * @param maxTemp the maximum temperature to set to the maxTemp variable
-	 */
-	public void setMaxTemp(String maxTemp) {
-		this.maxTemp = maxTemp;
-	}
-	
-	/**
-	 * Sets an updated time for sunrise to the current sunrise value
-	 * @param sunrise a time to set to the sunrise variable
-	 */
-	public void setSunrise(String sunrise) {
-		this.sunrise = sunrise;
-	}
-	
-	/**
-	 * Sets an updated time for sunset to the current sunset value
-	 * @param sunset a time to set the sunset variable
-	 */
-	public void setSunset(String sunset) {
-		this.sunset = sunset;
-	}
-	
-	/**
-	 * Sets an updated city
-	 * @param city the city selected
-	 */
-	public void setCity(String city) {
-		this.city = city;
-	}
-	
-	/**
-	 * Sets an updated country
-	 * @param country the country of the city
-	 */
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	
+	}	
 }

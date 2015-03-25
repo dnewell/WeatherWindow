@@ -3,11 +3,14 @@ import java.io.*;
 /**
  * Deserializes the data.ser file to load user presets
  * 
- * @author Insert name(s)
+ * @author Team 22
  */
 public class Deserialize implements Serializable {
 	private static SavedData s;
 
+	/**
+	 * Constructor
+	 */
 	public Deserialize() {
 		{
 			

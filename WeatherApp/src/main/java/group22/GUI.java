@@ -551,14 +551,12 @@ public class GUI implements ActionListener {
 	private void setBackgroundImage(Location loc) {
 		WeatherIcon wI;
 		URL url;
-		if (backgroundImageLabel != null)
+		if (backgroundImageLabel != null){
 			mainWindow.remove(backgroundImageLabel);
-		
-		String imageName, skyCondition = "";
-		
+		}
 		// Set a background image for the Mars JPanel
 		if (!loc.getLocation().toLowerCase().equals("mars")){
-			skyCondition = loc.getLW().getSkyCondition().toLowerCase();
+			//skyCondition = loc.getLW().getSkyCondition().toLowerCase();
 			wI = new WeatherIcon(loc.getLW().getWeatherID());
 			url = getClass().getResource(wI.getWeatherBackground());
 		} else {

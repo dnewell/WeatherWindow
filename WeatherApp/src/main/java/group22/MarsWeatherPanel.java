@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

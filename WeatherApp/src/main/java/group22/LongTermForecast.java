@@ -8,8 +8,6 @@ import org.json.*;
  * @author David Newell
  * @author David Langford
  */
-
-
 public class LongTermForecast {
 	
 private Day[] dayArray;

@@ -1,6 +1,4 @@
 import java.text.DecimalFormat;
-import java.util.Date;
-
 import org.json.*;
 
 /**
@@ -28,14 +26,10 @@ public class MarsWeather {
 	public MarsWeather(JSONObject info) throws Exception {
 
 		DecimalFormat temp = new DecimalFormat("#.#");
-		Double precip=0.00;
 		   
 		   //Declare Json Objects for use
 		   JSONObject data = info.getJSONObject("report");
-		   
-		   //TIME
-		   Date now = new Date();
-		   
+		     
 		   //TEMPERATURE
 		   int maxTemp = data.getInt("max_temp");
 		   int minTemp = data.getInt("min_temp");
@@ -150,67 +144,6 @@ public class MarsWeather {
 		return humidity;
 	}
 	
-	/**
-	 * Set an updated date for the current date
-	 * @param date the updated date information to set
-	 */
-	public void setdate(String date) {
-		this.date = date;
-	}
 	
-	/**
-	 * Set an updated temperature value
-	 * @param temperature the updated temperature information to set
-	 */
-	public void setTemperature(String temperature) {
-		this.temperature = temperature;
-	}
-	
-	/**
-	 * Set an updated temperature value in Fahrenheight
-	 * @param temperature the updated temperature information to set
-	 */
-	public void setFtemp(String Ftemp) {
-		this.Ftemp = Ftemp;
-	}
-	
-	/**
-	 * Set an updated sky condition
-	 * @param skyCondition the updated skycondition information to set
-	 */
-	public void setSkyCondition(String skyCondition) {
-		this.skyCondition = skyCondition;
-	}
-	
-	/**
-	 * Set an updated wind speed value
-	 * @param windSpeed the updated wind speed information to set
-	 */
-	public void setWindSpeed(String windSpeed) {
-		this.windSpeed = windSpeed;
-	}
-	
-	/**
-	 * Set an updated wind direction value
-	 * @param windDirection the updated wind direction information to set
-	 */
-	public void setWindDirection(String windDirection) {
-		this.windDirection = windDirection;
-	}
-	
-	/**
-	 * Set an updated atmospheric pressure value
-	 * @param pressure the updated pressure value to set
-	 */
-	public void setPressure(String pressure) {
-		this.pressure = pressure;
-	}
-	
-	/**
-	 * Set an updated humidity value
-	 * @param humidity the updated humidity information to set
-	 */
-	public void setHumidity(String humidity) {
-		this.humidity = humidity;
-	}
+
 }
