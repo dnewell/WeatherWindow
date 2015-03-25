@@ -20,6 +20,8 @@ public class WeatherIcon {
 	 */
 	public WeatherIcon(int weatherCode) {
 		
+		this.weatherCode = weatherCode;
+		
 		switch (weatherCode) {
 
 		// THUNDERSTORM
