@@ -306,6 +306,13 @@ public class GUI implements ActionListener {
 	 */
 	private void stateCelsius() {
 
+		// Checks if when the Celsius button is pressed that
+		// the field is not blank or a different location for the
+		// query for Celsius information
+		if(field.getText() != CURRENT_LOCATION){
+			field.setText(CURRENT_LOCATION);
+		}
+			
 		// Updates the app with weather information in Celsius
 		// by reloading new weather information in Celsius
 		try {
@@ -373,6 +380,13 @@ public class GUI implements ActionListener {
 	 * Changes the metric for the weather information to Fahrenheit
 	 */
 	private void stateFahrenheit() {
+		
+		// Checks if when the Fahrenheit button is pressed that
+		// the search field is not blank or a different location
+		// exists when doing a query for Fahrenheit information
+		if(field.getText() != CURRENT_LOCATION){
+			field.setText(CURRENT_LOCATION);
+		}
 		
 		// Updates the app with weather information in Fahrenheit
 		// by reloading new weather information in Fahrenheit
