@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -13,6 +14,10 @@ import javax.swing.JPanel;
 public class MarsWeatherPanel extends JPanel {
 
 		private static final long serialVersionUID = 1L;
+		JLabel humidityIconLabel = new JLabel();
+		JLabel airpressureIconLabel = new JLabel();
+		JLabel windIconLabel = new JLabel();
+		
 		
 		/**
 		 * Constructs the panel
@@ -48,7 +53,24 @@ public class MarsWeatherPanel extends JPanel {
 			JLabel humidityTitleLabel = new JLabel();
 			JLabel airpressureInfoLabel = new JLabel();
 			JLabel windInfoLabel = new JLabel();
-
+			
+			addLabel(humidityIconLabel, new WeatherIcon("f04e").getWeatherIcon(), 400, 40, 25, 25, "WeatherIcons", 14);
+			humidityIconLabel.setHorizontalAlignment(JLabel.CENTER);
+			humidityIconLabel.setVerticalAlignment(JLabel.BOTTOM);
+			addLabel(humidityTitleLabel, mw.getHumidity(), 435, 40, 300, 25, "Light", 18);			
+			
+			addLabel(airpressureIconLabel, new WeatherIcon("f053").getWeatherIcon(), 400, 76, 25, 25, "WeatherIcons", 10);
+			airpressureIconLabel.setHorizontalAlignment(JLabel.CENTER);
+			airpressureIconLabel.setVerticalAlignment(JLabel.BOTTOM);
+			addLabel(airpressureInfoLabel, mw.getPressure(), 435, 78, 200, 25, "Light", 18);			
+			
+			addLabel(windIconLabel, new WeatherIcon("f050").getWeatherIcon(), 400, 112, 25, 25, "WeatherIcons", 10);
+			windIconLabel.setHorizontalAlignment(JLabel.CENTER);
+			windIconLabel.setVerticalAlignment(JLabel.BOTTOM);
+			addLabel(windInfoLabel, mw.getWindSpeed()+" "+mw.getWindDirection(), 435, 114, 375, 25, "Light", 18);
+	    	   	
+	    	// Access the WeatherIcon information
+	    	WeatherIcon wI = new WeatherIcon(mw.getWeatherID());
 
 			
 			// Set the weather for Mars
@@ -58,14 +80,11 @@ public class MarsWeatherPanel extends JPanel {
 					addLabel(currenttemperatureInfoLabel, mw.getTemperature(), -45, 20, 400, 150, "Light", 145);	
 				else 
 					addLabel(currenttemperatureInfoLabel, mw.getFtemp(), -45, 20, 400, 150, "Light", 145);
-				addLabel(skyconditionInfoLabel, mw.getSkyCondition(), 25, 173, 250, 25, "Light", 20);			
-				//addLabel(mintempInfoLabel, mw.getMinTemp(), 35, 170, 125, 25, "Light", 20);			
-				//addLabel(maxtempInfoLabel, mw.getMaxTemp(), 170, 170, 125, 25, "Light", 20);			
-				//addLabel(sunriseInfoLabel, mw.getSunrise(), 535, 35, 200, 25, "Light", 18);
-				//addLabel(sunsetTitleLabel, mw.getSunset(), 535, 70, 200, 25, "Light", 18);			
-				addLabel(humidityTitleLabel, mw.getHumidity(), 335, 105, 350, 25, "Light", 18);			
-				addLabel(airpressureInfoLabel, mw.getPressure(), 335, 140, 350, 25, "Light", 18);			
-				addLabel(windInfoLabel, mw.getWindSpeed()+" "+mw.getWindDirection(), 335, 174, 350, 25, "Light", 18);
+				addLabel(skyconditionInfoLabel, mw.getSkyCondition(), 25, 173, 250, 25, "Light", 20);						
+				JLabel skyconditionImageLabel = new JLabel();
+				skyconditionImageLabel.setHorizontalAlignment(JLabel.CENTER);
+				skyconditionImageLabel.setVerticalAlignment(JLabel.BOTTOM);
+				addLabel(skyconditionImageLabel, wI.getWeatherIcon(), 248, 75, 150, 150, "Owfont", 60);
 		
 		}
 		
