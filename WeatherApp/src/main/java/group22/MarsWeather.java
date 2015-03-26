@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+
 import org.json.*;
 
 /**
@@ -13,6 +14,7 @@ public class MarsWeather {
 	private String temperature;
 	private String Ftemp;
 	private String skyCondition;
+	private String atmoOpacity;
 	private String windSpeed;
 	private String windDirection;
 	private String pressure;
@@ -57,6 +59,7 @@ public class MarsWeather {
 		   //HUMIDITY + CONDITION
 		   Object humidity = data.get("abs_humidity"); 
 		   String skyCondition = data.getString("atmo_opacity");
+		   String atmoOpacity = data.getString("atmo_opacity");
 		   
 		
 		this.date = String.format("Date: " + totalDate);
@@ -74,7 +77,7 @@ public class MarsWeather {
 		   if (!humidity.equals(null))
 			   this.humidity = ("Humidity "+ humidity);	
 		   else this.humidity = ("No humidity information available.");	   
-		
+		this.atmoOpacity = atmoOpacity;
 		this.skyCondition = "Sky Conditon: " + skyCondition;
 		this.pressure = pressure + "KpA";
 		
@@ -142,6 +145,16 @@ public class MarsWeather {
 	 */
 	public String getHumidity() {
 		return humidity;
+	}
+
+	public int getWeatherID() {
+		if(atmoOpacity.toLowerCase().equals("sunny")){
+			return 800; 
+		}
+		if(atmoOpacity.toLowerCase().equals("cloudy")){
+			return 804;
+		}
+		return 9999;
 	}
 	
 	

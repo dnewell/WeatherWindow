@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * The LocalWeatherPanel class displays the current forecast and Mars weather information
+ * The LocalWeatherPanel class displays the current forecast and  weather information
  * 
  * @author David Newell
  * @author David Langford
@@ -16,7 +16,7 @@ public class LocalWeatherPanel extends JPanel {
 		
 		/**
 		 * Constructs the panel
-		 * @param loc a requested location (e.g city, planet (Mars)) for weather information
+		 * @param loc a requested location (e.g city) for weather information
 		 * @throws Exception if an error occurs
 		 */
 		public LocalWeatherPanel(Location loc) throws Exception {	
@@ -25,7 +25,7 @@ public class LocalWeatherPanel extends JPanel {
 
 		/**
 		 * Initializes the panel, and sets its display attributes
-		 * @param loc a requested location (e.g city, planet (Mars)) for weather information
+		 * @param loc a requested location (e.g city) for weather information
 		 * @throws Exception if an error occurs
 		 */
 		private void initPanel(Location loc) throws Exception {
@@ -37,17 +37,8 @@ public class LocalWeatherPanel extends JPanel {
 	    	this.setSize(new Dimension(750,200));
 	  
 	    	// Access the LocalWeather weather information
-	    	LocalWeather lw = null;
-	    	
-	    	// Access the MarsWeather weather information
-	    	MarsWeather mw = null;
-	    	
-	    	// Check if the panel will display local or mars weather information
-	    	if (!loc.getLocation().toLowerCase().equals("mars"))
-	    		lw = loc.getLW();
-	    	else 
-	    		mw = loc.getMD();
-	    	
+	    	LocalWeather lw = loc.getLW();
+	    	   	
 	    	// Access the WeatherIcon information
 	    	WeatherIcon wI = new WeatherIcon(lw.getWeatherID());
 	    	
