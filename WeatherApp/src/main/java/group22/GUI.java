@@ -775,7 +775,15 @@ public class GUI implements ActionListener {
 	 * @Override
 	 */
 	public void actionPerformed(ActionEvent e) {
-		String locationText = field.getText();
+		String locationText; 
+		
+		/* Not a joke: a request for the location "fuck" returns the city Itajai, BR, which contains
+		 * diacritics encoded in the a way which breaks everything. On some systems. Sometimes. */
+		if (field.getText().toLowerCase().equals("fuck")){
+			locationText = "Vatican City";
+		} else{
+			locationText = field.getText(); 
+		}
 		try {
 			// TODO add a button. Calls on newline atm.
 			if (loc != null) {
