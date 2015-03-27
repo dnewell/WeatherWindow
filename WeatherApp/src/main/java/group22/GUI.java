@@ -35,6 +35,7 @@ public class GUI implements ActionListener {
 	// Data from data.ser file
 	private static String CURRENT_LOCATION = "London ON";
 	public int CURRENT_UNITS = 1;
+	private float fieldFontSize = 45f;
 	
 	// Main program window
 	private JFrame mainWindow;
@@ -67,6 +68,8 @@ public class GUI implements ActionListener {
 		if (!savedData.location.equals("null")) {
 			CURRENT_LOCATION = savedData.location;
 			CURRENT_UNITS = savedData.units;
+			fieldFontSize = savedData.fieldFontSize;
+			
 		}
 
 		// Create the main window for the GUI, and apply it's name
@@ -585,7 +588,7 @@ public class GUI implements ActionListener {
 		}
 		// Create a new font based on the needs for that element
 		MakeFont makeNewFont = new MakeFont("UltraLight");
-		Font locationfieldFont = makeNewFont.getFont().deriveFont(45f);
+		Font locationfieldFont = makeNewFont.getFont().deriveFont(fieldFontSize);
 
 		// Create a new text field
 		field = new JTextField(15);
@@ -612,7 +615,7 @@ public class GUI implements ActionListener {
 	}
 
 	/**
-	 * Validates and refreshGUIes the main JFrame hierarchy
+	 * Validates and refreshes the main JFrame hierarchy
 	 */
 	private void refreshGUI() {
 		mainWindow.validate();
@@ -818,8 +821,16 @@ public class GUI implements ActionListener {
 						stateCelsius();
 	
 					if (!loc.getLocation().toLowerCase().equals("mars")) {
-						loc.setLocation(loc.getLW().getCity() + ", " + loc.getLW().getCountry());
-						// Re-add the Short-term and Long-ter Buttons
+						//Earth Case
+						
+						//Handles case where there is no city name
+						if(loc.getLW().getCity().equals("")){					
+							loc.setLocation(loc.getLW().getCountry());
+						} else {
+							loc.setLocation(loc.getLW().getCity() + ", " + loc.getLW().getCountry());
+						}
+
+						// Re-add the Short-term and Long-term Buttons
 						addShortTermButton();
 						addLongTermButton();
 						shorttermButton.setVisible(true);
@@ -833,6 +844,7 @@ public class GUI implements ActionListener {
 						// Update the Local weather panel
 						addLW(loc);
 					} else {
+						//Mars case
 						shorttermButton.setVisible(false);
 						longtermButton.setVisible(false);
 						//Mars does not have a local weather, capitalize mars if needed
@@ -840,11 +852,41 @@ public class GUI implements ActionListener {
 						addMW(loc);
 					}
 				
-					// Set the text in the text field to the returned location by the API call
-					field.setText(loc.getLocation());
 
-					// Saves the new location and current units as default presets next time software loads
-					new Serialize(loc.getLocation(), loc.getUnits());
+					// Create a new font based on the needs for that element
+					MakeFont makeNewFont = new MakeFont("UltraLight");
+					Float locationFontSize = 45f;
+					Font locationfieldFont = makeNewFont.getFont().deriveFont(locationFontSize);
+					
+					// Create an invisible JTextField on which to perform font sizing tests
+					JTextField testField = new JTextField();
+					field.setSize(500, 50);
+					
+					testField.setText(loc.getLocation());
+					testField.setFont(locationfieldFont);
+					
+					//width of the text rendered at the default font size
+					int textWidth = testField.getFontMetrics(testField.getFont()).stringWidth(testField.getText());
+					//width of the actual GUI JTextField
+					int fieldWidth = field.getWidth();
+					
+					/*
+					 * if the width of the text once rendered is greater than the size of the JTextField,
+					 * reduce font size by 3px and re-try the test
+					 */
+					while (textWidth >= fieldWidth){
+						// Reduce font size
+						locationFontSize = locationFontSize - 3f;
+						locationfieldFont = makeNewFont.getFont().deriveFont(locationFontSize);
+						testField.setFont(locationfieldFont);
+						textWidth = testField.getFontMetrics(testField.getFont()).stringWidth(testField.getText());
+					}
+					
+					// Sets font size
+					field.setFont(locationfieldFont);
+					field.setText(loc.getLocation());
+					// Saves the new location, current units, and location font size as default presets next time software loads
+					new Serialize(loc.getLocation(), loc.getUnits(), locationFontSize);
 				
 					
 					// Switch between short term and long term
