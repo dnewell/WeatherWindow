@@ -222,36 +222,46 @@ public class GUI implements ActionListener {
 		// Remove the weather refresh button if it already exists
 		if (refreshButton != null)
 			mainWindow.remove(refreshButton);
-
-		// Create and apply the properties for the refresh button
-		refreshButton = new JButton();
-		refreshButton.setFont(new MakeFont("WeatherIcons").getFont().deriveFont(22f));
-		refreshButton.setText(new WeatherIcon("f03e").getWeatherIcon());
-		refreshButton.setForeground(Color.WHITE);
-		refreshButton.setHorizontalAlignment(JButton.CENTER);
-		refreshButton.setVerticalAlignment(JButton.BOTTOM);
-		refreshButton.setBounds(520, 18, 95, 65);
-		refreshButton.setOpaque(false);
-		refreshButton.setContentAreaFilled(false);
-		refreshButton.setBorderPainted(false);
-
-		// Change the cursor of the mouse to a hand to represent a clickable button
-		refreshButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
+		// Define the text for the Fahrenheit button
+		refreshButton = new JButton("Refresh");
+				
+		// Make a new font for the button
+		refreshButton.setFont(new MakeFont("WeatherIcons").getFont().deriveFont(22f));
+				
 		// Define the actions of the button
 		refreshButton.addActionListener(new ActionListener() {
-
-			// Set the action code when the refresh button is pressed
 			public void actionPerformed(ActionEvent e) {
-
 				try {
 					refresh = true;
 					refresh();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+								
 			}
 		});
+
+		// Set other properties of the button and its text
+		refreshButton.setVerticalAlignment(SwingConstants.BOTTOM);
+		refreshButton.setHorizontalAlignment(SwingConstants.CENTER);
+		refreshButton.setForeground(Color.WHITE);
+		refreshButton.setBounds(520, 20, 95, 65);
+		refreshButton.setBackground(Color.BLACK);
+		refreshButton.setOpaque(false);
+		refreshButton.setContentAreaFilled(false);
+		refreshButton.setBorderPainted(false);
+		refreshButton.setText(new WeatherIcon("f03e").getWeatherIcon());
+		
+
+		// Create and apply the properties for the refresh button
+		//refreshButton.setHorizontalAlignment(JButton.CENTER);
+		//refreshButton.setVerticalAlignment(JButton.BOTTOM);
+
+		// Change the cursor of the mouse to a hand to represent a clickable button
+		refreshButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+
 
 		// Add the refresh button to the GUI
 		mainWindow.getContentPane().add(refreshButton);
