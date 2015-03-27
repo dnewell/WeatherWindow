@@ -183,6 +183,8 @@ public class GUI implements ActionListener {
 
 		// Make the JFrame visible
 		mainWindow.setVisible(true);
+		// Sets the focus to the location text field 
+		field.requestFocus();
 	}
 
 	private void addMW(Location loc2) {
