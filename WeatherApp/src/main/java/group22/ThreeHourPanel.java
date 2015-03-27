@@ -49,7 +49,7 @@ public class ThreeHourPanel extends JPanel {
 		this.setSize(new Dimension(91,270));
     	
 		// Add a time Label
-		addLabel(period.getTime(),20,0,10, "Medium");
+		addLabel(period.getTime(),12,0,10, "Medium");
 		
 		// Add a average temperature label
 		addLabel(period.getTemperature(),30,0,20, "Medium");    	
