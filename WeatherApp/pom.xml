@@ -17,7 +17,7 @@
 
 	<resources>
       <resource>
-        <directory>bin</directory>
+        <directory>src/bin</directory>
         <includes>
           <include>HelveticaNeue-Light.otf</include>
           <include>HelveticaNeue-Medium.otf</include>
