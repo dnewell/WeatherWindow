@@ -72,11 +72,11 @@ public class MarsWeather {
 		   
 		   if (!windSpeed.equals(null))
 			   this.windDirection = ("Wind speed " + windSpeed);
-		   else this.windSpeed = ("No wind speed information available.");
+		   else this.windSpeed = ("No wind speed available.");
 		   
 		   if (!humidity.equals(null))
 			   this.humidity = ("Humidity "+ humidity);	
-		   else this.humidity = ("No humidity information available.");	   
+		   else this.humidity = ("No humidity available.");	   
 		this.atmoOpacity = atmoOpacity;
 		this.skyCondition = "Sky Conditon: " + skyCondition;
 		this.pressure = pressure + "KpA";

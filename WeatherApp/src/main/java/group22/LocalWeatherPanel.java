@@ -61,6 +61,7 @@ public class LocalWeatherPanel extends JPanel {
 			JLabel windIconLabel = new JLabel();
 			
 			// Set the weather for the local view
+
 				
 			// Add the text based weather information
 			addLabel(timeInfoLabel, lw.getUserTime(), 25, 0, 180, 20, "Light", 15);	    	
@@ -85,7 +86,7 @@ public class LocalWeatherPanel extends JPanel {
 			humidityIconLabel.setHorizontalAlignment(JLabel.CENTER);
 			humidityIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 			addLabel(humidityTitleLabel, lw.getHumidity(), 535, 105, 200, 25, "Light", 18);			
-			
+
 			addLabel(airpressureIconLabel, new WeatherIcon("f053").getWeatherIcon(), 500, 138, 25, 25, "WeatherIcons", 10);
 			airpressureIconLabel.setHorizontalAlignment(JLabel.CENTER);
 			airpressureIconLabel.setVerticalAlignment(JLabel.BOTTOM);

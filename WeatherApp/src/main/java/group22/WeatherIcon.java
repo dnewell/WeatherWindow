@@ -37,7 +37,7 @@ public class WeatherIcon {
 		// Thunderstorm with Heavy Rain
 		case 202:
 			content = "EB2A";
-			weatherBackground = "HeavyThunderstormDay.png";
+			weatherBackground = "ThunderstormDay.png";
 			break;
 
 		// Light Thunderstorm
@@ -55,7 +55,7 @@ public class WeatherIcon {
 		// Heavy Thunderstorm
 		case 212:
 			content = "EB34";
-			weatherBackground = "HeavyThunderstormDay.png";
+			weatherBackground = "ThunderstormDay.png";
 			break;
 
 		// Ragged Thunderstorm
@@ -79,7 +79,7 @@ public class WeatherIcon {
 		// Thunderstorm with Heavy Drizzle
 		case 232:
 			content = "EB48";
-			weatherBackground = "HeavyThunderstormDay.png";
+			weatherBackground = "ThunderstormDay.png.png";
 			break;
 
 		// DRIZZLE
@@ -482,8 +482,9 @@ public class WeatherIcon {
 	 * @param weatherCode A string representing a content code 
 	 */
 	public WeatherIcon (String weatherCode){
-		content = weatherCode;
-	}
+			content = weatherCode;
+	}	
+		
 
 	/**
 	 * A getter method that takes content string and forms
