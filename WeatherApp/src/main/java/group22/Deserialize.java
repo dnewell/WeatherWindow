@@ -29,6 +29,7 @@ public class Deserialize implements Serializable {
 				
 				System.out.println("No Data file found. Loading default information");
 				s.location = "London ON";
+				s.fieldFontSize = 45f;
 				
 			} catch (ClassNotFoundException c) {
 				
@@ -48,6 +49,7 @@ public class Deserialize implements Serializable {
 			System.out.println("Deserialized Data...");
 			System.out.println("Units: " + units_text);
 			System.out.println("Location: " + s.location);
+			System.out.println("Font size: " + s.fieldFontSize);
 		}
 	}
 

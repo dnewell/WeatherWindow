@@ -11,12 +11,13 @@ public class Serialize implements Serializable
    
 	private static final long serialVersionUID = 1L;
 
-	public Serialize(String loc, int units)
+	public Serialize(String loc, int units, float fieldFontSize)
    {	
 	 
       SavedData s = new SavedData();
       s.units = units;
-      s.location= loc;
+      s.location = loc;
+      s.fieldFontSize = fieldFontSize;
       try
       {
     	 //URL url = getClass().getResource("data.ser");

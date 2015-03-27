@@ -76,10 +76,8 @@ public class Location {
 	}
 
 	/**
-	 * Do we ever need to change an individual location?  It's set by a parameter on creation.
-	 * I think it should be immutable afterwards, and so we should not have a setter for it.  Thoughts? 
+	 * Sets the Location
 	 * @param location: the location to set. 
-	 * TODO perhaps delete?
 	 */
 	public void setLocation(String location) {
 		this.location = location;
@@ -99,7 +97,6 @@ public class Location {
 		if(units==1)
 			units_text = "&units=imperial";
 		   
-		//NOTE - this will be controlled by a radio button or something, not the user entering a string
 		if (s == "current")
 		{
 			api = "http://api.openweathermap.org/data/2.5/weather?q=";
