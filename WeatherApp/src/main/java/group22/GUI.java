@@ -31,27 +31,27 @@ public class GUI implements ActionListener {
 
 	// Set the application name
 	private static final String APPLICATION_NAME = "Weather Window";
-	
+
 	// Data from data.ser file
 	private static String CURRENT_LOCATION = "London ON";
 	public int CURRENT_UNITS = 1;
 	private float fieldFontSize = 45f;
-	
+
 	// Main program window
 	private JFrame mainWindow;
-	
+
 	// Panels that reside within the main frame
 	private JPanel shadowPanel;
 	private LongTermPanel ltPanel;
 	private ShortTermPanel stPanel;
 	private LocalWeatherPanel lwPanel;
 	private MarsWeatherPanel mwPanel;
-	
+
 	// Swing elements added to the main frame
 	private JTextField field;
 	private JButton shorttermButton, longtermButton, celsiusButton, fahrenheitButton, refreshButton;
 	private JLabel backgroundImageLabel, greyLineLabelTop,  greyLineLabelBottom;
-	
+
 	// Other elements needed for running/managing the GUI
 	private Location loc;
 	private SavedData savedData;
@@ -69,7 +69,7 @@ public class GUI implements ActionListener {
 			CURRENT_LOCATION = savedData.location;
 			CURRENT_UNITS = savedData.units;
 			fieldFontSize = savedData.fieldFontSize;
-			
+
 		}
 
 		// Create the main window for the GUI, and apply it's name
@@ -131,7 +131,7 @@ public class GUI implements ActionListener {
 
 				// Add the short-term forecast to the frame
 				addSTF(loc);
-				
+
 				// Add the current forecast to the frame
 				addLW(loc);
 			}
@@ -168,7 +168,7 @@ public class GUI implements ActionListener {
 
 			// Add grey divisional lines to the bottom of the GUI 
 			addGreyLines();
-			
+
 			// Add a ShadowPanel to the background
 			addShadowPanel();
 
@@ -224,13 +224,13 @@ public class GUI implements ActionListener {
 		// Remove the weather refresh button if it already exists
 		if (refreshButton != null)
 			mainWindow.remove(refreshButton);
-		
+
 		// Define the text for the Fahrenheit button
 		refreshButton = new JButton("Refresh");
-				
+
 		// Make a new font for the button
 		refreshButton.setFont(new MakeFont("WeatherIcons").getFont().deriveFont(22f));
-				
+
 		// Define the actions of the button
 		refreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,7 +240,7 @@ public class GUI implements ActionListener {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-								
+
 			}
 		});
 
@@ -254,7 +254,7 @@ public class GUI implements ActionListener {
 		refreshButton.setContentAreaFilled(false);
 		refreshButton.setBorderPainted(false);
 		refreshButton.setText(new WeatherIcon("f03e").getWeatherIcon());
-		
+
 
 		// Create and apply the properties for the refresh button
 		//refreshButton.setHorizontalAlignment(JButton.CENTER);
@@ -262,7 +262,7 @@ public class GUI implements ActionListener {
 
 		// Change the cursor of the mouse to a hand to represent a clickable button
 		refreshButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 
 
 		// Add the refresh button to the GUI
@@ -278,7 +278,7 @@ public class GUI implements ActionListener {
 	private void refresh() throws Exception {
 		updateGUI(loc.getUnits(), loc.getLocation());
 	}
-	
+
 	/**
 	 * Creates a JButton to convert the weather information to Celsius
 	 */
@@ -287,17 +287,17 @@ public class GUI implements ActionListener {
 		// Remove the Celsius button if it already exists
 		if (celsiusButton != null)
 			mainWindow.remove(celsiusButton);
-		
+
 		// Define the text for the Celsius button
 		celsiusButton = new JButton("C" + "\u00b0");
 
 		// Make a new font for the button
 		MakeFont makenewFont = new MakeFont("Bold");
 		celsiusButton.setFont(makenewFont.getFont().deriveFont(40f));
-		
+
 		// Change the cursor of the mouse to a hand to represent a clickable button
 		celsiusButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		// Define the actions of the button
 		celsiusButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -327,7 +327,7 @@ public class GUI implements ActionListener {
 		if(field.getText() != CURRENT_LOCATION){
 			field.setText(CURRENT_LOCATION);
 		}
-			
+
 		// Updates the app with weather information in Celsius
 		// by reloading new weather information in Celsius
 		try {
@@ -362,17 +362,17 @@ public class GUI implements ActionListener {
 		// Remove the Fahrenheit button if it already exists
 		if (fahrenheitButton != null)
 			mainWindow.remove(fahrenheitButton);
-		
+
 		// Define the text for the Fahrenheit button
 		fahrenheitButton = new JButton("F" + "\u00b0");
 
 		// Make a new font for the button
 		MakeFont makenewFont = new MakeFont("Bold");
 		fahrenheitButton.setFont(makenewFont.getFont().deriveFont(40f));
-		
+
 		// Change the cursor of the mouse to a hand to represent a clickable button
 		fahrenheitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		// Define the actions of the button
 		fahrenheitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -395,14 +395,14 @@ public class GUI implements ActionListener {
 	 * Changes the metric for the weather information to Fahrenheit
 	 */
 	private void stateFahrenheit() {
-		
+
 		// Checks if when the Fahrenheit button is pressed that
 		// the search field is not blank or a different location
 		// exists when doing a query for Fahrenheit information
 		if(field.getText() != CURRENT_LOCATION){
 			field.setText(CURRENT_LOCATION);
 		}
-		
+
 		// Updates the app with weather information in Fahrenheit
 		// by reloading new weather information in Fahrenheit
 		try {
@@ -437,10 +437,10 @@ public class GUI implements ActionListener {
 		// Remove the Short-term button if it already exists
 		if (shorttermButton != null)
 			mainWindow.remove(shorttermButton);
-		
+
 		// Create a new JButton
 		shorttermButton = new JButton("Short-term");
-		
+
 		// Apply the properties of the new button
 		MakeFont makenewFont = new MakeFont("Light");
 		shorttermButton.setFont(makenewFont.getFont().deriveFont(18f));
@@ -451,20 +451,20 @@ public class GUI implements ActionListener {
 		shorttermButton.setOpaque(false);
 		shorttermButton.setContentAreaFilled(false);
 		shorttermButton.setBorderPainted(false);
-		
+
 		// Change the cursor of the mouse to a hand to represent a clickable button
 		shorttermButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		// Adds the button the GUI
 		mainWindow.getContentPane().add(shorttermButton);
-		
+
 		// Logic code that changes to the short-term panel when pressed
 		shorttermButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeToShortTerm();
 			}
 		});
-		
+
 		// Refresh the GUI with the button added
 		refreshGUI();
 
@@ -501,10 +501,10 @@ public class GUI implements ActionListener {
 		// Remove the Long-term button if it already exists
 		if (longtermButton != null)
 			mainWindow.remove(longtermButton);
-		
+
 		// Create a new JButton
 		longtermButton = new JButton("Long-term");
-		
+
 		// Apply the properties of the new button
 		MakeFont makenewFont = new MakeFont("Light");
 		longtermButton.setFont(makenewFont.getFont().deriveFont(18f));
@@ -515,13 +515,13 @@ public class GUI implements ActionListener {
 		longtermButton.setContentAreaFilled(false);
 		longtermButton.setBorderPainted(false);
 		longtermButton.setBounds(130, 300, 150, 30);
-		
+
 		// Change the cursor of the mouse to a hand to represent a clickable button
 		longtermButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				
+
 		// Adds the button the GUI
 		mainWindow.getContentPane().add(longtermButton);
-		
+
 		// Logic code that changes to the short-term panel when pressed
 		longtermButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -530,7 +530,7 @@ public class GUI implements ActionListener {
 
 			}
 		});
-		
+
 		// Refresh the GUI with the button added
 		refreshGUI();
 
@@ -553,7 +553,7 @@ public class GUI implements ActionListener {
 
 		stPanel.setVisible(false);
 		ltPanel.setVisible(true);
-		
+
 		// Refresh the GUI
 		refreshGUI();
 
@@ -572,10 +572,50 @@ public class GUI implements ActionListener {
 		// Set a background image for the Mars JPanel
 		if (!loc.getLocation().toLowerCase().equals("mars")){
 			//skyCondition = loc.getLW().getSkyCondition().toLowerCase();
+
+			//if not mars then set background according to weather condition
 			wI = new WeatherIcon(loc.getLW().getWeatherID());
 			url = getClass().getResource(wI.getWeatherBackground());
+
+			//else if mars then set background image to random mars image
 		} else {
 			url = getClass().getResource("mars.png");
+
+			int numMarsPics=10;
+			double x = Math.random();
+			int y = (int)(x*numMarsPics);
+
+			switch (y){
+			case 0:url = getClass().getResource("mars0.png");
+			break;
+
+			case 1:url = getClass().getResource("mars1.png");
+			break;
+
+			case 2:url = getClass().getResource("mars2.png");
+			break;
+
+			case 3:url = getClass().getResource("mars3.png");
+			break;
+
+			case 4:url = getClass().getResource("mars4.png");
+			break;
+
+			case 5:url = getClass().getResource("mars5.png");
+			break;
+
+			case 6:url = getClass().getResource("mars6.png");
+			break;
+
+			case 7:url = getClass().getResource("mars7.png");
+			break;
+
+			case 8:url = getClass().getResource("mars8.png");
+			break;
+
+			case 9:url = getClass().getResource("mars9.png");
+			break;
+			}			
 		}
 
 		// Set the size of the JLabel and apply the image
@@ -583,7 +623,7 @@ public class GUI implements ActionListener {
 		backgroundImageLabel.setSize(750, 630);
 		backgroundImageLabel.setIcon(new ImageIcon(url));
 		mainWindow.setContentPane(backgroundImageLabel);
-		
+
 		// Refresh the GUI
 		refreshGUI();
 
@@ -593,7 +633,7 @@ public class GUI implements ActionListener {
 	 * Adds a text field through which the user can change locations
 	 */
 	private void addLocationField() {
-		
+
 		// Remove the text if it already exists in the GUI
 		if (field != null){
 			mainWindow.remove(field);
@@ -642,7 +682,7 @@ public class GUI implements ActionListener {
 
 		// Create a new JLabel
 		greyLineLabelTop = new JLabel();
-		
+
 		// Check if the top grey label exists; if so remove it
 		if (greyLineLabelTop != null)
 			mainWindow.remove(greyLineLabelTop);
@@ -652,13 +692,13 @@ public class GUI implements ActionListener {
 		greyLineLabelTop.setOpaque(true);
 		greyLineLabelTop.setBounds(15, 332, 720, 2);
 		greyLineLabelTop.setVisible(true);
-		
+
 		// Add the top grey line to the GUI
 		mainWindow.getContentPane().add(greyLineLabelTop);
 
 		// Create a new JLabel
 		greyLineLabelBottom = new JLabel();
-		
+
 		// Check if the bottom grey label exists; if so remove it
 		if (greyLineLabelBottom != null)
 			mainWindow.remove(greyLineLabelBottom);
@@ -668,7 +708,7 @@ public class GUI implements ActionListener {
 		greyLineLabelBottom.setOpaque(true);
 		greyLineLabelBottom.setBounds(15, 590, 720, 2);
 		greyLineLabelBottom.setVisible(true);
-		
+
 		// Add the bottom grey line to the GUI
 		mainWindow.getContentPane().add(greyLineLabelBottom);
 
@@ -776,7 +816,7 @@ public class GUI implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String locationText; 
-		
+
 		/* Not a joke: a request for the location "fuck" returns the city Itajai, BR, which contains
 		 * diacritics encoded in the a way which breaks everything. On some systems. Sometimes. */
 		if (field.getText().toLowerCase().equals("fuck")){
@@ -806,7 +846,7 @@ public class GUI implements ActionListener {
 		// Sets the current weather metric and location
 		CURRENT_UNITS = units;
 		CURRENT_LOCATION = locationText;
-		
+
 
 		// Applies the current location
 		Location oldLoc = loc;
@@ -815,122 +855,122 @@ public class GUI implements ActionListener {
 		if ((!loc.getLocation().toLowerCase().equals(locationText.toLowerCase()) || loc.getUnits() != units)|| refresh == true){
 
 
-					// Show a spinning circle to tell the user the program is doing something
-					mainWindow.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			// Show a spinning circle to tell the user the program is doing something
+			mainWindow.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-					// Get the location
-					try {
-						loc = new Location(units, locationText);
-					} catch (Exception e) {
-						System.out.println(e);
-					}
+			// Get the location
+			try {
+				loc = new Location(units, locationText);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 
-					// Set a new background image
-					setBackgroundImage(loc);
-					
-					// Re-add the search field
-					addLocationField();
-					
-					// Re-add the Celsius and Fahrenheit Buttons
-					addCelsiusButton();
-					addFahrenheitButton();
-					
-					if (CURRENT_UNITS == 1)
-						stateFahrenheit();
-					else
-						stateCelsius();
-	
-					if (!loc.getLocation().toLowerCase().equals("mars")) {
-						//Earth Case
-						
-						//Handles case where there is no city name
-						if(loc.getLW().getCity().equals("")){					
-							loc.setLocation(loc.getLW().getCountry());
-						} else {
-							loc.setLocation(loc.getLW().getCity() + ", " + loc.getLW().getCountry());
-						}
+			// Set a new background image
+			setBackgroundImage(loc);
 
-						// Re-add the Short-term and Long-term Buttons
-						addShortTermButton();
-						addLongTermButton();
-						shorttermButton.setVisible(true);
-						longtermButton.setVisible(true);
-						// Update Long-term panel
-						addLTF(loc);
-						
-						// Update the Short-term panel
-						addSTF(loc);
-						
-						// Update the Local weather panel
-						addLW(loc);
-					} else {
-						//Mars case
-						shorttermButton.setVisible(false);
-						longtermButton.setVisible(false);
-						//Mars does not have a local weather, capitalize mars if needed
-						loc.setLocation(loc.getLocation().substring(0, 1).toUpperCase() + loc.getLocation().substring(1));
-						addMW(loc);
-					}
-				
+			// Re-add the search field
+			addLocationField();
 
-					// Create a new font based on the needs for that element
-					MakeFont makeNewFont = new MakeFont("UltraLight");
-					Float locationFontSize = 45f;
-					Font locationfieldFont = makeNewFont.getFont().deriveFont(locationFontSize);
-					
-					// Create an invisible JTextField on which to perform font sizing tests
-					JTextField testField = new JTextField();
-					field.setSize(500, 50);
-					
-					testField.setText(loc.getLocation());
-					testField.setFont(locationfieldFont);
-					
-					//width of the text rendered at the default font size
-					int textWidth = testField.getFontMetrics(testField.getFont()).stringWidth(testField.getText());
-					//width of the actual GUI JTextField
-					int fieldWidth = field.getWidth();
-					
-					/*
-					 * if the width of the text once rendered is greater than the size of the JTextField,
-					 * reduce font size by 3px and re-try the test
-					 */
-					while (textWidth >= fieldWidth){
-						// Reduce font size
-						locationFontSize = locationFontSize - 3f;
-						locationfieldFont = makeNewFont.getFont().deriveFont(locationFontSize);
-						testField.setFont(locationfieldFont);
-						textWidth = testField.getFontMetrics(testField.getFont()).stringWidth(testField.getText());
-					}
-					
-					// Sets font size
-					field.setFont(locationfieldFont);
-					field.setText(loc.getLocation());
-					// Saves the new location, current units, and location font size as default presets next time software loads
-					new Serialize(loc.getLocation(), loc.getUnits(), locationFontSize);
-				
-					
-					// Switch between short term and long term
-					if(!loc.getLocation().toLowerCase().equals("mars")){
-						if (shorttermState == true){
-							changeToShortTerm();
-						} else {
-							changeToLongTerm();
-						}
-					}
-					// Re-add the refresh button
-					addRefreshButton();
-					
-					// Re-add the grey lines
-					addGreyLines();
-					
-					// Re-add the shadow panel
-					addShadowPanel();
-		
-					// End the animation of the loading circle on the mouse cursor
-					mainWindow.setCursor(Cursor.getDefaultCursor());
-				
+			// Re-add the Celsius and Fahrenheit Buttons
+			addCelsiusButton();
+			addFahrenheitButton();
+
+			if (CURRENT_UNITS == 1)
+				stateFahrenheit();
+			else
+				stateCelsius();
+
+			if (!loc.getLocation().toLowerCase().equals("mars")) {
+				//Earth Case
+
+				//Handles case where there is no city name
+				if(loc.getLW().getCity().equals("")){					
+					loc.setLocation(loc.getLW().getCountry());
+				} else {
+					loc.setLocation(loc.getLW().getCity() + ", " + loc.getLW().getCountry());
+				}
+
+				// Re-add the Short-term and Long-term Buttons
+				addShortTermButton();
+				addLongTermButton();
+				shorttermButton.setVisible(true);
+				longtermButton.setVisible(true);
+				// Update Long-term panel
+				addLTF(loc);
+
+				// Update the Short-term panel
+				addSTF(loc);
+
+				// Update the Local weather panel
+				addLW(loc);
+			} else {
+				//Mars case
+				shorttermButton.setVisible(false);
+				longtermButton.setVisible(false);
+				//Mars does not have a local weather, capitalize mars if needed
+				loc.setLocation(loc.getLocation().substring(0, 1).toUpperCase() + loc.getLocation().substring(1));
+				addMW(loc);
+			}
+
+
+			// Create a new font based on the needs for that element
+			MakeFont makeNewFont = new MakeFont("UltraLight");
+			Float locationFontSize = 45f;
+			Font locationfieldFont = makeNewFont.getFont().deriveFont(locationFontSize);
+
+			// Create an invisible JTextField on which to perform font sizing tests
+			JTextField testField = new JTextField();
+			field.setSize(500, 50);
+
+			testField.setText(loc.getLocation());
+			testField.setFont(locationfieldFont);
+
+			//width of the text rendered at the default font size
+			int textWidth = testField.getFontMetrics(testField.getFont()).stringWidth(testField.getText());
+			//width of the actual GUI JTextField
+			int fieldWidth = field.getWidth();
+
+			/*
+			 * if the width of the text once rendered is greater than the size of the JTextField,
+			 * reduce font size by 3px and re-try the test
+			 */
+			while (textWidth >= fieldWidth){
+				// Reduce font size
+				locationFontSize = locationFontSize - 3f;
+				locationfieldFont = makeNewFont.getFont().deriveFont(locationFontSize);
+				testField.setFont(locationfieldFont);
+				textWidth = testField.getFontMetrics(testField.getFont()).stringWidth(testField.getText());
+			}
+
+			// Sets font size
+			field.setFont(locationfieldFont);
+			field.setText(loc.getLocation());
+			// Saves the new location, current units, and location font size as default presets next time software loads
+			new Serialize(loc.getLocation(), loc.getUnits(), locationFontSize);
+
+
+			// Switch between short term and long term
+			if(!loc.getLocation().toLowerCase().equals("mars")){
+				if (shorttermState == true){
+					changeToShortTerm();
+				} else {
+					changeToLongTerm();
+				}
+			}
+			// Re-add the refresh button
+			addRefreshButton();
+
+			// Re-add the grey lines
+			addGreyLines();
+
+			// Re-add the shadow panel
+			addShadowPanel();
+
+			// End the animation of the loading circle on the mouse cursor
+			mainWindow.setCursor(Cursor.getDefaultCursor());
+
 			refresh = false;
-			
+
 		}
 		else{
 			field.setText(oldLoc.getLocation().substring(0, 1).toUpperCase() + oldLoc.getLocation().substring(1));
