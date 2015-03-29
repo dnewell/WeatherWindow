@@ -59,6 +59,16 @@
 		<include>WindSquallDay.png</include>
 		<include>WindyDay.png</include>		
 		<include>mars.png</include>
+		<include>mars0.png</include>
+		<include>mars1.png</include>
+		<include>mars2.png</include>
+		<include>mars3.png</include>
+		<include>mars4.png</include>
+		<include>mars5.png</include>
+		<include>mars6.png</include>
+		<include>mars7.png</include>
+		<include>mars8.png</include>
+		<include>mars9.png</include>
         </includes>
       </resource>
     </resources>
