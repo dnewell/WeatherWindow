@@ -54,7 +54,8 @@ public class MarsWeather {
 		   //PRESSURE
 		   int pressureNum = data.getInt("pressure");
 		   String pressureString = data.getString("pressure_string");
-		   String pressure = temp.format(pressureNum) + " (" + pressureString + ")";
+		   //String pressure = temp.format(pressureNum) + " (" + pressureString + ")";
+		   String pressure = temp.format(pressureNum);
 		   
 		   //HUMIDITY + CONDITION
 		   Object humidity = data.get("abs_humidity"); 
@@ -62,7 +63,7 @@ public class MarsWeather {
 		   String atmoOpacity = data.getString("atmo_opacity");
 		   
 		
-		this.date = String.format("Date: " + totalDate);
+		this.date = String.format("Date of update: " + totalDate);
 		this.temperature = temp.format(avgTemp) + "\u00b0";
 		this.Ftemp = temp.format(avgFTemp) + "\u00b0";
 		
@@ -79,7 +80,7 @@ public class MarsWeather {
 		   else this.humidity = ("No humidity available.");	   
 		this.atmoOpacity = atmoOpacity;
 		this.skyCondition = "Sky Conditon: " + skyCondition;
-		this.pressure = pressure + "KpA";
+		this.pressure = pressure + " KpA";
 		
 	}
 	
@@ -147,6 +148,10 @@ public class MarsWeather {
 		return humidity;
 	}
 
+	/**
+	 * Get a WeatherID code for the different Mars sky states
+	 * @return An int code
+	 */
 	public int getWeatherID() {
 		if(atmoOpacity.toLowerCase().equals("sunny")){
 			return 800; 
@@ -156,7 +161,4 @@ public class MarsWeather {
 		}
 		return 9999;
 	}
-	
-	
-
 }
