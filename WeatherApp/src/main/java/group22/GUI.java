@@ -28,7 +28,7 @@ import java.net.URL;
  * @author Robert Goldfarb
  */
 public class GUI implements ActionListener {
-
+	
 	// Set the application name
 	private static final String APPLICATION_NAME = "Weather Window";
 
@@ -48,7 +48,7 @@ public class GUI implements ActionListener {
 	private MarsWeatherPanel mwPanel;
 
 	// Swing elements added to the main frame
-	private JTextField field;
+	public JTextField field;
 	private JButton shorttermButton, longtermButton, celsiusButton, fahrenheitButton, refreshButton;
 	private JLabel backgroundImageLabel, greyLineLabelTop,  greyLineLabelBottom;
 
@@ -862,7 +862,7 @@ public class GUI implements ActionListener {
 			try {
 				loc = new Location(units, locationText);
 			} catch (Exception e) {
-				System.out.println(e);
+				if (WeatherApp.CONSOLE_OUTPUT) {System.out.println(e);}
 			}
 
 			// Set a new background image

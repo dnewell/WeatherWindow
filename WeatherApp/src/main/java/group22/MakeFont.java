@@ -35,7 +35,9 @@ public class MakeFont {
 			newFont = Font.createFont(Font.TRUETYPE_FONT, fontIS);
 			
 		} catch (Exception e) {
+			if (WeatherApp.CONSOLE_OUTPUT){
 			e.printStackTrace();
+			}
 		} 
 		
 	}

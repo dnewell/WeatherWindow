@@ -50,6 +50,8 @@ public class Location {
 		 * MARS case handling. 
 		 */		
 		if (getLocation().toLowerCase().equals("mars")){
+			// Handles reformatting of Mars string. MARs or mars --> Mars etc.
+			this.setLocation("Mars");
 			this.marsWeather = new MarsWeather(readJSON(units, "", "mars"));
 		}
 		 else {
@@ -135,15 +137,18 @@ public class Location {
 	    	count++;
 	    	if (count <=10)
 	    	{
+	    		if (WeatherApp.CONSOLE_OUTPUT) {
 	    		System.out.println("Retry attempt " + count + " of 10");
+	    		}
 	    		return readJSON(units, addr, s);
 	    	}
+	    	// This console output should be displayed no matter value of WeatherApp.CONSOLE_OUTPUT - user should know why a close occurs
 	    	System.out.println("No information available. Check Internet connection.\nOpen Weather Maps API could also be down.\nClosing application.");
 	    	System.exit(0);
 	    }
-	   
+	    if (WeatherApp.CONSOLE_OUTPUT){
 	    System.out.println("API address used: " + url);
-	    
+	    }	  
 	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
@@ -151,7 +156,9 @@ public class Location {
 	 
 	    if (str == "")
 	    {
+	    	if (WeatherApp.CONSOLE_OUTPUT){
     		System.out.println("Sorry, OpenWeatherMaps is loading a blank page.");
+	    	}
     		return null;
     	}
 	    
@@ -162,7 +169,9 @@ public class Location {
 	    if (res.has("cod"))
 	    	if (res.getInt("cod") == 404)
 	    	{
+	    		if (WeatherApp.CONSOLE_OUTPUT) {
 	    		System.out.println("That is not a valid location. ");
+	    		}
 	    		return null;
 	    	}
 	    
