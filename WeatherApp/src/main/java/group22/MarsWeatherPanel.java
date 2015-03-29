@@ -75,7 +75,7 @@ public class MarsWeatherPanel extends JPanel {
 
 			
 			// Set the weather for Mars
-				addLabel(timeInfoLabel, mw.getdate(), 25, 0, 280, 20, "Light", 15);	    	
+				addLabel(timeInfoLabel, mw.getdate(), 25, 0, 380, 20, "Light", 15);	    	
 				//addLabel(lastupdateInfoLabel, mw.getUpdateTime(), 205, 0, 225, 20, "Light", 15);	
 				if (loc.units == 0)
 					addLabel(currenttemperatureInfoLabel, mw.getTemperature(), -45, 20, 400, 150, "Light", 145);	

@@ -28,12 +28,15 @@ public class Serialize implements Serializable
          out.writeObject(s);
          out.close();
          fileOut.close();
+         if (WeatherApp.CONSOLE_OUTPUT){
          System.out.println("Serialized data is saved in data.ser");
+         }
       
-      }catch(IOException i)
-      
+      }catch(IOException i)   
       {
+    	  if (WeatherApp.CONSOLE_OUTPUT){
           i.printStackTrace();
+    	  }
       }
    }
 }

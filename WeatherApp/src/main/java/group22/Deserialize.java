@@ -27,14 +27,18 @@ public class Deserialize implements Serializable {
 				
 			} catch (IOException i) {
 				
-				System.out.println("No Data file found. Loading default information");
+				if (WeatherApp.CONSOLE_OUTPUT) {
+					System.out.println("No Data file found. Loading default information");
+					}
 				s.location = "London ON";
 				s.fieldFontSize = 45f;
 				
 			} catch (ClassNotFoundException c) {
 				
-				System.out.println("SavedData class not found");
+				if (WeatherApp.CONSOLE_OUTPUT) {
+					System.out.println("SavedData class not found");
 				c.printStackTrace();
+				}
 				return;
 				
 			}
@@ -46,10 +50,12 @@ public class Deserialize implements Serializable {
 
 			// Prints what information is being pulled from the data.ser to the
 			// console
+			if (WeatherApp.CONSOLE_OUTPUT){
 			System.out.println("Deserialized Data...");
 			System.out.println("Units: " + units_text);
 			System.out.println("Location: " + s.location);
 			System.out.println("Font size: " + s.fieldFontSize);
+			}
 		}
 	}
 
