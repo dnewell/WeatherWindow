@@ -40,7 +40,7 @@ public class MarsWeatherPanel extends JPanel {
 			this.setLayout(null);
 			this.setOpaque(false);
 			this.setBackground(new Color(255,255,255,100));
-	    	this.setSize(new Dimension(750,200));
+	    	this.setSize(new Dimension(750,630));
     	
 	    	// Access the MarsWeather weather information
 	    	MarsWeather mw = loc.getMD();
@@ -54,6 +54,9 @@ public class MarsWeatherPanel extends JPanel {
 			JLabel humidityTitleLabel = new JLabel();
 			JLabel airpressureInfoLabel = new JLabel();
 			JLabel windInfoLabel = new JLabel();
+			
+			JLabel NASAmessage = new JLabel();
+
 			
 			addLabel(humidityIconLabel, new WeatherIcon("f04e").getWeatherIcon(), 500, 50, 25, 25, "WeatherIcons", 14);
 			humidityIconLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -69,6 +72,9 @@ public class MarsWeatherPanel extends JPanel {
 			windIconLabel.setHorizontalAlignment(JLabel.CENTER);
 			windIconLabel.setVerticalAlignment(JLabel.BOTTOM);
 			addLabel(windInfoLabel, mw.getWindSpeed()+" "+mw.getWindDirection(), 435, 114, 375, 25, "Light", 18);
+			
+			//prints out "Images Provided by NASA" in the bottom right hand corner
+			addLabel(NASAmessage,"Images Provided by NASA",582,482,350,25,"Light",12);
 	    	   	
 	    	// Access the WeatherIcon information
 	    	WeatherIcon wI = new WeatherIcon(mw.getWeatherID());
@@ -94,7 +100,8 @@ public class MarsWeatherPanel extends JPanel {
 				addLabel(humidityTitleLabel, mw.getHumidity(), 535, 47, 350, 25, "Light", 14);			
 				addLabel(airpressureInfoLabel, mw.getPressure(), 535, 102, 350, 25, "Light", 14);			
 				addLabel(windInfoLabel, mw.getWindSpeed()+" "+mw.getWindDirection(), 535, 153, 350, 25, "Light", 14);
-	
+				addLabel(NASAmessage,"Images Provided by NASA",582,482,350,25,"Light",12);
+
 
 		
 		}
